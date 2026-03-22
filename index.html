@@ -35,66 +35,72 @@ body {
   font-weight: bold;
 }
 
-.lang-switch button:hover {
-  background: var(--accent-color);
-  color: white;
-}
-
 /* HERO HEADER */
 .hero-header {
   position: relative;
   height: 100vh;
-  background: url('images/header-bg.jpg') center/cover no-repeat;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
+}
+
+/* VIDEO BACKGROUND */
+.bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 0;
+  filter: brightness(0.7);
+  animation: slowZoom 8s ease-in-out infinite;
+}
+
+@keyframes slowZoom {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  50%  { transform: translate(-50%, -50%) scale(1.08); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* OVERLAY */
+.hero-header .overlay {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 50px 20px;
+  border-radius: 20px;
+  background: linear-gradient(
+    rgba(10, 37, 64, 0.7),
+    rgba(10, 37, 64, 0.4)
+  );
+}
+
+/* LOGO */
+.logo-animate {
+  width: 260px;
+  margin-bottom: 25px;
+}
+
+/* TYPING EFFECT */
+.headline {
+  font-size: 3rem;
+  margin: 20px 0;
+  border-right: 3px solid white;
+  white-space: nowrap;
   overflow: hidden;
 }
 
-.hero-header .overlay {
-  text-align: center;
-  background: rgba(10, 37, 64, 0.6);
-  padding: 50px 20px;
-  border-radius: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-/* LOGO ANIMATION */
-.logo-animate {
-  width: 280px;
-  max-width: 90%;
-  animation: logoZoom 2s ease-in-out;
-  margin-bottom: 30px;
-}
-
-@keyframes logoZoom {
-  0% { transform: scale(0); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* HEADLINE ANIMATION */
-.headline {
-  font-size: 3rem;
-  margin: 20px 0 10px;
-  animation: fadeUp 1.5s ease-out forwards;
-  opacity: 0;
-}
-
+/* SUBTITLE */
 .subline {
   font-size: 1.3rem;
   margin-bottom: 30px;
-  animation: fadeUp 2s ease-out forwards;
-  opacity: 0;
 }
 
-@keyframes fadeUp {
-  0% { transform: translateY(20px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-/* CTA BUTTON */
+/* CTA */
 .cta-btn {
   display: inline-block;
   padding: 14px 30px;
@@ -103,44 +109,11 @@ body {
   border-radius: 30px;
   text-decoration: none;
   font-weight: bold;
-  transition: 0.3s;
   animation: pulse 2.5s infinite;
 }
 
-.cta-btn:hover {
-  background: var(--main-color);
-  color: white;
-}
-
 @keyframes pulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,0,0,0); }
-  50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(0,194,255,0.5); }
-}
-
-/* FLOATING ICONS */
-.floating-icons {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.float {
-  position: absolute;
-  animation: floatUpDown 6s ease-in-out infinite;
-}
-
-.float1 { top: 30%; left: 10%; animation-delay: 0s; width: 50px; }
-.float2 { top: 60%; left: 80%; animation-delay: 2s; width: 40px; }
-.float3 { top: 50%; left: 50%; animation-delay: 4s; width: 60px; }
-
-@keyframes floatUpDown {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
+  50% { transform: scale(1.05); }
 }
 
 /* CONTAINER */
@@ -150,21 +123,10 @@ body {
   padding: 50px 20px;
 }
 
-/* CARDS */
 .card {
   background: white;
   padding: 25px;
   margin: 25px 0;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-
-/* HERO IMAGE */
-.card img.hero {
-  width: 90%;
-  max-width: 900px;
-  margin: auto;
-  display: block;
   border-radius: 15px;
 }
 
@@ -175,30 +137,20 @@ body {
   gap: 25px;
 }
 
-.grid div {
-  text-align: center;
-}
-
-/* EXPERIENCE IMAGES */
-.grid div img {
+.grid img {
   width: 80%;
   max-width: 220px;
   margin: auto;
+  display: block;
   border-radius: 12px;
-  transition: transform 0.3s;
 }
 
-.grid div img:hover {
-  transform: scale(1.05);
-}
-
-/* VIDEO */
+/* VIDEO SECTION */
 .card video {
   width: 90%;
   max-width: 800px;
   display: block;
   margin: auto;
-  border-radius: 12px;
 }
 
 /* CONTACT */
@@ -214,8 +166,6 @@ input, textarea {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
 }
 
 button.submit-btn {
@@ -225,12 +175,6 @@ button.submit-btn {
   padding: 12px 25px;
   border-radius: 25px;
   cursor: pointer;
-  font-weight: bold;
-  margin-top:10px;
-}
-
-button.submit-btn:hover {
-  background: var(--main-color);
 }
 
 footer {
@@ -239,135 +183,77 @@ footer {
   background: #111;
   color: white;
 }
-
-/* RESPONSIVE */
-@media screen and (max-width: 1024px) {
-  .card img.hero,
-  .card video {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .hero-header { height: 80vh; }
-  .headline { font-size: 2rem; }
-  .subline { font-size: 1.1rem; }
-  .grid {
-    gap: 15px;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-  .grid div img {
-    width: 90%;
-    max-width: 180px;
-  }
-}
 </style>
 </head>
 
 <body>
 
-<!-- LANGUAGE SWITCH -->
 <div class="lang-switch">
   <button onclick="setLang('en')">EN</button>
   <button onclick="setLang('fr')">FR</button>
 </div>
 
-<!-- MODERN HERO HEADER -->
 <header class="hero-header">
+
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="images/arm AI video.mp4" type="video/mp4">
+  </video>
+
   <div class="overlay">
-    <img id="logo" src="images/KAVA LOGO.png" alt="KAVA LOGO" class="logo-animate">
-    <h1 id="title" class="headline">Meet the Future of Coffee</h1>
+    <img src="images/KAVA LOGO.png" class="logo-animate">
+
+    <h1 id="title" class="headline"></h1>
     <p id="subtitle" class="subline">AI-powered robotic barista delivering innovation and experience</p>
+
     <a href="#contact" class="cta-btn" id="cta">Request Partnership</a>
   </div>
-  <!-- Floating icons -->
-  <div class="floating-icons">
-    <img src="images/coffee-cup.png" class="float float1" alt="Coffee Cup">
-    <img src="images/steam.png" class="float float2" alt="Coffee Steam">
-    <img src="images/robot-arm.png" class="float float3" alt="Robot Arm">
-  </div>
+
 </header>
 
 <div class="container">
 
-  <!-- HERO IMAGE -->
   <div class="card">
-    <img src="images/KAVA Home page.png" alt="KAVA Machine" class="hero">
+    <img src="images/KAVA Home page.png" style="width:100%;">
   </div>
 
-  <!-- VIDEO -->
   <div class="card">
     <h2 id="video-title">See It in Action</h2>
     <video controls>
-      <source src="images/video.mp4" type="video/mp4">
+      <source src="images/video.mp4">
     </video>
   </div>
 
-  <!-- EXPERIENCE -->
   <div class="card">
     <h2 id="experience-title">Experience</h2>
     <div class="grid">
       <div>
-        <img src="images/ROBOT HAND.png" alt="">
+        <img src="images/ROBOT HAND.png">
         <p id="txt1">Robotic arm preparing coffee</p>
       </div>
       <div>
-        <img src="images/screen.png" alt="">
+        <img src="images/screen.png">
         <p id="txt2">Interactive drink selection</p>
       </div>
       <div>
-        <img src="images/paying screen.png" alt="">
+        <img src="images/paying screen.png">
         <p id="txt3">Fast and seamless payment</p>
       </div>
       <div>
-        <img src="images/FOAM.png" alt="">
+        <img src="images/FOAM.png">
         <p id="txt4">Custom printed coffee foam</p>
       </div>
     </div>
   </div>
 
-  <!-- WHY KAVA -->
-  <div class="card">
-    <h2 id="why-title">Why KAVA?</h2>
-    <div class="grid">
-      <div>
-        <h3>🚀 Attract Foot Traffic</h3>
-        <p>Eye-catching robotic technology that draws visitors and increases mall engagement.</p>
-      </div>
-      <div>
-        <h3>📸 Social Media Magnet</h3>
-        <p>Customers love filming and sharing the experience, creating organic promotion.</p>
-      </div>
-      <div>
-        <h3>☕ Premium Experience</h3>
-        <p>High-quality coffee combined with a futuristic, interactive journey.</p>
-      </div>
-      <div>
-        <h3>💡 Innovative Concept</h3>
-        <p>A unique mix of AI, robotics, and retail entertainment.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- BUSINESS PITCH -->
-  <div class="card" style="text-align:center;">
-    <h2 id="pitch-title">A New Retail Attraction</h2>
-    <p id="pitch-text" style="font-size:18px; max-width:700px; margin:auto;">
-      A premium attraction combining coffee, robotics, and entertainment — designed to elevate customer experience and increase dwell time in commercial spaces.
-    </p>
-  </div>
-
-  <!-- CONTACT FORM -->
   <div class="card contact-box" id="contact">
     <h2 id="contact-title">Let’s Work Together</h2>
-    <form id="contact-form" action="https://formspree.io/f/xvzwjpad" method="POST">
+
+    <form action="https://formspree.io/f/xvzwjpad" method="POST">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
-      <input type="text" name="company" placeholder="Company / Mall Name">
-      <textarea name="message" placeholder="Your Message" rows="4"></textarea>
-      <button type="submit" class="submit-btn">Send Request</button>
+      <textarea name="message" placeholder="Your Message"></textarea>
+      <button class="submit-btn">Send</button>
     </form>
-    <p id="form-message" style="margin-top:15px; font-weight:bold;"></p>
   </div>
 
 </div>
@@ -377,68 +263,45 @@ footer {
 </footer>
 
 <script>
+// TYPEWRITER EFFECT
+function typeText(text) {
+  let i = 0;
+  const speed = 50;
+  const el = document.getElementById("title");
+  el.innerHTML = "";
+
+  function typing() {
+    if (i < text.length) {
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+  typing();
+}
+
+// LANGUAGE SWITCH
 function setLang(lang) {
   if (lang === 'fr') {
-    document.getElementById("title").innerText = "Découvrez le futur du café";
+    typeText("Découvrez le futur du café");
     document.getElementById("subtitle").innerText = "Barista robotisé alimenté par l’IA";
     document.getElementById("cta").innerText = "Demande de partenariat";
     document.getElementById("video-title").innerText = "Voir en action";
     document.getElementById("experience-title").innerText = "Expérience";
     document.getElementById("txt1").innerText = "Bras robotisé préparant le café";
-    document.getElementById("txt2").innerText = "Sélection interactive des boissons";
-    document.getElementById("txt3").innerText = "Paiement rapide et fluide";
-    document.getElementById("txt4").innerText = "Impression personnalisée sur mousse";
-    document.getElementById("why-title").innerText = "Pourquoi KAVA ?";
-    document.getElementById("pitch-title").innerText = "Une nouvelle attraction commerciale";
-    document.getElementById("pitch-text").innerText = "Une attraction haut de gamme combinant café, robotique et divertissement — conçue pour améliorer l’expérience client et augmenter le temps passé en centre commercial.";
+    document.getElementById("txt2").innerText = "Sélection interactive";
+    document.getElementById("txt3").innerText = "Paiement rapide";
+    document.getElementById("txt4").innerText = "Mousse personnalisée";
     document.getElementById("contact-title").innerText = "Travaillons ensemble";
   } else {
-    document.getElementById("title").innerText = "Meet the Future of Coffee";
+    typeText("Meet the Future of Coffee");
     document.getElementById("subtitle").innerText = "AI-powered robotic barista delivering innovation and experience";
     document.getElementById("cta").innerText = "Request Partnership";
-    document.getElementById("video-title").innerText = "See It in Action";
-    document.getElementById("experience-title").innerText = "Experience";
-    document.getElementById("txt1").innerText = "Robotic arm preparing coffee";
-    document.getElementById("txt2").innerText = "Interactive drink selection";
-    document.getElementById("txt3").innerText = "Fast and seamless payment";
-    document.getElementById("txt4").innerText = "Custom printed coffee foam";
-    document.getElementById("why-title").innerText = "Why KAVA?";
-    document.getElementById("pitch-title").innerText = "A New Retail Attraction";
-    document.getElementById("pitch-text").innerText = "A premium attraction combining coffee, robotics, and entertainment — designed to elevate customer experience and increase dwell time in commercial spaces.";
-    document.getElementById("contact-title").innerText = "Let’s Work Together";
   }
 }
 
-// Form submission with instant EN/FR Thank You message
-const form = document.getElementById("contact-form");
-const msg = document.getElementById("form-message");
-
-form.addEventListener("submit", function(e) {
-  e.preventDefault();
-  const lang = document.getElementById("logo").src.includes("FRENCH") ? "fr" : "en";
-  const data = new FormData(form);
-
-  fetch(form.action, {
-    method: "POST",
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  }).then(response => {
-    if (response.ok) {
-      msg.innerText = lang === 'fr' 
-        ? "Merci ! Nous vous contacterons sous peu."
-        : "Thank you! We will contact you shortly.";
-      form.reset();
-    } else {
-      msg.innerText = lang === 'fr' 
-        ? "Une erreur s'est produite. Veuillez réessayer."
-        : "Oops! There was a problem. Please try again.";
-    }
-  }).catch(() => {
-    msg.innerText = lang === 'fr' 
-      ? "Une erreur s'est produite. Veuillez réessayer."
-      : "Oops! There was a problem. Please try again.";
-  });
-});
+// INITIAL LOAD
+window.onload = () => setLang('en');
 </script>
 
 </body>
