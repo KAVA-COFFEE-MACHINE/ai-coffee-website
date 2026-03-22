@@ -221,7 +221,7 @@ footer {
   <!-- SEE IT IN ACTION -->
   <div class="card">
     <h2 id="video-title"></h2>
-    <video controls>
+    <video controls id="action-video">
       <source src="images/Storyboard.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
@@ -300,6 +300,7 @@ function setLang(lang) {
   const subtitle = document.getElementById("subtitle");
   const cta = document.getElementById("cta");
   const videoTitle = document.getElementById("video-title");
+  const actionVideo = document.getElementById("action-video");
   const experienceTitle = document.getElementById("experience-title");
   const txt1 = document.getElementById("txt1");
   const txt2 = document.getElementById("txt2");
@@ -317,6 +318,8 @@ function setLang(lang) {
     subtitle.innerText = "Barista robotisé alimenté par l’IA";
     cta.innerText = "Demander un partenariat";
     videoTitle.innerText = "Voir en action";
+    actionVideo.querySelector("source").src = "images/StoryboardFR.mp4";
+    actionVideo.load();
     experienceTitle.innerText = "Expérience";
     txt1.innerText = "Bras robotisé préparant le café";
     txt2.innerText = "Sélection interactive des boissons";
@@ -333,6 +336,8 @@ function setLang(lang) {
     subtitle.innerText = "AI-powered robotic barista delivering innovation and experience";
     cta.innerText = "Request Partnership";
     videoTitle.innerText = "See It in Action";
+    actionVideo.querySelector("source").src = "images/Storyboard.mp4";
+    actionVideo.load();
     experienceTitle.innerText = "Experience";
     txt1.innerText = "Robotic arm preparing coffee";
     txt2.innerText = "Interactive drink selection";
