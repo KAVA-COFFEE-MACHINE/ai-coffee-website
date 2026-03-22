@@ -14,7 +14,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f8f9fb;
+  background: #f4f6f9;
 }
 
 /* LANGUAGE SWITCH */
@@ -22,6 +22,7 @@ body {
   position: fixed;
   top: 15px;
   right: 20px;
+  z-index: 1000;
 }
 
 .lang-switch button {
@@ -30,56 +31,87 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  background: white;
+  font-weight: bold;
+}
+
+.lang-switch button:hover {
+  background: var(--accent-color);
+  color: white;
 }
 
 /* HEADER */
 header {
   text-align: center;
-  background: linear-gradient(135deg, var(--main-color), var(--accent-color));
+  background: linear-gradient(135deg, #0a2540, #007acc); /* softer, homogeneous blue */
   color: white;
-  padding: 80px 20px;
+  padding: 140px 20px; /* more space for bigger logo */
 }
 
 header img {
-  width: 140px;
+  width: 250px; /* bigger logo */
+  max-width: 90%; /* responsive */
+  margin-bottom: 30px;
 }
 
 .cta-btn {
   display: inline-block;
-  margin-top: 20px;
-  padding: 12px 25px;
+  margin-top: 25px;
+  padding: 14px 30px;
   background: white;
   color: var(--main-color);
-  border-radius: 25px;
+  border-radius: 30px;
   text-decoration: none;
   font-weight: bold;
+  transition: 0.3s;
+}
+
+.cta-btn:hover {
+  background: var(--main-color);
+  color: white;
 }
 
 /* CONTAINER */
 .container {
   max-width: 1100px;
   margin: auto;
-  padding: 40px 20px;
+  padding: 50px 20px;
 }
 
 /* CARDS */
 .card {
   background: white;
   padding: 25px;
-  margin: 20px 0;
-  border-radius: 12px;
+  margin: 25px 0;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 /* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 25px;
 }
 
-img, video {
+.grid div {
+  text-align: center;
+}
+
+/* IMAGE EFFECT */
+img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
+  transition: transform 0.3s;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+video {
+  width: 100%;
+  border-radius: 12px;
 }
 
 /* CONTACT */
@@ -87,8 +119,31 @@ img, video {
   text-align: center;
   background: var(--main-color);
   color: white;
-  padding: 30px;
-  border-radius: 12px;
+  padding: 40px;
+  border-radius: 15px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button.submit-btn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top:10px;
+}
+
+button.submit-btn:hover {
+  background: var(--main-color);
 }
 
 footer {
@@ -96,6 +151,16 @@ footer {
   padding: 20px;
   background: #111;
   color: white;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  header {
+    padding: 100px 15px;
+  }
+  .grid {
+    gap: 15px;
+  }
 }
 </style>
 </head>
@@ -109,7 +174,7 @@ footer {
 </div>
 
 <header>
-  <img id="logo" src="images/LOGO ENGLISH.jpeg">
+  <img id="logo" src="images/LOGO ENGLISH.png" alt="KAVA Logo"> <!-- transparent PNG recommended -->
 
   <h1 id="title">Meet the Future of Coffee</h1>
   <p id="subtitle">AI-powered robotic barista delivering innovation and experience</p>
@@ -121,7 +186,7 @@ footer {
 
   <!-- HERO IMAGE -->
   <div class="card">
-    <img src="images/KAVA Home page.png">
+    <img src="images/KAVA Home page.png" alt="KAVA Machine">
   </div>
 
   <!-- VIDEO -->
@@ -138,31 +203,75 @@ footer {
 
     <div class="grid">
       <div>
-        <img src="images/ROBOT HAND.png">
+        <img src="images/ROBOT HAND.png" alt="">
         <p id="txt1">Robotic arm preparing coffee</p>
       </div>
 
       <div>
-        <img src="images/screen.png">
+        <img src="images/screen.png" alt="">
         <p id="txt2">Interactive drink selection</p>
       </div>
 
       <div>
-        <img src="images/paying screen.png">
+        <img src="images/paying screen.png" alt="">
         <p id="txt3">Fast and seamless payment</p>
       </div>
 
       <div>
-        <img src="images/FOAM.png">
+        <img src="images/FOAM.png" alt="">
         <p id="txt4">Custom printed coffee foam</p>
       </div>
     </div>
   </div>
 
-  <!-- CONTACT -->
-  <div id="contact" class="contact-box">
+  <!-- WHY KAVA -->
+  <div class="card">
+    <h2 id="why-title">Why KAVA?</h2>
+
+    <div class="grid">
+      <div>
+        <h3>🚀 Attract Foot Traffic</h3>
+        <p>Eye-catching robotic technology that draws visitors and increases mall engagement.</p>
+      </div>
+
+      <div>
+        <h3>📸 Social Media Magnet</h3>
+        <p>Customers love filming and sharing the experience, creating organic promotion.</p>
+      </div>
+
+      <div>
+        <h3>☕ Premium Experience</h3>
+        <p>High-quality coffee combined with a futuristic, interactive journey.</p>
+      </div>
+
+      <div>
+        <h3>💡 Innovative Concept</h3>
+        <p>A unique mix of AI, robotics, and retail entertainment.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUSINESS PITCH -->
+  <div class="card" style="text-align:center;">
+    <h2 id="pitch-title">A New Retail Attraction</h2>
+    <p id="pitch-text" style="font-size:18px; max-width:700px; margin:auto;">
+      A premium attraction combining coffee, robotics, and entertainment — designed to elevate customer experience and increase dwell time in commercial spaces.
+    </p>
+  </div>
+
+  <!-- CONTACT FORM -->
+  <div class="card contact-box" id="contact">
     <h2 id="contact-title">Let’s Work Together</h2>
-    <p>Email: info@kava.com</p>
+
+    <form id="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="company" placeholder="Company / Mall Name">
+      <textarea name="message" placeholder="Your Message" rows="4"></textarea>
+      <button type="submit" class="submit-btn">Send Request</button>
+    </form>
+
+    <p id="form-message" style="margin-top:15px; font-weight:bold;"></p>
   </div>
 
 </div>
@@ -174,7 +283,7 @@ footer {
 <script>
 function setLang(lang) {
   if (lang === 'fr') {
-    document.getElementById("logo").src = "images/LOGO - FRENCH.jpeg";
+    document.getElementById("logo").src = "images/LOGO - FRENCH.png";
     document.getElementById("title").innerText = "Découvrez le futur du café";
     document.getElementById("subtitle").innerText = "Barista robotisé alimenté par l’IA";
     document.getElementById("cta").innerText = "Demande de partenariat";
@@ -184,9 +293,12 @@ function setLang(lang) {
     document.getElementById("txt2").innerText = "Sélection interactive des boissons";
     document.getElementById("txt3").innerText = "Paiement rapide et fluide";
     document.getElementById("txt4").innerText = "Impression personnalisée sur mousse";
+    document.getElementById("why-title").innerText = "Pourquoi KAVA ?";
+    document.getElementById("pitch-title").innerText = "Une nouvelle attraction commerciale";
+    document.getElementById("pitch-text").innerText = "Une attraction haut de gamme combinant café, robotique et divertissement — conçue pour améliorer l’expérience client et augmenter le temps passé en centre commercial.";
     document.getElementById("contact-title").innerText = "Travaillons ensemble";
   } else {
-    document.getElementById("logo").src = "images/LOGO ENGLISH.jpeg";
+    document.getElementById("logo").src = "images/LOGO ENGLISH.png";
     document.getElementById("title").innerText = "Meet the Future of Coffee";
     document.getElementById("subtitle").innerText = "AI-powered robotic barista delivering innovation and experience";
     document.getElementById("cta").innerText = "Request Partnership";
@@ -196,9 +308,43 @@ function setLang(lang) {
     document.getElementById("txt2").innerText = "Interactive drink selection";
     document.getElementById("txt3").innerText = "Fast and seamless payment";
     document.getElementById("txt4").innerText = "Custom printed coffee foam";
+    document.getElementById("why-title").innerText = "Why KAVA?";
+    document.getElementById("pitch-title").innerText = "A New Retail Attraction";
+    document.getElementById("pitch-text").innerText = "A premium attraction combining coffee, robotics, and entertainment — designed to elevate customer experience and increase dwell time in commercial spaces.";
     document.getElementById("contact-title").innerText = "Let’s Work Together";
   }
 }
+
+// Form submission with instant EN/FR Thank You message
+const form = document.getElementById("contact-form");
+const msg = document.getElementById("form-message");
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+  const lang = document.getElementById("logo").src.includes("FRENCH") ? "fr" : "en";
+  const data = new FormData(form);
+
+  fetch(form.action, {
+    method: "POST",
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(response => {
+    if (response.ok) {
+      msg.innerText = lang === 'fr' 
+        ? "Merci ! Nous vous contacterons sous peu."
+        : "Thank you! We will contact you shortly.";
+      form.reset();
+    } else {
+      msg.innerText = lang === 'fr' 
+        ? "Une erreur s'est produite. Veuillez réessayer."
+        : "Oops! There was a problem. Please try again.";
+    }
+  }).catch(() => {
+    msg.innerText = lang === 'fr' 
+      ? "Une erreur s'est produite. Veuillez réessayer."
+      : "Oops! There was a problem. Please try again.";
+  });
+});
 </script>
 
 </body>
