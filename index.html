@@ -3,91 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Coffee Experience</title>
+  <title>KAVA - AI Coffee Experience</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f8f9fb;
-      color: #333;
-    }
-
-    header {
-      background: linear-gradient(135deg, #111, #444);
-      color: white;
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 18px;
-      opacity: 0.9;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    h2 {
-      margin-bottom: 15px;
-      color: #222;
-    }
-
-    .card {
-      background: white;
-      padding: 25px;
-      margin: 20px 0;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #111;
-      color: white;
-    }
-
-    .lang {
-      text-align: right;
-      padding: 10px 20px;
-    }
-
-    button {
-      padding: 8px 12px;
-      margin-left: 5px;
-      border: none;
-      cursor: pointer;
-      border-radius: 6px;
-    }
-
-    .active {
-      background: #111;
-      color: white;
-    }
-
-    @media (max-width: 768px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f8f9fb; color: #333; }
+    header { background: linear-gradient(135deg, #4b2e2b, #a67c52); color: white; padding: 80px 20px; text-align: center; }
+    header h1 { font-size: 42px; margin-bottom: 10px; }
+    header p { font-size: 18px; opacity: 0.9; }
+    .container { max-width: 1000px; margin: auto; padding: 40px 20px; }
+    h2 { margin-bottom: 15px; color: #222; }
+    .card { background: white; padding: 25px; margin: 20px 0; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.08); }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    img { max-width: 100%; border-radius: 10px; }
+    footer { text-align: center; padding: 20px; background: #111; color: white; }
+    .lang { text-align: right; padding: 10px 20px; }
+    button { padding: 8px 12px; margin-left: 5px; border: none; cursor: pointer; border-radius: 6px; }
+    .active { background: #111; color: white; }
+    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
+<!-- Language toggle -->
 <div class="lang">
   <button onclick="setLang('en')" class="active" id="btn-en">EN</button>
   <button onclick="setLang('fr')" id="btn-fr">FR</button>
@@ -96,18 +32,22 @@
 <header>
   <h1 id="title">AI Robotic Coffee Experience</h1>
   <p id="subtitle">A new attraction that transforms customer engagement</p>
+  <img src="KAVA Home page.jpg" alt="AI coffee machine" style="max-width:400px; margin-top:20px;">
 </header>
 
 <div class="container">
 
+  <!-- About Section -->
   <div class="card">
     <h2 id="about-title">Concept</h2>
     <p id="about-text">
       Our AI-powered robotic coffee machine offers a fully automated, premium coffee experience.
       Designed for high-traffic environments, it combines innovation, entertainment, and efficiency.
     </p>
+    <img src="FOAM.jpg" alt="Edible ink printed on coffee foam">
   </div>
 
+  <!-- Benefits and Business Value -->
   <div class="grid">
     <div class="card">
       <h2 id="benefits-title">Why It Stands Out</h2>
@@ -117,6 +57,7 @@
         <li>Modern and innovative brand image</li>
         <li>Consistent, high-quality service</li>
       </ul>
+      <img src="LOGO - FRENCH.jpg" alt="Company logo in French">
     </div>
 
     <div class="card">
@@ -125,17 +66,22 @@
         This concept is more than a coffee machine — it's an experience.
         It brings innovation into commercial spaces and enhances customer satisfaction.
       </p>
+      <img src="paying screen.jpg" alt="Payment screen interface">
     </div>
   </div>
 
+  <!-- Opportunity Section -->
   <div class="card">
     <h2 id="opportunity-title">Opportunity</h2>
     <p id="opportunity-text">
       We are seeking to collaborate with premium locations such as shopping malls
       to introduce this unique concept and elevate the visitor experience.
     </p>
+    <img src="ROBOT HAND.jpg" alt="Robot hand holding a coffee cup">
+    <img src="screen.jpg" alt="Screen showing drink options and prices">
   </div>
 
+  <!-- Contact Section -->
   <div class="card">
     <h2 id="contact-title">Contact</h2>
     <p>Email: your@email.com</p>
@@ -145,7 +91,7 @@
 </div>
 
 <footer>
-  <p>© 2026 AI Coffee Experience</p>
+  <p>© 2026 KAVA AI Coffee Experience</p>
 </footer>
 
 <script>
