@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Coffee Experience</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fb;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #111, #444);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: white;
+    }
+
+    .lang {
+      text-align: right;
+      padding: 10px 20px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin-left: 5px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .active {
+      background: #111;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="lang">
+  <button onclick="setLang('en')" class="active" id="btn-en">EN</button>
+  <button onclick="setLang('fr')" id="btn-fr">FR</button>
+</div>
+
+<header>
+  <h1 id="title">AI Robotic Coffee Experience</h1>
+  <p id="subtitle">A new attraction that transforms customer engagement</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2 id="about-title">Concept</h2>
+    <p id="about-text">
+      Our AI-powered robotic coffee machine offers a fully automated, premium coffee experience.
+      Designed for high-traffic environments, it combines innovation, entertainment, and efficiency.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2 id="benefits-title">Why It Stands Out</h2>
+      <ul id="benefits-list">
+        <li>Creates a strong visual attraction</li>
+        <li>Increases foot traffic and engagement</li>
+        <li>Modern and innovative brand image</li>
+        <li>Consistent, high-quality service</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2 id="business-title">Business Value</h2>
+      <p id="business-text">
+        This concept is more than a coffee machine — it's an experience.
+        It brings innovation into commercial spaces and enhances customer satisfaction.
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 id="opportunity-title">Opportunity</h2>
+    <p id="opportunity-text">
+      We are seeking to collaborate with premium locations such as shopping malls
+      to introduce this unique concept and elevate the visitor experience.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2 id="contact-title">Contact</h2>
+    <p>Email: your@email.com</p>
+    <p>Phone: (XXX) XXX-XXXX</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 AI Coffee Experience</p>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.getElementById('btn-en').classList.remove('active');
+  document.getElementById('btn-fr').classList.remove('active');
+  document.getElementById('btn-' + lang).classList.add('active');
+
+  if (lang === 'fr') {
+    document.getElementById('title').innerText = "Expérience Café Robotisée IA";
+    document.getElementById('subtitle').innerText = "Une attraction innovante pour transformer l’expérience client";
+
+    document.getElementById('about-title').innerText = "Concept";
+    document.getElementById('about-text').innerText =
+      "Notre machine à café robotisée alimentée par l'IA offre une expérience premium entièrement automatisée.";
+
+    document.getElementById('benefits-title').innerText = "Pourquoi c’est unique";
+    document.getElementById('benefits-list').innerHTML =
+      "<li>Crée une forte attraction visuelle</li><li>Augmente l’achalandage</li><li>Image moderne et innovante</li><li>Service constant et rapide</li>";
+
+    document.getElementById('business-title').innerText = "Valeur commerciale";
+    document.getElementById('business-text').innerText =
+      "Ce concept est plus qu’une machine à café — c’est une expérience immersive.";
+
+    document.getElementById('opportunity-title').innerText = "Opportunité";
+    document.getElementById('opportunity-text').innerText =
+      "Nous cherchons à collaborer avec des centres commerciaux pour introduire ce concept unique.";
+
+    document.getElementById('contact-title').innerText = "Contact";
+  } else {
+    location.reload();
+  }
+}
+</script>
+
+</body>
+</html>
