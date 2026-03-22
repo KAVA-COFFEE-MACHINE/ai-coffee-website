@@ -40,23 +40,63 @@ body {
   color: white;
 }
 
-/* HEADER */
-header {
-  text-align: center;
-  background: linear-gradient(135deg, #0a2540, #007acc);
+/* HERO HEADER */
+.hero-header {
+  position: relative;
+  height: 100vh;
+  background: url('images/header-bg.jpg') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
-  padding: 140px 20px;
+  overflow: hidden;
 }
 
-header img {
-  width: 250px;
+.hero-header .overlay {
+  text-align: center;
+  background: rgba(10, 37, 64, 0.6);
+  padding: 50px 20px;
+  border-radius: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* LOGO ANIMATION */
+.logo-animate {
+  width: 280px;
   max-width: 90%;
+  animation: logoZoom 2s ease-in-out;
   margin-bottom: 30px;
 }
 
+@keyframes logoZoom {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* HEADLINE ANIMATION */
+.headline {
+  font-size: 3rem;
+  margin: 20px 0 10px;
+  animation: fadeUp 1.5s ease-out forwards;
+  opacity: 0;
+}
+
+.subline {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  animation: fadeUp 2s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* CTA BUTTON */
 .cta-btn {
   display: inline-block;
-  margin-top: 25px;
   padding: 14px 30px;
   background: white;
   color: var(--main-color);
@@ -64,11 +104,43 @@ header img {
   text-decoration: none;
   font-weight: bold;
   transition: 0.3s;
+  animation: pulse 2.5s infinite;
 }
 
 .cta-btn:hover {
   background: var(--main-color);
   color: white;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,0,0,0); }
+  50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(0,194,255,0.5); }
+}
+
+/* FLOATING ICONS */
+.floating-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.float {
+  position: absolute;
+  animation: floatUpDown 6s ease-in-out infinite;
+}
+
+.float1 { top: 30%; left: 10%; animation-delay: 0s; width: 50px; }
+.float2 { top: 60%; left: 80%; animation-delay: 2s; width: 40px; }
+.float3 { top: 50%; left: 50%; animation-delay: 4s; width: 60px; }
+
+@keyframes floatUpDown {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
 }
 
 /* CONTAINER */
@@ -177,9 +249,9 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
-  header {
-    padding: 100px 15px;
-  }
+  .hero-header { height: 80vh; }
+  .headline { font-size: 2rem; }
+  .subline { font-size: 1.1rem; }
   .grid {
     gap: 15px;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -200,13 +272,20 @@ footer {
   <button onclick="setLang('fr')">FR</button>
 </div>
 
-<header>
-  <img id="logo" src="images/KAVA LOGO.png" alt="KAVA LOGO">
-
-  <h1 id="title">Meet the Future of Coffee</h1>
-  <p id="subtitle">AI-powered robotic barista delivering innovation and experience</p>
-
-  <a href="#contact" class="cta-btn" id="cta">Request Partnership</a>
+<!-- MODERN HERO HEADER -->
+<header class="hero-header">
+  <div class="overlay">
+    <img id="logo" src="images/KAVA LOGO.png" alt="KAVA LOGO" class="logo-animate">
+    <h1 id="title" class="headline">Meet the Future of Coffee</h1>
+    <p id="subtitle" class="subline">AI-powered robotic barista delivering innovation and experience</p>
+    <a href="#contact" class="cta-btn" id="cta">Request Partnership</a>
+  </div>
+  <!-- Floating icons -->
+  <div class="floating-icons">
+    <img src="images/coffee-cup.png" class="float float1" alt="Coffee Cup">
+    <img src="images/steam.png" class="float float2" alt="Coffee Steam">
+    <img src="images/robot-arm.png" class="float float3" alt="Robot Arm">
+  </div>
 </header>
 
 <div class="container">
@@ -227,23 +306,19 @@ footer {
   <!-- EXPERIENCE -->
   <div class="card">
     <h2 id="experience-title">Experience</h2>
-
     <div class="grid">
       <div>
         <img src="images/ROBOT HAND.png" alt="">
         <p id="txt1">Robotic arm preparing coffee</p>
       </div>
-
       <div>
         <img src="images/screen.png" alt="">
         <p id="txt2">Interactive drink selection</p>
       </div>
-
       <div>
         <img src="images/paying screen.png" alt="">
         <p id="txt3">Fast and seamless payment</p>
       </div>
-
       <div>
         <img src="images/FOAM.png" alt="">
         <p id="txt4">Custom printed coffee foam</p>
@@ -254,23 +329,19 @@ footer {
   <!-- WHY KAVA -->
   <div class="card">
     <h2 id="why-title">Why KAVA?</h2>
-
     <div class="grid">
       <div>
         <h3>🚀 Attract Foot Traffic</h3>
         <p>Eye-catching robotic technology that draws visitors and increases mall engagement.</p>
       </div>
-
       <div>
         <h3>📸 Social Media Magnet</h3>
         <p>Customers love filming and sharing the experience, creating organic promotion.</p>
       </div>
-
       <div>
         <h3>☕ Premium Experience</h3>
         <p>High-quality coffee combined with a futuristic, interactive journey.</p>
       </div>
-
       <div>
         <h3>💡 Innovative Concept</h3>
         <p>A unique mix of AI, robotics, and retail entertainment.</p>
@@ -289,7 +360,6 @@ footer {
   <!-- CONTACT FORM -->
   <div class="card contact-box" id="contact">
     <h2 id="contact-title">Let’s Work Together</h2>
-
     <form id="contact-form" action="https://formspree.io/f/xvzwjpad" method="POST">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
@@ -297,7 +367,6 @@ footer {
       <textarea name="message" placeholder="Your Message" rows="4"></textarea>
       <button type="submit" class="submit-btn">Send Request</button>
     </form>
-
     <p id="form-message" style="margin-top:15px; font-weight:bold;"></p>
   </div>
 
@@ -310,7 +379,6 @@ footer {
 <script>
 function setLang(lang) {
   if (lang === 'fr') {
-    // Logo stays the same
     document.getElementById("title").innerText = "Découvrez le futur du café";
     document.getElementById("subtitle").innerText = "Barista robotisé alimenté par l’IA";
     document.getElementById("cta").innerText = "Demande de partenariat";
