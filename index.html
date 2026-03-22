@@ -9,16 +9,17 @@
     header { background: linear-gradient(135deg, #4b2e2b, #a67c52); color: white; padding: 80px 20px; text-align: center; }
     header h1 { font-size: 42px; margin-bottom: 10px; }
     header p { font-size: 18px; opacity: 0.9; }
-    .container { max-width: 1000px; margin: auto; padding: 40px 20px; }
+    .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
     h2 { margin-bottom: 15px; color: #222; }
     .card { background: white; padding: 25px; margin: 20px 0; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.08); }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    img { max-width: 100%; border-radius: 10px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    figure { margin: 0; }
+    figcaption { text-align: center; font-size: 14px; margin-top: 5px; color: #555; }
+    img { max-width: 100%; border-radius: 10px; display: block; margin: auto; }
     footer { text-align: center; padding: 20px; background: #111; color: white; }
     .lang { text-align: right; padding: 10px 20px; }
     button { padding: 8px 12px; margin-left: 5px; border: none; cursor: pointer; border-radius: 6px; }
     .active { background: #111; color: white; }
-    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -32,22 +33,28 @@
 <header>
   <h1 id="title">AI Robotic Coffee Experience</h1>
   <p id="subtitle">A new attraction that transforms customer engagement</p>
-  <img src="KAVA Home page.jpg" alt="AI coffee machine" style="max-width:400px; margin-top:20px;">
+  <figure>
+    <img src="KAVA Home page.jpg" alt="AI coffee machine">
+    <figcaption>AI Coffee Machine</figcaption>
+  </figure>
 </header>
 
 <div class="container">
 
-  <!-- About Section -->
+  <!-- Concept Section -->
   <div class="card">
     <h2 id="about-title">Concept</h2>
     <p id="about-text">
       Our AI-powered robotic coffee machine offers a fully automated, premium coffee experience.
       Designed for high-traffic environments, it combines innovation, entertainment, and efficiency.
     </p>
-    <img src="FOAM.jpg" alt="Edible ink printed on coffee foam">
+    <figure>
+      <img src="FOAM.jpg" alt="Edible ink printed on coffee foam">
+      <figcaption>Custom printed coffee foam</figcaption>
+    </figure>
   </div>
 
-  <!-- Benefits and Business Value -->
+  <!-- Benefits & Business Value Section -->
   <div class="grid">
     <div class="card">
       <h2 id="benefits-title">Why It Stands Out</h2>
@@ -57,7 +64,10 @@
         <li>Modern and innovative brand image</li>
         <li>Consistent, high-quality service</li>
       </ul>
-      <img src="LOGO - FRENCH.jpg" alt="Company logo in French">
+      <figure>
+        <img src="LOGO - FRENCH.jpg" alt="Company logo in French">
+        <figcaption>KAVA Logo (French)</figcaption>
+      </figure>
     </div>
 
     <div class="card">
@@ -66,7 +76,10 @@
         This concept is more than a coffee machine — it's an experience.
         It brings innovation into commercial spaces and enhances customer satisfaction.
       </p>
-      <img src="paying screen.jpg" alt="Payment screen interface">
+      <figure>
+        <img src="paying screen.jpg" alt="Payment screen interface">
+        <figcaption>Interactive payment screen</figcaption>
+      </figure>
     </div>
   </div>
 
@@ -77,8 +90,16 @@
       We are seeking to collaborate with premium locations such as shopping malls
       to introduce this unique concept and elevate the visitor experience.
     </p>
-    <img src="ROBOT HAND.jpg" alt="Robot hand holding a coffee cup">
-    <img src="screen.jpg" alt="Screen showing drink options and prices">
+    <div class="grid">
+      <figure>
+        <img src="ROBOT HAND.jpg" alt="Robot hand holding a coffee cup">
+        <figcaption>Robot hand serving coffee</figcaption>
+      </figure>
+      <figure>
+        <img src="screen.jpg" alt="Screen showing drink options and prices">
+        <figcaption>Menu screen with drinks & prices</figcaption>
+      </figure>
+    </div>
   </div>
 
   <!-- Contact Section -->
