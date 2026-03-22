@@ -1,165 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>KAVA - AI Coffee Experience</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<title>KAVA - AI Coffee Experience</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f8f9fb;
-      color: #333;
-    }
+<style>
+:root {
+  --main-color: #0A2540;
+  --accent-color: #00C2FF;
+}
 
-    header {
-      text-align: center;
-      background: linear-gradient(135deg, #4b2e2b, #a67c52);
-      color: white;
-      padding: 60px 20px;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f8f9fb;
+}
 
-    header img {
-      width: 140px;
-      margin-bottom: 15px;
-    }
+/* LANGUAGE SWITCH */
+.lang-switch {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+}
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 20px;
-    }
+.lang-switch button {
+  padding: 8px 12px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    .card {
-      background: white;
-      padding: 25px;
-      margin: 20px 0;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-    }
+/* HEADER */
+header {
+  text-align: center;
+  background: linear-gradient(135deg, var(--main-color), var(--accent-color));
+  color: white;
+  padding: 80px 20px;
+}
 
-    h2 {
-      margin-top: 0;
-    }
+header img {
+  width: 140px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
+.cta-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: white;
+  color: var(--main-color);
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-    img {
-      width: 100%;
-      border-radius: 10px;
-    }
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+}
 
-    figure {
-      margin: 0;
-    }
+/* CARDS */
+.card {
+  background: white;
+  padding: 25px;
+  margin: 20px 0;
+  border-radius: 12px;
+}
 
-    figcaption {
-      text-align: center;
-      font-size: 14px;
-      margin-top: 5px;
-      color: #555;
-    }
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #111;
-      color: white;
-    }
-  </style>
+img, video {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* CONTACT */
+.contact-box {
+  text-align: center;
+  background: var(--main-color);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+  color: white;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <img src="images/LOGO ENGLISH.jpeg" alt="KAVA Logo">
-  <h1>Meet the Future of Coffee</h1>
-  <p>AI-powered robotic barista delivering innovation and experience</p>
+<!-- LANGUAGE SWITCH -->
+<div class="lang-switch">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('fr')">FR</button>
+</div>
 
-  <figure>
-    <img src="images/KAVA Home page.png" alt="AI Coffee Machine">
-    <figcaption>AI Robotic Coffee Machine</figcaption>
-  </figure>
+<header>
+  <img id="logo" src="images/LOGO ENGLISH.jpeg">
+
+  <h1 id="title">Meet the Future of Coffee</h1>
+  <p id="subtitle">AI-powered robotic barista delivering innovation and experience</p>
+
+  <a href="#contact" class="cta-btn" id="cta">Request Partnership</a>
 </header>
 
 <div class="container">
 
-  <!-- ABOUT -->
+  <!-- HERO IMAGE -->
   <div class="card">
-    <h2>Concept</h2>
-    <p>
-      Our AI-powered robotic coffee machine delivers a premium, fully automated experience.
-      Designed for high-traffic locations, it combines innovation, speed, and entertainment.
-    </p>
-
-    <figure>
-      <img src="images/FOAM.png" alt="Coffee Foam Printing">
-      <figcaption>Custom edible ink printing on coffee foam</figcaption>
-    </figure>
+    <img src="images/KAVA Home page.png">
   </div>
 
-  <!-- FEATURES -->
-  <div class="grid">
-    <div class="card">
-      <h2>Why It Stands Out</h2>
-      <ul>
-        <li>Strong visual attraction</li>
-        <li>Increases customer engagement</li>
-        <li>Modern and innovative concept</li>
-        <li>Consistent high-quality drinks</li>
-      </ul>
-
-      <figure>
-        <img src="images/LOGO - FRENCH.jpeg" alt="KAVA Logo French">
-        <figcaption>KAVA Branding (French version)</figcaption>
-      </figure>
-    </div>
-
-    <div class="card">
-      <h2>User Experience</h2>
-      <p>
-        Customers interact through a simple and intuitive interface,
-        making ordering and payment seamless.
-      </p>
-
-      <figure>
-        <img src="images/paying screen.png" alt="Payment Screen">
-        <figcaption>Interactive ordering & payment screen</figcaption>
-      </figure>
-    </div>
+  <!-- VIDEO -->
+  <div class="card">
+    <h2 id="video-title">See It in Action</h2>
+    <video controls>
+      <source src="images/video.mp4" type="video/mp4">
+    </video>
   </div>
 
-  <!-- OPPORTUNITY -->
+  <!-- EXPERIENCE -->
   <div class="card">
-    <h2>Opportunity</h2>
-    <p>
-      We are looking to collaborate with premium shopping malls and high-traffic
-      locations to introduce this innovative coffee experience.
-    </p>
+    <h2 id="experience-title">Experience</h2>
 
     <div class="grid">
-      <figure>
-        <img src="images/ROBOT HAND.png" alt="Robot Serving Coffee">
-        <figcaption>Robotic arm serving coffee</figcaption>
-      </figure>
+      <div>
+        <img src="images/ROBOT HAND.png">
+        <p id="txt1">Robotic arm preparing coffee</p>
+      </div>
 
-      <figure>
-        <img src="images/screen.png" alt="Menu Screen">
-        <figcaption>Drink selection interface</figcaption>
-      </figure>
+      <div>
+        <img src="images/screen.png">
+        <p id="txt2">Interactive drink selection</p>
+      </div>
+
+      <div>
+        <img src="images/paying screen.png">
+        <p id="txt3">Fast and seamless payment</p>
+      </div>
+
+      <div>
+        <img src="images/FOAM.png">
+        <p id="txt4">Custom printed coffee foam</p>
+      </div>
     </div>
   </div>
 
   <!-- CONTACT -->
-  <div class="card">
-    <h2>Contact</h2>
+  <div id="contact" class="contact-box">
+    <h2 id="contact-title">Let’s Work Together</h2>
     <p>Email: info@kava.com</p>
-    <p>Phone: (XXX) XXX-XXXX</p>
   </div>
 
 </div>
@@ -167,6 +170,36 @@
 <footer>
   <p>© 2026 KAVA AI Coffee Experience</p>
 </footer>
+
+<script>
+function setLang(lang) {
+  if (lang === 'fr') {
+    document.getElementById("logo").src = "images/LOGO - FRENCH.jpeg";
+    document.getElementById("title").innerText = "Découvrez le futur du café";
+    document.getElementById("subtitle").innerText = "Barista robotisé alimenté par l’IA";
+    document.getElementById("cta").innerText = "Demande de partenariat";
+    document.getElementById("video-title").innerText = "Voir en action";
+    document.getElementById("experience-title").innerText = "Expérience";
+    document.getElementById("txt1").innerText = "Bras robotisé préparant le café";
+    document.getElementById("txt2").innerText = "Sélection interactive des boissons";
+    document.getElementById("txt3").innerText = "Paiement rapide et fluide";
+    document.getElementById("txt4").innerText = "Impression personnalisée sur mousse";
+    document.getElementById("contact-title").innerText = "Travaillons ensemble";
+  } else {
+    document.getElementById("logo").src = "images/LOGO ENGLISH.jpeg";
+    document.getElementById("title").innerText = "Meet the Future of Coffee";
+    document.getElementById("subtitle").innerText = "AI-powered robotic barista delivering innovation and experience";
+    document.getElementById("cta").innerText = "Request Partnership";
+    document.getElementById("video-title").innerText = "See It in Action";
+    document.getElementById("experience-title").innerText = "Experience";
+    document.getElementById("txt1").innerText = "Robotic arm preparing coffee";
+    document.getElementById("txt2").innerText = "Interactive drink selection";
+    document.getElementById("txt3").innerText = "Fast and seamless payment";
+    document.getElementById("txt4").innerText = "Custom printed coffee foam";
+    document.getElementById("contact-title").innerText = "Let’s Work Together";
+  }
+}
+</script>
 
 </body>
 </html>
