@@ -25,16 +25,6 @@ body {
   z-index: 1000;
 }
 
-.lang-switch button {
-  padding: 8px 12px;
-  margin-left: 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background: white;
-  font-weight: bold;
-}
-
 /* HERO HEADER */
 .hero-header {
   position: relative;
@@ -54,16 +44,9 @@ body {
   width: 110%;
   height: 110%;
   object-fit: cover;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%);
   z-index: 0;
   filter: brightness(0.7);
-  animation: slowZoom 8s ease-in-out infinite;
-}
-
-@keyframes slowZoom {
-  0%   { transform: translate(-50%, -50%) scale(1); }
-  50%  { transform: translate(-50%, -50%) scale(1.08); }
-  100% { transform: translate(-50%, -50%) scale(1); }
 }
 
 /* OVERLAY */
@@ -73,47 +56,36 @@ body {
   text-align: center;
   padding: 50px 20px;
   border-radius: 20px;
-  background: linear-gradient(
-    rgba(10, 37, 64, 0.7),
-    rgba(10, 37, 64, 0.4)
-  );
+  background: linear-gradient(rgba(10,37,64,0.7), rgba(10,37,64,0.4));
 }
 
-/* LOGO */
+/* BIGGER LOGO + TEXT */
 .logo-animate {
-  width: 260px;
-  margin-bottom: 25px;
+  width: 380px;
+  max-width: 90%;
+  margin-bottom: 30px;
 }
 
-/* TYPING EFFECT */
 .headline {
-  font-size: 3rem;
+  font-size: 4rem;
   margin: 20px 0;
   border-right: 3px solid white;
   white-space: nowrap;
   overflow: hidden;
 }
 
-/* SUBTITLE */
 .subline {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   margin-bottom: 30px;
 }
 
 /* CTA */
 .cta-btn {
-  display: inline-block;
   padding: 14px 30px;
   background: white;
   color: var(--main-color);
   border-radius: 30px;
   text-decoration: none;
-  font-weight: bold;
-  animation: pulse 2.5s infinite;
-}
-
-@keyframes pulse {
-  50% { transform: scale(1.05); }
 }
 
 /* CONTAINER */
@@ -130,6 +102,20 @@ body {
   border-radius: 15px;
 }
 
+/* VIDEO SECTION */
+.card h2 {
+  text-align: center;
+  font-size: 2.2rem;
+}
+
+.card video {
+  width: 100%;
+  max-width: 900px;
+  display: block;
+  margin: auto;
+  border-radius: 15px;
+}
+
 /* GRID */
 .grid {
   display: grid;
@@ -142,15 +128,6 @@ body {
   max-width: 220px;
   margin: auto;
   display: block;
-  border-radius: 12px;
-}
-
-/* VIDEO SECTION */
-.card video {
-  width: 90%;
-  max-width: 800px;
-  display: block;
-  margin: auto;
 }
 
 /* CONTACT */
@@ -160,21 +137,6 @@ body {
   color: white;
   padding: 40px;
   border-radius: 15px;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-}
-
-button.submit-btn {
-  background: var(--accent-color);
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 25px;
-  cursor: pointer;
 }
 
 footer {
@@ -195,16 +157,15 @@ footer {
 
 <header class="hero-header">
 
-  <video autoplay muted loop playsinline class="bg-video">
-    <source src="images/arm AI video.mp4" type="video/mp4">
+  <!-- VIDEO (NO LOOP) -->
+  <video autoplay muted playsinline class="bg-video">
+    <source src="images/arm-ai-video.mp4" type="video/mp4">
   </video>
 
   <div class="overlay">
     <img src="images/KAVA LOGO.png" class="logo-animate">
-
     <h1 id="title" class="headline"></h1>
     <p id="subtitle" class="subline">AI-powered robotic barista delivering innovation and experience</p>
-
     <a href="#contact" class="cta-btn" id="cta">Request Partnership</a>
   </div>
 
@@ -212,17 +173,20 @@ footer {
 
 <div class="container">
 
+  <!-- SEE IT IN ACTION (NOW FIRST) -->
+  <div class="card">
+    <h2 id="video-title">See It in Action</h2>
+    <video controls>
+      <source src="Storyboard.mp4">
+    </video>
+  </div>
+
+  <!-- IMAGE -->
   <div class="card">
     <img src="images/KAVA Home page.png" style="width:100%;">
   </div>
 
-  <div class="card">
-    <h2 id="video-title">See It in Action</h2>
-    <video controls>
-      <source src="images/video.mp4">
-    </video>
-  </div>
-
+  <!-- EXPERIENCE -->
   <div class="card">
     <h2 id="experience-title">Experience</h2>
     <div class="grid">
@@ -245,14 +209,14 @@ footer {
     </div>
   </div>
 
+  <!-- CONTACT -->
   <div class="card contact-box" id="contact">
     <h2 id="contact-title">Let’s Work Together</h2>
-
     <form action="https://formspree.io/f/xvzwjpad" method="POST">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <textarea name="message" placeholder="Your Message"></textarea>
-      <button class="submit-btn">Send</button>
+      <button>Send</button>
     </form>
   </div>
 
@@ -263,10 +227,13 @@ footer {
 </footer>
 
 <script>
-// TYPEWRITER EFFECT
+// STOP VIDEO AFTER END
+const video = document.querySelector(".bg-video");
+video.addEventListener("ended", () => video.pause());
+
+// TYPE EFFECT
 function typeText(text) {
   let i = 0;
-  const speed = 50;
   const el = document.getElementById("title");
   el.innerHTML = "";
 
@@ -274,33 +241,23 @@ function typeText(text) {
     if (i < text.length) {
       el.innerHTML += text.charAt(i);
       i++;
-      setTimeout(typing, speed);
+      setTimeout(typing, 40);
     }
   }
   typing();
 }
 
-// LANGUAGE SWITCH
+// LANGUAGE
 function setLang(lang) {
   if (lang === 'fr') {
     typeText("Découvrez le futur du café");
     document.getElementById("subtitle").innerText = "Barista robotisé alimenté par l’IA";
-    document.getElementById("cta").innerText = "Demande de partenariat";
-    document.getElementById("video-title").innerText = "Voir en action";
-    document.getElementById("experience-title").innerText = "Expérience";
-    document.getElementById("txt1").innerText = "Bras robotisé préparant le café";
-    document.getElementById("txt2").innerText = "Sélection interactive";
-    document.getElementById("txt3").innerText = "Paiement rapide";
-    document.getElementById("txt4").innerText = "Mousse personnalisée";
-    document.getElementById("contact-title").innerText = "Travaillons ensemble";
   } else {
     typeText("Meet the Future of Coffee");
     document.getElementById("subtitle").innerText = "AI-powered robotic barista delivering innovation and experience";
-    document.getElementById("cta").innerText = "Request Partnership";
   }
 }
 
-// INITIAL LOAD
 window.onload = () => setLang('en');
 </script>
 
