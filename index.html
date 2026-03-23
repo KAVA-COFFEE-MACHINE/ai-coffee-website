@@ -44,10 +44,10 @@ body {
   color: white;
 }
 
-/* HERO HEADER */
+/* HERO HEADER - ENLARGED */
 .hero-header {
   position: relative;
-  height: 85vh; 
+  height: 90vh; /* Increased for more impact */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,8 +62,8 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: translate(-50%, -50%);
-  filter: brightness(0.4); 
+  transform: translate(-50%, -50%) scale(1.1); /* Slightly zoomed for full coverage */
+  filter: brightness(0.45); 
 }
 .overlay { 
   position: relative; 
@@ -72,28 +72,28 @@ body {
   padding: 20px;
 }
 .logo-animate { 
-  width: 550px; 
-  max-width: 85%; 
+  width: 580px; 
+  max-width: 90%; 
   border-radius: 40px; 
-  margin-bottom: 20px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  margin-bottom: 25px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
 }
 
 .headline { 
-  font-size: 3.5rem; 
+  font-size: 3.8rem; 
   font-weight: 800; 
   margin: 10px 0; 
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 .subtitle { 
-  font-size: 1.6rem; 
-  opacity: 0.9;
-  margin-bottom: 30px;
+  font-size: 1.8rem; 
+  opacity: 0.95;
+  margin-bottom: 35px;
 }
 
 .scroll-indicator { margin-top: 20px; cursor: pointer; }
-.scroll-text { font-size: 0.8rem; letter-spacing: 5px; opacity: 0.7; margin-bottom: 10px; }
-.scroll-line { width: 2px; height: 60px; margin: 0 auto; background: rgba(255,255,255,0.2); position: relative; overflow: hidden; }
+.scroll-text { font-size: 0.8rem; letter-spacing: 5px; opacity: 0.8; margin-bottom: 10px; }
+.scroll-line { width: 2px; height: 70px; margin: 0 auto; background: rgba(255,255,255,0.2); position: relative; overflow: hidden; }
 .scroll-line::after {
   content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
   background: linear-gradient(to bottom, transparent, var(--accent-color), transparent);
@@ -101,70 +101,92 @@ body {
 }
 @keyframes neonFlow { 0% { top: -100%; } 100% { top: 100%; } }
 
-/* CARDS */
-.container { max-width: 1100px; margin: auto; padding: 60px 20px; }
+/* CONTAINER & CARDS */
+.container { max-width: 1200px; margin: auto; padding: 60px 20px; }
 .card {
   background: white;
-  padding: 50px;
-  margin-bottom: 50px;
-  border-radius: 35px;
-  box-shadow: 0 15px 50px rgba(0,0,0,0.05);
+  padding: 60px 50px;
+  margin-bottom: 60px;
+  border-radius: 40px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.06);
   text-align: center;
 }
-.card h2 { font-size: 2.2rem; margin-bottom: 30px; font-weight: 700; }
-video { width: 100%; border-radius: 25px; background: #000; }
+.card h2 { font-size: 2.5rem; margin-bottom: 40px; font-weight: 700; }
 
-/* INTERACTIVE SECTION & TOOLTIPS */
-.image-wrapper { position: relative; display: inline-block; width: 100%; max-width: 800px; }
-.main-image { width: 100%; border-radius: 25px; display: block; }
-.scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-color); box-shadow: 0 0 15px var(--accent-color); animation: scanMove 4s linear infinite; pointer-events: none; }
+/* INTERACTIVE IMAGE */
+.image-wrapper { position: relative; display: inline-block; width: 100%; max-width: 900px; margin-bottom: 20px;}
+.main-image { width: 100%; border-radius: 30px; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+.scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--accent-color); box-shadow: 0 0 20px var(--accent-color); animation: scanMove 4s linear infinite; pointer-events: none; }
 @keyframes scanMove { 0% { top: 2%; } 100% { top: 98%; } }
 
-.point { position: absolute; width: 22px; height: 22px; background: var(--accent-color); border-radius: 50%; cursor: pointer; z-index: 10; transition: 0.3s; }
-.point.active { background: white; border: 5px solid var(--accent-color); transform: scale(1.4); }
+.point { position: absolute; width: 24px; height: 24px; background: var(--accent-color); border-radius: 50%; cursor: pointer; z-index: 10; transition: 0.3s; }
+.point.active { background: white; border: 6px solid var(--accent-color); transform: scale(1.5); }
 .point::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; background: var(--accent-color); animation: pulse 2s infinite; z-index: -1; }
 @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
 
-/* Tooltip Styling */
+/* Tooltip */
 .point::after {
   content: attr(data-title);
   position: absolute;
-  bottom: 150%;
+  bottom: 160%;
   left: 50%;
   transform: translateX(-50%) translateY(10px);
   background: var(--main-color);
   color: #fff;
-  padding: 6px 14px;
-  border-radius: 10px;
-  font-size: 0.85rem;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 0.9rem;
   font-weight: 600;
   white-space: nowrap;
   opacity: 0;
   transition: 0.3s ease;
   pointer-events: none;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  border-bottom: 2px solid var(--accent-color);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  border-bottom: 3px solid var(--accent-color);
 }
-.point:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
+.point:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+/* ENLARGED FEATURE BOXES */
 .feature-box {
-  margin-top: 40px;
-  padding: 35px;
-  border-radius: 30px;
-  background: #f8fafc;
+  margin-top: 50px;
+  padding: 0;
+  border-radius: 35px;
+  background: #ffffff;
   display: flex;
-  align-items: center;
-  gap: 35px;
+  align-items: stretch;
+  gap: 0;
   opacity: 0;
-  transform: translateY(15px);
-  transition: 0.5s ease;
+  transform: translateY(20px);
+  transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   border: 1px solid #edf2f7;
+  overflow: hidden;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.05);
 }
 .feature-box.show { opacity: 1; transform: translateY(0); }
-.feature-box img { width: 240px; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+
+.feature-img-wrapper {
+  width: 50%; /* Image takes half the width */
+  overflow: hidden;
+}
+.feature-box img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  transition: transform 0.8s ease;
+}
+.feature-box:hover img { transform: scale(1.05); }
+
+.feature-text-wrapper { 
+  width: 50%;
+  padding: 50px;
+  text-align: left; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fdfdfd;
+}
+.feature-text-wrapper h3 { font-size: 1.8rem; margin-bottom: 15px; color: var(--main-color); }
+.feature-text-wrapper p { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; }
 
 /* CONTACT */
 .contact-box {
@@ -174,53 +196,55 @@ video { width: 100%; border-radius: 25px; background: #000; }
   border: 1px solid rgba(0, 194, 255, 0.1);
 }
 .contact-box::before {
-  content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 6px;
+  content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 8px;
   background: linear-gradient(90deg, var(--main-color), var(--accent-color));
 }
 .contact-flex {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 50px;
-  max-width: 950px;
+  gap: 60px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .contact-video-side {
   width: 40%;
-  max-width: 320px;
   mix-blend-mode: multiply;
 }
-.contact-form-side { flex: 1; text-align: left; transition: all 0.5s ease; }
-
+.contact-form-side { flex: 1; text-align: left; }
 .contact-form-side input, .contact-form-side textarea {
   width: 100%;
   margin: 12px 0;
-  padding: 18px;
-  border-radius: 14px;
+  padding: 20px;
+  border-radius: 15px;
   border: 1.5px solid #edf2f7;
   background: #f8fafc;
   font-family: inherit;
+  font-size: 1rem;
 }
 .contact-form-side button {
   width: 100%;
-  padding: 18px;
+  padding: 20px;
   background: var(--main-color);
   color: white;
   border: none;
-  border-radius: 40px;
+  border-radius: 45px;
   cursor: pointer;
   font-weight: 700;
+  font-size: 1.15rem;
   transition: 0.3s;
 }
-.contact-form-side button:hover { background: var(--accent-color); transform: translateY(-3px); }
+.contact-form-side button:hover { background: var(--accent-color); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,194,255,0.2); }
 
-/* MOBILE */
-@media (max-width: 768px) {
-  .headline { font-size: 2.4rem; }
-  .logo-animate { width: 85%; }
+/* MOBILE RESPONSIVE STACKING */
+@media (max-width: 900px) {
+  .headline { font-size: 2.8rem; }
+  .feature-box { flex-direction: column; }
+  .feature-img-wrapper, .feature-text-wrapper { width: 100%; }
+  .feature-img-wrapper { height: 250px; }
+  .feature-text-wrapper { padding: 30px; text-align: center; }
   .contact-flex { flex-direction: column; text-align: center; }
-  .contact-video-side { width: 70%; }
-  .feature-box { flex-direction: column; text-align: center; }
+  .contact-video-side { width: 80%; }
 }
 </style>
 </head>
@@ -263,11 +287,13 @@ video { width: 100%; border-radius: 25px; background: #000; }
       <div class="point" data-feature="screen" style="top:27%; left:49%;" onclick="showFeature('screen')"></div>
       <div class="point" data-feature="robot" style="top:50%; left:49%;" onclick="showFeature('robot')"></div>
       <div class="point" data-feature="touch" style="top:69%; left:49%;" onclick="showFeature('touch')"></div>
-      <div class="point" data-feature="foam" style="top:66%; left:22%;" onclick="showFeature('foam')"></div>
+      <div class="point" data-feature="foam" style="top:66%; left:30%;" onclick="showFeature('foam')"></div>
     </div>
     
     <div class="feature-box" id="feature-box">
-        <img id="feature-image" src="" alt="">
+        <div class="feature-img-wrapper">
+            <img id="feature-image" src="" alt="">
+        </div>
         <div class="feature-text-wrapper">
           <h3 id="feature-title"></h3>
           <p id="feature-text"></p>
@@ -298,28 +324,28 @@ let currentLang = "fr";
 
 const featuresData = {
   screen: {
-    en: { title: "Menu Display", text: "View our full selection of beverages. This screen showcases our latest digital art creations.", image: "images/screen.png", hover: "Menu" },
-    fr: { title: "Écran d'affichage", text: "Consultez notre sélection complète de boissons. Cet écran dynamique affiche nos dernières créations digitales.", image: "images/screen.png", hover: "Le Menu" }
+    en: { title: "Menu Display", text: "Browse our premium selection of beverages. Our dynamic digital screen brings the art of coffee to life.", image: "images/screen.png", hover: "Menu" },
+    fr: { title: "Écran d'affichage", text: "Découvrez notre sélection de boissons. Notre écran dynamique donne vie à l'art du café.", image: "images/screen.png", hover: "Le Menu" }
   },
   robot: {
-    en: { title: "Robotic Arm", text: "A high-precision robotic barista crafts your drink with perfect consistency every time.", image: "images/robot.png", hover: "Barista" },
-    fr: { title: "Bras robotisé", text: "Admirez la précision de notre barista technologique. Il prépare votre café avec une régularité parfaite.", image: "images/robot.png", hover: "Robotique" }
+    en: { title: "Robotic Precision", text: "A high-precision robotic barista ensures every cup is crafted with perfect consistency.", image: "images/robot.png", hover: "Barista" },
+    fr: { title: "Précision Robotisée", text: "Un barista technologique de haute précision garantit une qualité constante pour chaque tasse.", image: "images/robot.png", hover: "Robotique" }
   },
   touch: {
-    en: { title: "Touch Screen", text: "Order and customize your drink in a few taps. Upload photos to print on your coffee foam.", image: "images/touch.png", hover: "Interface" },
-    fr: { title: "Écran tactile", text: "Commandez et personnalisez votre boisson. Téléchargez votre photo pour l'imprimer directement sur la mousse.", image: "images/touch.png", hover: "Commande" }
+    en: { title: "Smart Interface", text: "Customize your drink in seconds. Upload your own photos to personalize your coffee foam.", image: "images/touch.png", hover: "Interface" },
+    fr: { title: "Interface Intelligente", text: "Personnalisez votre boisson en quelques secondes. Imprimez vos propres photos sur la mousse.", image: "images/touch.png", hover: "Commande" }
   },
   foam: {
-    en: { title: "Foam Art", text: "Our tech prints high-definition edible ink portraits directly onto your latte foam.", image: "images/foam.png", hover: "Art" },
-    fr: { title: "Art sur mousse", text: "Notre technologie imprime des portraits haute définition directement sur votre mousse.", image: "images/foam.png", hover: "Artiste" }
+    en: { title: "Foam Art Technology", text: "High-definition edible ink printing directly onto your latte foam for a unique experience.", image: "images/foam.png", hover: "Art" },
+    fr: { title: "Technologie Foam Art", text: "Impression haute définition avec encre comestible directement sur votre mousse de lait.", image: "images/foam.png", hover: "Artiste" }
   }
 };
 
 function setLang(lang) {
   currentLang = lang;
   const content = {
-    en: { title: "Meet the Future of Coffee", sub: "AI-powered robotic barista", vTitle: "See It in Action", eTitle: "KAVA Technology", cTitle: "Let's Work Together", btn: "Send Message", name: "Your Name", email: "Your Email", msg: "Your Message", scroll: "SCROLL" },
-    fr: { title: "Découvrez le futur du café", sub: "Barista robotisé alimenté par l'IA", vTitle: "Voir en action", eTitle: "Technologie KAVA", cTitle: "Travaillons ensemble", btn: "Envoyer le message", name: "Votre Nom", email: "Votre Email", msg: "Votre Message", scroll: "DÉCOUVRIR" }
+    en: { title: "The Future of Coffee", sub: "AI-Powered Robotic Barista", vTitle: "See It in Action", eTitle: "KAVA Technology", cTitle: "Let's Work Together", btn: "Send Message", name: "Your Name", email: "Your Email", msg: "Your Message", scroll: "SCROLL" },
+    fr: { title: "Le Futur du Café", sub: "Barista Robotisé par l'IA", vTitle: "Voir en Action", eTitle: "Technologie KAVA", cTitle: "Travaillons Ensemble", btn: "Envoyer le Message", name: "Votre Nom", email: "Votre Email", msg: "Votre Message", scroll: "DÉCOUVRIR" }
   };
 
   const d = content[lang];
@@ -334,11 +360,14 @@ function setLang(lang) {
   document.getElementById("input-message").placeholder = d.msg;
   document.querySelector(".scroll-text").innerText = d.scroll;
 
-  // Update Hover Tooltips
   document.querySelectorAll('.point').forEach(p => {
     const key = p.getAttribute('data-feature');
     p.setAttribute('data-title', featuresData[key][lang].hover);
   });
+  
+  if(document.querySelector(".point.active")) {
+    showFeature(document.querySelector(".point.active").getAttribute('data-feature'));
+  }
 }
 
 function showFeature(featureKey) {
@@ -363,9 +392,9 @@ function handleSend() {
   setTimeout(() => {
     container.innerHTML = `
       <div style="text-align:center; padding: 20px;">
-        <h1 style="font-size: 3.5rem; color: var(--accent-color); margin-bottom: 15px;">✓</h1>
-        <h2 style="font-size: 2rem;">${currentLang === 'fr' ? 'Merci !' : 'Thank You!'}</h2>
-        <p style="font-size: 1.1rem; opacity: 0.8;">${currentLang === 'fr' ? 'Votre message a été envoyé.' : 'Your message has been sent.'}</p>
+        <h1 style="font-size: 4rem; color: var(--accent-color); margin-bottom: 15px;">✓</h1>
+        <h2 style="font-size: 2.2rem;">${currentLang === 'fr' ? 'Merci !' : 'Thank You!'}</h2>
+        <p style="font-size: 1.2rem; opacity: 0.8;">${currentLang === 'fr' ? 'Votre message a été envoyé avec succès.' : 'Your message has been sent successfully.'}</p>
       </div>
     `;
     container.style.opacity = "1";
