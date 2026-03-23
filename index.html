@@ -43,7 +43,7 @@ body {
 /* --- HEADER SECTION --- */
 .hero-header {
   position: relative;
-  height: 70vh; /* Default Mobile Height */
+  height: 100vh; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,13 +63,52 @@ body {
 }
 .overlay { position: relative; z-index: 1; text-align: center; padding: 20px; }
 .logo-animate { 
-  width: 320px; /* Default Mobile Logo */
+  width: 320px;
   max-width: 90%; 
   border-radius: 25px; 
   margin-bottom: 20px;
 }
 .headline { font-size: 2.2rem; font-weight: 800; margin: 10px 0; }
 .subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 25px; }
+
+/* SCROLL SYMBOL */
+.scroll-down {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.mouse {
+  width: 26px;
+  height: 42px;
+  border: 2px solid white;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto 8px;
+  position: relative;
+}
+.wheel {
+  width: 4px;
+  height: 8px;
+  background: var(--accent-color);
+  border-radius: 2px;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll-anim 1.6s infinite;
+}
+@keyframes scroll-anim {
+  0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(15px); }
+}
+#scroll-text { font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
 
 /* --- CARDS & INTERACTIVE --- */
 .container { max-width: 1200px; margin: auto; padding: 40px 20px; }
@@ -82,10 +121,9 @@ body {
   text-align: center;
 }
 
-/* FIXED VIDEO SIZE */
 #action-video {
   width: 100%;
-  max-width: 800px; /* Limits the size on screen */
+  max-width: 800px; 
   height: auto;
   border-radius: 20px;
   display: block;
@@ -95,10 +133,10 @@ body {
 .image-wrapper { position: relative; display: inline-block; width: 100%; max-width: 900px; }
 .main-image { width: 100%; border-radius: 25px; display: block; }
 
-/* INTERACTIVE POINTS & TOOLTIPS */
 .point { position: absolute; width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; cursor: pointer; z-index: 10; }
 .point.active { background: white; border: 5px solid var(--accent-color); transform: scale(1.3); }
 
+/* HOVER TITLE TOOLTIP */
 .point::after {
   content: attr(data-title);
   position: absolute;
@@ -117,14 +155,9 @@ body {
   pointer-events: none;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
+.point:hover::after { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 
-.point:hover::after {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* --- FEATURE BOX (Mobile Style by Default) --- */
+/* --- FEATURE BOX --- */
 .feature-box {
   margin-top: 30px;
   padding: 20px;
@@ -143,43 +176,33 @@ body {
 .feature-box img { width: 100%; border-radius: 15px; }
 .feature-text-wrapper { text-align: center; }
 
-/* --- CONTACT --- */
+/* --- CONTACT FORM --- */
 .contact-flex { display: flex; flex-direction: column; align-items: center; gap: 30px; }
 .contact-video-side { width: 70%; mix-blend-mode: multiply; }
 .contact-form-side { width: 100%; text-align: center; }
 
-/* ============================================================
-   DESKTOP STYLES (Screen wider than 992px)
-   ============================================================ */
-@media (min-width: 992px) {
-  .hero-header { height: 90vh; }
-  .bg-video { transform: translate(-50%, -50%) scale(1.1); }
-  .logo-animate { width: 580px; border-radius: 40px; box-shadow: 0 25px 50px rgba(0,0,0,0.4); }
-  .headline { font-size: 3.8rem; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-  .subtitle { font-size: 1.8rem; }
+.contact-form-side input, .contact-form-side textarea { 
+  width: 100%; margin: 10px 0; padding: 18px; border-radius: 15px; 
+  border: 1.5px solid #edf2f7; background: #f8fafc; font-family: inherit; box-sizing: border-box; 
+}
+.contact-form-side button { 
+  width: 100%; padding: 18px; background: var(--main-color); color: white; 
+  border: none; border-radius: 45px; cursor: pointer; font-weight: 700; transition: 0.3s; 
+}
+.contact-form-side button:hover { background: var(--accent-color); transform: translateY(-3px); }
 
-  .card { padding: 60px 50px; border-radius: 40px; }
-  
-  .feature-box {
-    flex-direction: row;
-    align-items: stretch;
-    padding: 0;
-    overflow: hidden;
-    height: 350px;
-  }
+/* --- DESKTOP STYLES --- */
+@media (min-width: 992px) {
+  .hero-header { height: 100vh; }
+  .logo-animate { width: 580px; }
+  .headline { font-size: 3.8rem; }
+  .subtitle { font-size: 1.8rem; }
+  .feature-box { flex-direction: row; height: 350px; padding: 0; overflow: hidden; }
   .feature-img-wrapper { width: 50%; max-width: none; }
-  .feature-box img { height: 100%; object-fit: cover; border-radius: 0; }
   .feature-text-wrapper { width: 50%; padding: 50px; text-align: left; background: #fff; }
-  
   .contact-flex { flex-direction: row; text-align: left; }
   .contact-video-side { width: 40%; }
-  .contact-form-side { text-align: left; }
 }
-
-/* Shared UI Components */
-.contact-form-side input, .contact-form-side textarea { width: 100%; margin: 10px 0; padding: 18px; border-radius: 15px; border: 1.5px solid #edf2f7; background: #f8fafc; font-family: inherit; }
-.contact-form-side button { width: 100%; padding: 18px; background: var(--main-color); color: white; border: none; border-radius: 45px; cursor: pointer; font-weight: 700; transition: 0.3s; }
-.contact-form-side button:hover { background: var(--accent-color); transform: translateY(-3px); }
 </style>
 </head>
 <body>
@@ -198,9 +221,14 @@ body {
     <h1 id="title" class="headline"></h1>
     <p id="subtitle" class="subtitle"></p>
   </div>
+
+  <a href="#first-section" class="scroll-down">
+    <span class="mouse"><span class="wheel"></span></span>
+    <span id="scroll-text"></span>
+  </a>
 </header>
 
-<div class="container">
+<div class="container" id="first-section">
   <div class="card">
     <h2 id="video-title"></h2>
     <video controls id="action-video">
@@ -234,10 +262,14 @@ body {
       </video>
       <div class="contact-form-side" id="form-container">
         <h2 id="contact-title"></h2>
-        <input type="text" id="input-name" placeholder="">
-        <input type="email" id="input-email" placeholder="">
-        <textarea id="input-message" rows="4" placeholder=""></textarea>
-        <button type="button" id="contact-btn" onclick="handleSend()"></button>
+        
+        <form action="https://formspree.io/f/xvzwjpad" method="POST" id="kava-form">
+          <input type="text" name="name" id="input-name" required>
+          <input type="email" name="email" id="input-email" required>
+          <textarea name="message" id="input-message" rows="4" required></textarea>
+          <button type="submit" id="contact-btn"></button>
+        </form>
+        
       </div>
     </div>
   </div>
@@ -248,33 +280,33 @@ let currentLang = "fr";
 
 const featuresData = {
   screen: {
-    en: { title: "Menu Display", text: "View our full selection of hot and cold beverages and current pricing. This screen showcases our latest digital latte art creations.", image: "images/screen.png" },
-    fr: { title: "Écran d'affichage", text: "Consultez notre menu complet et les tarifs en un coup d'œil. Cet écran affiche nos dernières créations de latte art.", image: "images/screen.png" }
+    en: { title: "Menu Display", text: "View our full selection of hot and cold beverages and current pricing.", image: "images/screen.png" },
+    fr: { title: "Écran d'affichage", text: "Consultez notre menu complet et les tarifs en un coup d'œil.", image: "images/screen.png" }
   },
   robot: {
-    en: { title: "Robotic Arm", text: "Watch our high-precision robotic barista craft your drink with perfect consistency and zero human contact.", image: "images/robot.png" },
-    fr: { title: "Bras robotisé", text: "Admirez la précision de notre barista technologique. Il prépare votre café avec une régularité parfaite.", image: "images/robot.png" }
+    en: { title: "Robotic Arm", text: "Watch our high-precision robotic barista craft your drink with perfect consistency.", image: "images/robot.png" },
+    fr: { title: "Bras robotisé", text: "Admirez la précision de notre barista technologique.", image: "images/robot.png" }
   },
   touch: {
-    en: { title: "Touch Screen", text: "Select your favorite drink and customize it in just a few taps. Upload your photo to be printed on the foam.", image: "images/touch.png" },
-    fr: { title: "Écran tactile", text: "Commandez et personnalisez votre boisson en quelques clics. Téléchargez votre photo pour l'imprimer sur la mousse.", image: "images/touch.png" }
+    en: { title: "Touch Screen", text: "Select your favorite drink and customize it in just a few taps.", image: "images/touch.png" },
+    fr: { title: "Écran tactile", text: "Commandez et personnalisez votre boisson en quelques clics.", image: "images/touch.png" }
   },
   foam: {
-    en: { title: "Foam Art", text: "Our advanced tech prints high-definition edible ink portraits directly onto your latte foam in seconds.", image: "images/foam.png" },
-    fr: { title: "Art mousse", text: "Notre technologie imprime des portraits haute définition avec de l'encre comestible directement sur votre mousse.", image: "images/foam.png" }
+    en: { title: "Foam Art", text: "Our advanced tech prints high-definition edible ink portraits directly onto your latte.", image: "images/foam.png" },
+    fr: { title: "Art mousse", text: "Notre technologie imprime des portraits haute définition directement sur votre mousse.", image: "images/foam.png" }
   }
 };
 
 function setLang(lang) {
   currentLang = lang;
   const content = {
-    en: { title: "The Future of Coffee", sub: "AI-Powered Robotic Barista", vTitle: "See It in Action", eTitle: "KAVA Technology", cTitle: "Contact Us", btn: "Send Message", name: "Name", email: "Email", msg: "Message" },
-    fr: { title: "Le Futur du Café", sub: "Barista Robotisé par l'IA", vTitle: "Voir en Action", eTitle: "Technologie KAVA", cTitle: "Nous Contacter", btn: "Envoyer", name: "Nom", email: "Email", msg: "Message" }
+    en: { title: "The Future of Coffee", sub: "AI-Powered Robotic Barista", vTitle: "See It in Action", eTitle: "KAVA Technology", cTitle: "Contact Us", btn: "Send Message", name: "Name", email: "Email", msg: "Message", scroll: "Scroll" },
+    fr: { title: "Le Futur du Café", sub: "Barista Robotisé par l'IA", vTitle: "Voir en Action", eTitle: "Technologie KAVA", cTitle: "Nous Contacter", btn: "Envoyer", name: "Nom", email: "Email", msg: "Message", scroll: "Découvrir" }
   };
   
   const tooltips = {
-    en: { screen: "Menu Display", robot: "Robotic Arm", touch: "Touch Screen", foam: "Foam Art" },
-    fr: { screen: "Écran d'affichage", robot: "Bras robotisé", touch: "Écran Tactile", foam: "Art mousse" }
+    en: { screen: "Menu", robot: "Robotic Arm", touch: "Touchscreen", foam: "Latte Art" },
+    fr: { screen: "Menu", robot: "Bras Robot", touch: "Écran Tactile", foam: "Art Mousse" }
   };
 
   const d = content[lang];
@@ -287,29 +319,43 @@ function setLang(lang) {
   document.getElementById("input-name").placeholder = d.name;
   document.getElementById("input-email").placeholder = d.email;
   document.getElementById("input-message").placeholder = d.msg;
+  document.getElementById("scroll-text").innerText = d.scroll;
 
-  // Update hover titles
   document.querySelectorAll('.point').forEach(p => {
     const feature = p.getAttribute('data-feature');
     p.setAttribute('data-title', tooltips[lang][feature]);
   });
 
-  // Switch Storyboard video based on language
   const videoPlayer = document.getElementById("action-video");
-  const videoSrc = lang === 'fr' ? 'images/StoryboardFR.mp4' : 'images/Storyboard.mp4';
-  if(videoPlayer.src.indexOf(videoSrc) === -1) {
-    videoPlayer.src = videoSrc;
-    videoPlayer.load();
-  }
+  videoPlayer.src = lang === 'fr' ? 'images/StoryboardFR.mp4' : 'images/Storyboard.mp4';
+  videoPlayer.load();
 
-  // REPLAY HERO VIDEO ON LANG CHANGE
+  // Reset and play Hero Video
   const heroVideo = document.getElementById("hero-bg-video");
-  if (heroVideo) {
-    heroVideo.pause();
-    heroVideo.currentTime = 0;
-    heroVideo.play();
-  }
+  heroVideo.currentTime = 0;
+  heroVideo.play();
 }
+
+// FORMSPREE SUBMISSION WITHOUT PAGE RELOAD
+const contactForm = document.getElementById('kava-form');
+contactForm.addEventListener("submit", function(e) {
+  e.preventDefault();
+  const data = new FormData(contactForm);
+  fetch(contactForm.action, {
+    method: contactForm.method,
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(response => {
+    if (response.ok) {
+      document.getElementById("form-container").innerHTML = 
+        `<h2 style="color:var(--accent-color); font-size:3rem;">✓</h2>
+         <p style="font-weight:bold;">${currentLang === 'fr' ? 'Merci !' : 'Thank You!'}</p>
+         <p>${currentLang === 'fr' ? 'Votre message a été envoyé.' : 'Your message has been sent.'}</p>`;
+    } else {
+      alert("Error.");
+    }
+  });
+});
 
 function showFeature(featureKey) {
   const data = featuresData[featureKey][currentLang];
@@ -319,10 +365,6 @@ function showFeature(featureKey) {
   document.getElementById("feature-text").innerText = data.text;
   box.classList.add("show");
   document.querySelectorAll(".point").forEach(p => p.classList.toggle("active", p.getAttribute('data-feature') === featureKey));
-}
-
-function handleSend() {
-  document.getElementById("form-container").innerHTML = `<h2 style="color:var(--accent-color)">✓</h2><p>${currentLang === 'fr' ? 'Merci !' : 'Thank You!'}</p>`;
 }
 
 window.onload = () => { setLang("fr"); showFeature("screen"); };
