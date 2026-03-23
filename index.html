@@ -38,7 +38,7 @@ body {
 /* HERO HEADER */
 .hero-header {
   position: relative;
-  height: 165vh; /* 1.5× bigger */
+  height: 200vh; /* taller header */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,9 +49,9 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 120%;        /* smaller width */
+  width: 110%;
   height: auto;
-  max-height: 100%;
+  max-height: 120%;
   object-fit: cover;
   transform: translate(-50%, -50%);
   z-index: 0;
@@ -64,7 +64,7 @@ body {
   padding: 0 20px;
 }
 .logo-animate {
-  width: 750px;      /* 1.5× bigger */
+  width: 750px;      /* bigger logo */
   max-width: 90%;
   border-radius: 25px; /* pill-shaped */
   margin-bottom: 20px;
@@ -109,7 +109,7 @@ body {
 
 /* VIDEO */
 .card video {
-  width: 100%;       /* normal size */
+  width: 100%;
   max-width: 600px;
   display: block;
   margin: 0 auto;
@@ -120,13 +120,13 @@ body {
 /* Stylish video title above video */
 .video-title {
   text-align: center;
-  color: #00C2FF;
+  color: #000000;             /* black titles */
   font-size: 3rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 20px;
-  text-shadow: 0 3px 15px rgba(0,0,0,0.5);
+  text-shadow: 0 3px 15px rgba(0,0,0,0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -136,7 +136,7 @@ body {
   text-align: center;
 }
 .main-image {
-  width: 80%; /* scaled down to 0.8 */
+  width: 65%; /* scaled down */
   display: block;
   margin: 0 auto;
   border-radius: 20px;
@@ -182,13 +182,13 @@ body {
 /* Stylish KAVA Technology title above image */
 #experience-title {
   text-align: center;
-  color: #00C2FF;
+  color: #000000;             /* black title */
   font-size: 3rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 20px;
-  text-shadow: 0 3px 15px rgba(0,0,0,0.5);
+  text-shadow: 0 3px 15px rgba(0,0,0,0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -221,6 +221,44 @@ body {
 .contact-box button:hover {
   background: white;
   color: var(--main-color);
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+  .hero-header {
+    height: 120vh; /* shorter header */
+  }
+  .logo-animate {
+    width: 60%;
+  }
+  .headline {
+    font-size: 2.2rem;
+  }
+  .subtitle {
+    font-size: 1.2rem;
+  }
+  .cta-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  .video-title,
+  #experience-title {
+    font-size: 2rem;
+  }
+  .main-image {
+    width: 90%;
+  }
+  .feature-box {
+    padding: 15px;
+    min-height: auto;
+  }
+  .component-display-img {
+    width: 80%;
+  }
+  .card {
+    padding: 20px;
+    margin: 20px 0;
+  }
 }
 </style>
 </head>
