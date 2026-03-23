@@ -34,84 +34,54 @@ body {
   border-radius: 6px;
 }
 
-/* HERO HEADER */
+/* HERO */
 .hero-header {
   position: relative;
   height: 100vh;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
+  overflow: hidden;
 }
 
-/* VIDEO BACKGROUND */
 .bg-video {
   position: absolute;
-  top: 50%;
-  left: 50%;
   width: 110%;
   height: 110%;
   object-fit: cover;
-  transform: translate(-50%, -50%);
   z-index: 0;
   filter: brightness(0.65);
 }
 
-/* OVERLAY */
 .overlay {
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 50px 20px;
-  border-radius: 20px;
-  background: linear-gradient(rgba(10,37,64,0.75), rgba(10,37,64,0.4));
-  backdrop-filter: blur(6px);
 }
 
-/* LOGO */
 .logo-animate {
-  width: 420px;
+  width: 400px;
   max-width: 90%;
-  margin-bottom: 30px;
 }
 
-/* TEXT */
 .headline {
-  font-size: 4rem;
-  margin: 20px 0;
-  border-right: 3px solid white;
-  white-space: nowrap;
-  overflow: hidden;
+  font-size: 3.5rem;
 }
 
-.subline {
-  font-size: 1.5rem;
-  margin-bottom: 30px;
-  opacity: 0.9;
-}
-
-/* CTA */
 .cta-btn {
-  padding: 14px 35px;
+  padding: 12px 30px;
   background: white;
   color: var(--main-color);
-  border-radius: 30px;
+  border-radius: 25px;
   text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.cta-btn:hover {
-  background: var(--accent-color);
-  color: white;
 }
 
 /* CONTAINER */
 .container {
   max-width: 1100px;
   margin: auto;
-  padding: 60px 20px;
+  padding: 50px 20px;
 }
 
 /* CARD */
@@ -120,43 +90,53 @@ body {
   padding: 30px;
   margin: 30px 0;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* VIDEO SECTION */
-.card h2 {
-  text-align: center;
-  font-size: 2.4rem;
-  margin-bottom: 20px;
+/* INTERACTIVE IMAGE */
+.image-wrapper {
+  position: relative;
 }
 
-.card video {
+.main-image {
   width: 100%;
-  max-width: 1000px;
-  display: block;
-  margin: auto;
   border-radius: 15px;
 }
 
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
-  text-align: center;
+/* POINTS */
+.point {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #00C2FF;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: pulse 2s infinite;
 }
 
-.grid img {
-  width: 100%;
-  max-width: 200px;
-  margin: auto;
+.point:hover {
+  transform: scale(1.5);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0,194,255,0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(0,194,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,194,255,0); }
+}
+
+/* FEATURE BOX */
+.feature-box {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f1f5f9;
+  border-radius: 15px;
+  text-align: center;
 }
 
 /* CONTACT */
 .contact-box {
-  text-align: center;
   background: var(--main-color);
   color: white;
+  text-align: center;
 }
 
 .contact-box input,
@@ -164,39 +144,25 @@ body {
   width: 100%;
   max-width: 500px;
   display: block;
-  margin: 15px auto;
-  padding: 12px;
-  border: none;
+  margin: 10px auto;
+  padding: 10px;
   border-radius: 8px;
-  box-sizing: border-box;
+  border: none;
 }
 
 .contact-box button {
-  padding: 12px 25px;
+  padding: 10px 20px;
   background: var(--accent-color);
   border: none;
   color: white;
   border-radius: 20px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-.contact-box button:hover {
-  opacity: 0.85;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #111;
-  color: white;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LANGUAGE SWITCH -->
+<!-- LANGUAGE -->
 <div class="lang-switch">
   <button onclick="setLang('en')">EN</button>
   <button onclick="setLang('fr')">FR</button>
@@ -204,61 +170,52 @@ footer {
 
 <!-- HERO -->
 <header class="hero-header">
-  <video autoplay muted playsinline class="bg-video" id="heroVideo">
+  <video autoplay muted playsinline class="bg-video">
     <source src="images/arm AI video.mp4" type="video/mp4">
   </video>
 
   <div class="overlay">
     <img src="images/KAVA LOGO.png" class="logo-animate">
-    <h1 id="title" class="headline"></h1>
-    <p id="subtitle" class="subline"></p>
-    <a href="#contact" class="cta-btn" id="cta"></a>
+    <h1 id="title"></h1>
+    <p id="subtitle"></p>
+    <a href="#contact" id="cta" class="cta-btn"></a>
   </div>
 </header>
 
 <div class="container">
 
-  <!-- SEE IT IN ACTION -->
+  <!-- VIDEO -->
   <div class="card">
     <h2 id="video-title"></h2>
     <video controls id="action-video">
       <source src="images/Storyboard.mp4" type="video/mp4">
-      Your browser does not support the video tag.
     </video>
   </div>
 
-  <!-- HOME IMAGE -->
-  <div class="card">
-    <img src="images/KAVA Home page.png" style="width:100%;">
-  </div>
-
-  <!-- EXPERIENCE -->
+  <!-- INTERACTIVE MACHINE -->
   <div class="card">
     <h2 id="experience-title"></h2>
-    <div class="grid">
-      <div>
-        <img src="images/ROBOT HAND.png">
-        <p id="txt1"></p>
-      </div>
-      <div>
-        <img src="images/screen.png">
-        <p id="txt2"></p>
-      </div>
-      <div>
-        <img src="images/paying screen.png">
-        <p id="txt3"></p>
-      </div>
-      <div>
-        <img src="images/FOAM.png">
-        <p id="txt4"></p>
-      </div>
+
+    <div class="image-wrapper">
+      <img src="images/KAVA Home page.png" class="main-image">
+
+      <!-- POINTS -->
+      <div class="point" style="top:30%; left:50%;" onclick="showFeature('screen')"></div>
+      <div class="point" style="top:52%; left:48%;" onclick="showFeature('robot')"></div>
+      <div class="point" style="top:70%; left:50%;" onclick="showFeature('touch')"></div>
+      <div class="point" style="top:55%; left:30%;" onclick="showFeature('foam')"></div>
+    </div>
+
+    <div class="feature-box">
+      <h3 id="feature-title"></h3>
+      <p id="feature-text"></p>
     </div>
   </div>
 
   <!-- CONTACT -->
   <div class="card contact-box" id="contact">
     <h2 id="contact-title"></h2>
-    <form action="https://formspree.io/f/xvzwjpad" method="POST">
+    <form>
       <input type="text" name="name" placeholder="">
       <input type="email" name="email" placeholder="">
       <textarea name="message" placeholder=""></textarea>
@@ -268,92 +225,57 @@ footer {
 
 </div>
 
-<footer>
-  <p id="footer-text"></p>
-</footer>
-
 <script>
-// STOP HERO VIDEO
-const heroVideo = document.getElementById("heroVideo");
-heroVideo.addEventListener("ended", () => {
-  heroVideo.pause();
-  heroVideo.currentTime = heroVideo.duration;
-});
-
-// TYPE EFFECT
-function typeText(text) {
-  let i = 0;
-  const el = document.getElementById("title");
-  el.innerHTML = "";
-  function typing() {
-    if (i < text.length) {
-      el.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typing, 35);
-    }
-  }
-  typing();
-}
+let currentLang = "en";
 
 // LANGUAGE SWITCH
 function setLang(lang) {
-  const subtitle = document.getElementById("subtitle");
-  const cta = document.getElementById("cta");
-  const videoTitle = document.getElementById("video-title");
-  const actionVideo = document.getElementById("action-video");
-  const experienceTitle = document.getElementById("experience-title");
-  const txt1 = document.getElementById("txt1");
-  const txt2 = document.getElementById("txt2");
-  const txt3 = document.getElementById("txt3");
-  const txt4 = document.getElementById("txt4");
-  const contactTitle = document.getElementById("contact-title");
-  const nameInput = document.querySelector('input[name="name"]');
-  const emailInput = document.querySelector('input[name="email"]');
-  const messageInput = document.querySelector('textarea[name="message"]');
-  const contactBtn = document.getElementById("contact-btn");
-  const footerText = document.getElementById("footer-text");
+  currentLang = lang;
 
   if (lang === 'fr') {
-    typeText("Découvrez le futur du café");
-    subtitle.innerText = "Barista robotisé alimenté par l’IA";
-    cta.innerText = "Demander un partenariat";
-    videoTitle.innerText = "Voir en action";
-    actionVideo.querySelector("source").src = "images/StoryboardFR.mp4";
-    actionVideo.load();
-    experienceTitle.innerText = "Expérience";
-    txt1.innerText = "Bras robotisé préparant le café";
-    txt2.innerText = "Sélection interactive des boissons";
-    txt3.innerText = "Paiement rapide et fluide";
-    txt4.innerText = "Mousse de café personnalisée";
-    contactTitle.innerText = "Travaillons ensemble";
-    nameInput.placeholder = "Votre nom";
-    emailInput.placeholder = "Votre email";
-    messageInput.placeholder = "Votre message";
-    contactBtn.innerText = "Envoyer";
-    footerText.innerText = "© 2026 KAVA AI Coffee Experience";
+    document.getElementById("title").innerText = "Découvrez le futur du café";
+    document.getElementById("subtitle").innerText = "Barista robotisé alimenté par l’IA";
+    document.getElementById("cta").innerText = "Demander un partenariat";
+    document.getElementById("video-title").innerText = "Voir en action";
+    document.getElementById("experience-title").innerText = "Technologie KAVA";
+    document.getElementById("contact-title").innerText = "Travaillons ensemble";
+    document.getElementById("contact-btn").innerText = "Envoyer";
+
+    document.querySelector('input[name="name"]').placeholder = "Votre nom";
+    document.querySelector('input[name="email"]').placeholder = "Votre email";
+    document.querySelector('textarea[name="message"]').placeholder = "Votre message";
+
+    document.querySelector("#action-video source").src = "images/StoryboardFR.mp4";
+    document.getElementById("action-video").load();
+
   } else {
-    typeText("Meet the Future of Coffee");
-    subtitle.innerText = "AI-powered robotic barista delivering innovation and experience";
-    cta.innerText = "Request Partnership";
-    videoTitle.innerText = "See It in Action";
-    actionVideo.querySelector("source").src = "images/Storyboard.mp4";
-    actionVideo.load();
-    experienceTitle.innerText = "Experience";
-    txt1.innerText = "Robotic arm preparing coffee";
-    txt2.innerText = "Interactive drink selection";
-    txt3.innerText = "Fast and seamless payment";
-    txt4.innerText = "Custom printed coffee foam";
-    contactTitle.innerText = "Let’s Work Together";
-    nameInput.placeholder = "Your Name";
-    emailInput.placeholder = "Your Email";
-    messageInput.placeholder = "Your Message";
-    contactBtn.innerText = "Send";
-    footerText.innerText = "© 2026 KAVA AI Coffee Experience";
+    document.getElementById("title").innerText = "Meet the Future of Coffee";
+    document.getElementById("subtitle").innerText = "AI-powered robotic barista";
+    document.getElementById("cta").innerText = "Request Partnership";
+    document.getElementById("video-title").innerText = "See It in Action";
+    document.getElementById("experience-title").innerText = "KAVA Technology";
+    document.getElementById("contact-title").innerText = "Let’s Work Together";
+    document.getElementById("contact-btn").innerText = "Send";
+
+    document.querySelector('input[name="name"]').placeholder = "Your Name";
+    document.querySelector('input[name="email"]').placeholder = "Your Email";
+    document.querySelector('textarea[name="message"]').placeholder = "Your Message";
+
+    document.querySelector("#action-video source").src = "images/Storyboard.mp4";
+    document.getElementById("action-video").load();
   }
 }
 
-// DEFAULT LANGUAGE
-window.onload = () => setLang('en');
+// INTERACTIVE FEATURES (YOU WILL FILL TEXT LATER)
+function showFeature(feature) {
+  document.getElementById("feature-title").innerText = feature;
+  document.getElementById("feature-text").innerText = "...";
+}
+
+// DEFAULT LOAD
+window.onload = () => {
+  setLang('en');
+};
 </script>
 
 </body>
