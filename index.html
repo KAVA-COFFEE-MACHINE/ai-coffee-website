@@ -324,7 +324,7 @@ Object.values(featuresData).forEach(f=>{
 function updateTooltips(){
   for(const key in featuresData){
     const data = featuresData[key][currentLang];
-    document.getElementById(`tooltip-${key}`).innerHTML = `<strong>${data.title}</strong><br>${data.text}`;
+    document.getElementById(`tooltip-${key}`).innerHTML = `<strong>${data.title}</strong>`;
   }
 }
 
