@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>KAVA - AI Coffee Experience</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 :root {
@@ -11,10 +11,12 @@
   --accent-color: #00C2FF;
 }
 
+/* GLOBAL */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f4f6f9;
+  scroll-behavior: smooth;
 }
 
 /* LANGUAGE SWITCH */
@@ -34,10 +36,10 @@ body {
   border-radius: 6px;
 }
 
-/* HERO */
+/* HERO HEADER */
 .hero-header {
   position: relative;
-  height: 100vh;
+  height: 110vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,9 +49,12 @@ body {
 
 .bg-video {
   position: absolute;
-  width: 110%;
-  height: 110%;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  transform: translate(-50%, -50%);
   z-index: 0;
   filter: brightness(0.65);
 }
@@ -58,23 +63,39 @@ body {
   position: relative;
   z-index: 1;
   text-align: center;
+  padding: 0 20px;
 }
 
 .logo-animate {
-  width: 400px;
+  width: 500px;
   max-width: 90%;
+  border-radius: 50%; /* circular logo */
+  margin-bottom: 20px;
 }
 
 .headline {
-  font-size: 3.5rem;
+  font-size: 4rem;
+  margin: 10px 0;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
 }
 
 .cta-btn {
-  padding: 12px 30px;
+  padding: 14px 35px;
   background: white;
   color: var(--main-color);
   border-radius: 25px;
   text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.cta-btn:hover {
+  background: var(--accent-color);
+  color: white;
 }
 
 /* CONTAINER */
@@ -90,6 +111,17 @@ body {
   padding: 30px;
   margin: 30px 0;
   border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* VIDEO */
+.card video {
+  width: 100%;
+  max-width: 800px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
 /* INTERACTIVE IMAGE */
@@ -99,37 +131,68 @@ body {
 
 .main-image {
   width: 100%;
-  border-radius: 15px;
+  border-radius: 20px;
 }
 
 /* POINTS */
 .point {
   position: absolute;
-  width: 18px;
-  height: 18px;
-  background: #00C2FF;
+  width: 20px;
+  height: 20px;
+  background: var(--accent-color);
   border-radius: 50%;
   cursor: pointer;
   animation: pulse 2s infinite;
+  z-index: 2;
 }
 
 .point:hover {
   transform: scale(1.5);
 }
 
+/* PULSE ANIMATION */
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 rgba(0,194,255,0.7); }
   70% { box-shadow: 0 0 0 15px rgba(0,194,255,0); }
   100% { box-shadow: 0 0 0 0 rgba(0,194,255,0); }
 }
 
+/* TOOLTIP BOX */
+.feature-tooltip {
+  position: absolute;
+  background: var(--accent-color);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 12px;
+  max-width: 180px;
+  text-align: center;
+  font-size: 0.9rem;
+  display: none;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.feature-tooltip::after {
+  content: '';
+  position: absolute;
+  width: 0; 
+  height: 0; 
+  border-style: solid;
+  border-width: 8px 8px 0 8px;
+  border-color: var(--accent-color) transparent transparent transparent;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 /* FEATURE BOX */
 .feature-box {
   margin-top: 30px;
-  padding: 20px;
+  padding: 25px;
   background: #f1f5f9;
   border-radius: 15px;
   text-align: center;
+  min-height: 120px;
 }
 
 /* CONTACT */
@@ -137,6 +200,7 @@ body {
   background: var(--main-color);
   color: white;
   text-align: center;
+  padding: 40px 20px;
 }
 
 .contact-box input,
@@ -145,24 +209,30 @@ body {
   max-width: 500px;
   display: block;
   margin: 10px auto;
-  padding: 10px;
+  padding: 12px;
   border-radius: 8px;
   border: none;
 }
 
 .contact-box button {
-  padding: 10px 20px;
+  padding: 12px 25px;
   background: var(--accent-color);
   border: none;
   color: white;
   border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-box button:hover {
+  background: white;
+  color: var(--main-color);
 }
 </style>
 </head>
-
 <body>
 
-<!-- LANGUAGE -->
+<!-- LANGUAGE SWITCH -->
 <div class="lang-switch">
   <button onclick="setLang('en')">EN</button>
   <button onclick="setLang('fr')">FR</button>
@@ -176,8 +246,8 @@ body {
 
   <div class="overlay">
     <img src="images/KAVA LOGO.png" class="logo-animate">
-    <h1 id="title"></h1>
-    <p id="subtitle"></p>
+    <h1 id="title" class="headline"></h1>
+    <p id="subtitle" class="subtitle"></p>
     <a href="#contact" id="cta" class="cta-btn"></a>
   </div>
 </header>
@@ -200,10 +270,13 @@ body {
       <img src="images/KAVA Home page.png" class="main-image">
 
       <!-- POINTS -->
-      <div class="point" style="top:30%; left:50%;" onclick="showFeature('screen')"></div>
-      <div class="point" style="top:52%; left:48%;" onclick="showFeature('robot')"></div>
-      <div class="point" style="top:70%; left:50%;" onclick="showFeature('touch')"></div>
-      <div class="point" style="top:55%; left:30%;" onclick="showFeature('foam')"></div>
+      <div class="point" style="top:30%; left:50%;" onclick="showFeature('screen', this)"></div>
+      <div class="point" style="top:52%; left:48%;" onclick="showFeature('robot', this)"></div>
+      <div class="point" style="top:70%; left:50%;" onclick="showFeature('touch', this)"></div>
+      <div class="point" style="top:55%; left:30%;" onclick="showFeature('foam', this)"></div>
+
+      <!-- TOOLTIP -->
+      <div class="feature-tooltip" id="tooltip"></div>
     </div>
 
     <div class="feature-box">
@@ -228,11 +301,22 @@ body {
 <script>
 let currentLang = "en";
 
+// FEATURES DATA
+const featuresData = {
+  screen: { titleEN: "Touch Screen", textEN: "Intuitive and responsive interface.",
+            titleFR: "Écran tactile", textFR: "Interface intuitive et réactive." },
+  robot: { titleEN: "Robot Arm", textEN: "Precision robotic barista delivering perfect coffee.",
+           titleFR: "Bras robotisé", textFR: "Barista robotique précis livrant un café parfait." },
+  touch: { titleEN: "Touch Control", textEN: "Customizable coffee options at your fingertips.",
+           titleFR: "Contrôle tactile", textFR: "Options de café personnalisables à portée de main." },
+  foam: { titleEN: "Foam Art", textEN: "Beautiful latte art every time.",
+          titleFR: "Art de mousse", textFR: "Art latte magnifique à chaque fois." }
+};
+
 // LANGUAGE SWITCH
 function setLang(lang) {
   currentLang = lang;
-
-  if (lang === 'fr') {
+  if(lang === "fr"){
     document.getElementById("title").innerText = "Découvrez le futur du café";
     document.getElementById("subtitle").innerText = "Barista robotisé alimenté par l’IA";
     document.getElementById("cta").innerText = "Demander un partenariat";
@@ -240,14 +324,10 @@ function setLang(lang) {
     document.getElementById("experience-title").innerText = "Technologie KAVA";
     document.getElementById("contact-title").innerText = "Travaillons ensemble";
     document.getElementById("contact-btn").innerText = "Envoyer";
-
     document.querySelector('input[name="name"]').placeholder = "Votre nom";
     document.querySelector('input[name="email"]').placeholder = "Votre email";
     document.querySelector('textarea[name="message"]').placeholder = "Votre message";
-
     document.querySelector("#action-video source").src = "images/StoryboardFR.mp4";
-    document.getElementById("action-video").load();
-
   } else {
     document.getElementById("title").innerText = "Meet the Future of Coffee";
     document.getElementById("subtitle").innerText = "AI-powered robotic barista";
@@ -256,26 +336,45 @@ function setLang(lang) {
     document.getElementById("experience-title").innerText = "KAVA Technology";
     document.getElementById("contact-title").innerText = "Let’s Work Together";
     document.getElementById("contact-btn").innerText = "Send";
-
     document.querySelector('input[name="name"]').placeholder = "Your Name";
     document.querySelector('input[name="email"]').placeholder = "Your Email";
     document.querySelector('textarea[name="message"]').placeholder = "Your Message";
-
     document.querySelector("#action-video source").src = "images/Storyboard.mp4";
-    document.getElementById("action-video").load();
+  }
+  document.getElementById("action-video").load();
+}
+
+// SHOW FEATURE WITH TOOLTIP
+function showFeature(feature, el){
+  const tooltip = document.getElementById("tooltip");
+  const rect = el.getBoundingClientRect();
+  const wrapperRect = el.parentElement.getBoundingClientRect();
+
+  // Position tooltip above point
+  tooltip.style.left = (rect.left - wrapperRect.left + rect.width/2) + "px";
+  tooltip.style.top = (rect.top - wrapperRect.top - 45) + "px";
+  tooltip.style.display = "block";
+
+  if(currentLang === "fr"){
+    document.getElementById("feature-title").innerText = featuresData[feature].titleFR;
+    document.getElementById("feature-text").innerText = featuresData[feature].textFR;
+    tooltip.innerText = featuresData[feature].titleFR;
+  } else {
+    document.getElementById("feature-title").innerText = featuresData[feature].titleEN;
+    document.getElementById("feature-text").innerText = featuresData[feature].textEN;
+    tooltip.innerText = featuresData[feature].titleEN;
   }
 }
 
-// INTERACTIVE FEATURES (YOU WILL FILL TEXT LATER)
-function showFeature(feature) {
-  document.getElementById("feature-title").innerText = feature;
-  document.getElementById("feature-text").innerText = "...";
-}
+// HIDE TOOLTIP WHEN CLICKING OUTSIDE
+document.addEventListener("click", (e)=>{
+  if(!e.target.classList.contains("point")){
+    document.getElementById("tooltip").style.display = "none";
+  }
+});
 
 // DEFAULT LOAD
-window.onload = () => {
-  setLang('en');
-};
+window.onload = ()=>{ setLang('en'); };
 </script>
 
 </body>
