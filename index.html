@@ -38,47 +38,59 @@ body {
 /* HERO HEADER */
 .hero-header {
   position: relative;
-  height: 200vh; /* taller header */
+  height: 100vh; /* fits one screen */
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   overflow: hidden;
 }
+
+/* Background video smaller */
 .bg-video {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 110%;
+  width: 120%;
   height: auto;
-  max-height: 120%;
+  max-height: 100%;
   object-fit: cover;
   transform: translate(-50%, -50%);
   z-index: 0;
   filter: brightness(0.65);
 }
+
+/* Overlay content */
 .overlay {
   position: relative;
   z-index: 1;
   text-align: center;
   padding: 0 20px;
 }
+
+/* Remove default margins */
+.hero-header h1,
+.hero-header p {
+  margin: 0;
+}
+
+/* Logo and spacing */
 .logo-animate {
-  width: 750px;      /* bigger logo */
-  max-width: 90%;
-  border-radius: 25px; /* pill-shaped */
-  margin-bottom: 20px;
+  width: 650px;
+  max-width: 80%;
+  border-radius: 25px;
+  margin-bottom: 10px;
 }
 .headline {
-  font-size: 4rem;
-  margin: 10px 0;
+  font-size: 3rem;
 }
 .subtitle {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
 }
 .cta-btn {
-  padding: 14px 35px;
+  padding: 12px 25px;
+  font-size: 1rem;
   background: white;
   color: var(--main-color);
   border-radius: 25px;
@@ -120,7 +132,7 @@ body {
 /* Stylish video title above video */
 .video-title {
   text-align: center;
-  color: #000000;             /* black titles */
+  color: #000000;
   font-size: 3rem;
   font-weight: bold;
   text-transform: uppercase;
@@ -136,7 +148,7 @@ body {
   text-align: center;
 }
 .main-image {
-  width: 65%; /* scaled down */
+  width: 65%;
   display: block;
   margin: 0 auto;
   border-radius: 20px;
@@ -169,6 +181,7 @@ body {
   border-radius: 15px;
   text-align: center;
   min-height: 200px;
+  opacity: 1;
 }
 .component-display-img {
   width: 60%;
@@ -182,7 +195,7 @@ body {
 /* Stylish KAVA Technology title above image */
 #experience-title {
   text-align: center;
-  color: #000000;             /* black title */
+  color: #000000;
   font-size: 3rem;
   font-weight: bold;
   text-transform: uppercase;
@@ -190,6 +203,19 @@ body {
   margin-bottom: 20px;
   text-shadow: 0 3px 15px rgba(0,0,0,0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fade-in animation */
+.feature-box.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s forwards;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* CONTACT */
@@ -225,40 +251,16 @@ body {
 
 /* MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
-  .hero-header {
-    height: 120vh; /* shorter header */
-  }
-  .logo-animate {
-    width: 60%;
-  }
-  .headline {
-    font-size: 2.2rem;
-  }
-  .subtitle {
-    font-size: 1.2rem;
-  }
-  .cta-btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-  }
-  .video-title,
-  #experience-title {
-    font-size: 2rem;
-  }
-  .main-image {
-    width: 90%;
-  }
-  .feature-box {
-    padding: 15px;
-    min-height: auto;
-  }
-  .component-display-img {
-    width: 80%;
-  }
-  .card {
-    padding: 20px;
-    margin: 20px 0;
-  }
+  .hero-header { height: 80vh; }
+  .logo-animate { width: 60%; }
+  .headline { font-size: 2.2rem; }
+  .subtitle { font-size: 1.2rem; margin-bottom: 10px; }
+  .cta-btn { padding: 10px 20px; font-size: 0.9rem; }
+  .video-title, #experience-title { font-size: 2rem; }
+  .main-image { width: 90%; }
+  .feature-box { padding: 15px; min-height: auto; }
+  .component-display-img { width: 80%; }
+  .card { padding: 20px; margin: 20px 0; }
 }
 </style>
 </head>
@@ -373,12 +375,17 @@ function setLang(lang) {
   document.getElementById("action-video").load();
 }
 
-// SHOW FEATURE BELOW IMAGE
+// SHOW FEATURE BELOW IMAGE with fade-in
 function showFeature(feature){
   const featureTitle = document.getElementById("feature-title");
   const featureText = document.getElementById("feature-text");
   const featureImage = document.getElementById("feature-image");
+  const featureBox = document.querySelector(".feature-box");
 
+  // Remove previous animation
+  featureBox.classList.remove("fade-in");
+
+  // Set new content
   if(currentLang === "fr"){
     featureTitle.innerText = featuresData[feature].titleFR;
     featureText.innerText = featuresData[feature].textFR;
@@ -386,8 +393,11 @@ function showFeature(feature){
     featureTitle.innerText = featuresData[feature].titleEN;
     featureText.innerText = featuresData[feature].textEN;
   }
-
   featureImage.src = "images/" + feature + ".png";
+
+  // Trigger fade-in
+  void featureBox.offsetWidth; // reflow to restart animation
+  featureBox.classList.add("fade-in");
 }
 
 // DEFAULT LOAD
