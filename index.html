@@ -26,7 +26,6 @@ body {
   right: 20px;
   z-index: 1000;
 }
-
 .lang-switch button {
   padding: 8px 12px;
   margin-left: 5px;
@@ -46,7 +45,6 @@ body {
   color: white;
   overflow: hidden;
 }
-
 .bg-video {
   position: absolute;
   top: 50%;
@@ -58,31 +56,26 @@ body {
   z-index: 0;
   filter: brightness(0.65);
 }
-
 .overlay {
   position: relative;
   z-index: 1;
   text-align: center;
   padding: 0 20px;
 }
-
 .logo-animate {
   width: 500px;
   max-width: 90%;
-  border-radius: 50%; /* circular logo */
+  border-radius: 50%;
   margin-bottom: 20px;
 }
-
 .headline {
   font-size: 4rem;
   margin: 10px 0;
 }
-
 .subtitle {
   font-size: 1.8rem;
   margin-bottom: 20px;
 }
-
 .cta-btn {
   padding: 14px 35px;
   background: white;
@@ -92,7 +85,6 @@ body {
   font-weight: bold;
   transition: 0.3s;
 }
-
 .cta-btn:hover {
   background: var(--accent-color);
   color: white;
@@ -116,8 +108,8 @@ body {
 
 /* VIDEO */
 .card video {
-  width: 100%;
-  max-width: 800px;
+  width: 90%;
+  max-width: 600px;
   display: block;
   margin: 20px auto;
   border-radius: 20px;
@@ -128,10 +120,26 @@ body {
 .image-wrapper {
   position: relative;
 }
-
 .main-image {
-  width: 100%;
+  width: 80%;
+  max-width: 500px;
+  display: block;
+  margin: 0 auto;
   border-radius: 20px;
+}
+
+/* COMPONENT IMAGES */
+.component-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: none;
+  pointer-events: none;
+  border-radius: 20px;
+  z-index: 1;
 }
 
 /* POINTS */
@@ -145,12 +153,8 @@ body {
   animation: pulse 2s infinite;
   z-index: 2;
 }
+.point:hover { transform: scale(1.5); }
 
-.point:hover {
-  transform: scale(1.5);
-}
-
-/* PULSE ANIMATION */
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 rgba(0,194,255,0.7); }
   70% { box-shadow: 0 0 0 15px rgba(0,194,255,0); }
@@ -171,7 +175,6 @@ body {
   z-index: 10;
   pointer-events: none;
 }
-
 .feature-tooltip::after {
   content: '';
   position: absolute;
@@ -202,7 +205,6 @@ body {
   text-align: center;
   padding: 40px 20px;
 }
-
 .contact-box input,
 .contact-box textarea {
   width: 100%;
@@ -213,7 +215,6 @@ body {
   border-radius: 8px;
   border: none;
 }
-
 .contact-box button {
   padding: 12px 25px;
   background: var(--accent-color);
@@ -223,7 +224,6 @@ body {
   cursor: pointer;
   transition: 0.3s;
 }
-
 .contact-box button:hover {
   background: white;
   color: var(--main-color);
@@ -243,7 +243,6 @@ body {
   <video autoplay muted playsinline class="bg-video">
     <source src="images/arm AI video.mp4" type="video/mp4">
   </video>
-
   <div class="overlay">
     <img src="images/KAVA LOGO.png" class="logo-animate">
     <h1 id="title" class="headline"></h1>
@@ -265,9 +264,14 @@ body {
   <!-- INTERACTIVE MACHINE -->
   <div class="card">
     <h2 id="experience-title"></h2>
-
     <div class="image-wrapper">
       <img src="images/KAVA Home page.png" class="main-image">
+
+      <!-- Component images -->
+      <img src="images/screen.png" class="component-img" id="img-screen">
+      <img src="images/robot.png" class="component-img" id="img-robot">
+      <img src="images/touch.png" class="component-img" id="img-touch">
+      <img src="images/foam.png" class="component-img" id="img-foam">
 
       <!-- POINTS -->
       <div class="point" style="top:30%; left:50%;" onclick="showFeature('screen', this)"></div>
@@ -344,13 +348,12 @@ function setLang(lang) {
   document.getElementById("action-video").load();
 }
 
-// SHOW FEATURE WITH TOOLTIP
+// SHOW FEATURE WITH TOOLTIP AND COMPONENT IMAGE
 function showFeature(feature, el){
   const tooltip = document.getElementById("tooltip");
   const rect = el.getBoundingClientRect();
   const wrapperRect = el.parentElement.getBoundingClientRect();
 
-  // Position tooltip above point
   tooltip.style.left = (rect.left - wrapperRect.left + rect.width/2) + "px";
   tooltip.style.top = (rect.top - wrapperRect.top - 45) + "px";
   tooltip.style.display = "block";
@@ -364,6 +367,11 @@ function showFeature(feature, el){
     document.getElementById("feature-text").innerText = featuresData[feature].textEN;
     tooltip.innerText = featuresData[feature].titleEN;
   }
+
+  // Show correct component image
+  document.querySelectorAll(".component-img").forEach(img => img.style.display = "none");
+  const selectedImg = document.getElementById("img-" + feature);
+  if(selectedImg) selectedImg.style.display = "block";
 }
 
 // HIDE TOOLTIP WHEN CLICKING OUTSIDE
