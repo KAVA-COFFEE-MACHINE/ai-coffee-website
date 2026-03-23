@@ -11,14 +11,9 @@
   --accent-color: #00C2FF;
 }
 
-/* REMOVE ALL TOP SPACE */
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
 /* GLOBAL */
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
   background: #f4f6f9;
   scroll-behavior: smooth;
@@ -40,7 +35,7 @@ body {
   border-radius: 6px;
 }
 
-/* HERO */
+/* HERO HEADER */
 .hero-header {
   position: relative;
   height: 100vh;
@@ -51,7 +46,7 @@ body {
   overflow: hidden;
 }
 
-/* VIDEO */
+/* Background video */
 .bg-video {
   position: absolute;
   top: 50%;
@@ -63,7 +58,7 @@ body {
   filter: brightness(0.65);
 }
 
-/* OVERLAY */
+/* Overlay content */
 .overlay {
   position: relative;
   z-index: 1;
@@ -79,13 +74,12 @@ body {
 .headline { font-size: 3rem; margin: 10px 0; }
 .subtitle { font-size: 1.4rem; margin-bottom: 25px; }
 
-/* SCROLL INDICATOR INSANE */
+/* Scroll indicator */
 .scroll-indicator {
   margin-top: 50px;
   text-align: center;
   cursor: pointer;
 }
-
 .scroll-text {
   font-size: 0.75rem;
   letter-spacing: 4px;
@@ -93,7 +87,6 @@ body {
   margin-bottom: 10px;
   opacity: 0.7;
 }
-
 .scroll-line {
   width: 2px;
   height: 50px;
@@ -101,7 +94,6 @@ body {
   position: relative;
   background: rgba(255,255,255,0.2);
 }
-
 .scroll-line::after {
   content: "";
   position: absolute;
@@ -111,7 +103,6 @@ body {
   background: linear-gradient(to bottom, transparent, var(--accent-color), transparent);
   animation: neonFlow 1.6s linear infinite;
 }
-
 .scroll-line::before {
   content: "";
   position: absolute;
@@ -124,7 +115,6 @@ body {
   top: 10px;
   box-shadow: 0 0 20px var(--accent-color);
 }
-
 @keyframes neonFlow {
   0% { top: -30px; }
   100% { top: 100%; }
@@ -159,14 +149,17 @@ body {
 .image-wrapper {
   position: relative;
   text-align: center;
+  overflow: hidden; /* prevents lines outside the image */
 }
 
 .main-image {
   width: 65%;
   border-radius: 20px;
+  display: block;
+  margin: auto;
 }
 
-/* SCAN EFFECT */
+/* SCAN LINE */
 .scan-line {
   position: absolute;
   top: 0;
@@ -176,28 +169,9 @@ body {
   background: var(--accent-color);
   animation: scanMove 3s linear infinite;
 }
-
 @keyframes scanMove {
   0% { top: 0; }
   100% { top: 100%; }
-}
-
-/* CONNECTION LINES */
-.connections {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.connections line {
-  stroke: var(--accent-color);
-  stroke-width: 2;
-  stroke-dasharray: 5;
-  animation: dashMove 2s linear infinite;
-}
-
-@keyframes dashMove {
-  to { stroke-dashoffset: -20; }
 }
 
 /* POINTS */
@@ -208,13 +182,17 @@ body {
   background: var(--accent-color);
   border-radius: 50%;
   cursor: pointer;
+  animation: pulse 2s infinite;
+  z-index: 2;
+}
+.point.active, .point:hover { transform: scale(1.5); }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0,194,255,0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(0,194,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,194,255,0); }
 }
 
-.point.active {
-  box-shadow: 0 0 20px var(--accent-color);
-}
-
-/* GLASS FEATURE BOX */
+/* FEATURE BOX */
 .feature-box {
   margin-top: 30px;
   padding: 25px;
@@ -231,7 +209,6 @@ body {
   text-align: center;
   padding: 40px;
 }
-
 .contact-box input,
 .contact-box textarea {
   width: 100%;
@@ -242,7 +219,6 @@ body {
   border-radius: 8px;
   border: none;
 }
-
 .contact-box button {
   padding: 12px 25px;
   background: var(--accent-color);
@@ -252,7 +228,6 @@ body {
   cursor: pointer;
   transition: 0.3s;
 }
-
 .contact-box button:hover {
   background: white;
   color: var(--main-color);
@@ -265,7 +240,6 @@ body {
 }
 </style>
 </head>
-
 <body>
 
 <!-- LANGUAGE SWITCH -->
@@ -308,16 +282,12 @@ body {
     <div class="image-wrapper">
       <img src="images/KAVA Home page.png" class="main-image">
 
+      <!-- SCAN LINE -->
       <div class="scan-line"></div>
 
-      <svg class="connections">
-        <line x1="50%" y1="30%" x2="50%" y2="52%" />
-        <line x1="50%" y1="52%" x2="50%" y2="70%" />
-        <line x1="50%" y1="52%" x2="30%" y2="55%" />
-      </svg>
-
-      <div class="point" style="top:30%; left:50%;" onclick="showFeature('screen')"></div>
-      <div class="point" style="top:52%; left:48%;" onclick="showFeature('robot')"></div>
+      <!-- POINTS ON IMAGE -->
+      <div class="point" style="top:10%; left:55%;" onclick="showFeature('screen')"></div>
+      <div class="point" style="top:50%; left:50%;" onclick="showFeature('robot')"></div>
       <div class="point" style="top:70%; left:50%;" onclick="showFeature('touch')"></div>
       <div class="point" style="top:55%; left:30%;" onclick="showFeature('foam')"></div>
     </div>
@@ -388,7 +358,6 @@ function setLang(lang){
   heroVideo.load();
   heroVideo.play().catch(()=>{});
 
-  // Reload action video
   actionVideo.load();
 }
 
