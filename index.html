@@ -39,15 +39,11 @@ body {
   font-weight: 600;
   transition: 0.3s;
 }
-.lang-switch button:hover {
-  background: var(--accent-color);
-  color: white;
-}
 
-/* HERO HEADER - ENLARGED */
+/* --- HEADER SECTION --- */
 .hero-header {
   position: relative;
-  height: 90vh; /* Increased for more impact */
+  height: 70vh; /* Default Mobile */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,190 +58,110 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: translate(-50%, -50%) scale(1.1); /* Slightly zoomed for full coverage */
+  transform: translate(-50%, -50%);
   filter: brightness(0.45); 
 }
-.overlay { 
-  position: relative; 
-  z-index: 1; 
-  text-align: center;
-  padding: 20px;
-}
+.overlay { position: relative; z-index: 1; text-align: center; padding: 20px; }
 .logo-animate { 
-  width: 580px; 
+  width: 320px; 
   max-width: 90%; 
-  border-radius: 40px; 
-  margin-bottom: 25px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+  border-radius: 25px; 
+  margin-bottom: 20px;
 }
+.headline { font-size: 2.2rem; font-weight: 800; margin: 10px 0; }
+.subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 25px; }
 
-.headline { 
-  font-size: 3.8rem; 
-  font-weight: 800; 
-  margin: 10px 0; 
-  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
-.subtitle { 
-  font-size: 1.8rem; 
-  opacity: 0.95;
-  margin-bottom: 35px;
-}
-
-.scroll-indicator { margin-top: 20px; cursor: pointer; }
-.scroll-text { font-size: 0.8rem; letter-spacing: 5px; opacity: 0.8; margin-bottom: 10px; }
-.scroll-line { width: 2px; height: 70px; margin: 0 auto; background: rgba(255,255,255,0.2); position: relative; overflow: hidden; }
-.scroll-line::after {
-  content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to bottom, transparent, var(--accent-color), transparent);
-  animation: neonFlow 2s ease-in-out infinite;
-}
-@keyframes neonFlow { 0% { top: -100%; } 100% { top: 100%; } }
-
-/* CONTAINER & CARDS */
-.container { max-width: 1200px; margin: auto; padding: 60px 20px; }
+/* --- CARDS & INTERACTIVE --- */
+.container { max-width: 1200px; margin: auto; padding: 40px 20px; }
 .card {
   background: white;
-  padding: 60px 50px;
-  margin-bottom: 60px;
-  border-radius: 40px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 30px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
   text-align: center;
 }
-.card h2 { font-size: 2.5rem; margin-bottom: 40px; font-weight: 700; }
+.image-wrapper { position: relative; display: inline-block; width: 100%; max-width: 900px; }
+.main-image { width: 100%; border-radius: 25px; display: block; }
 
-/* INTERACTIVE IMAGE */
-.image-wrapper { position: relative; display: inline-block; width: 100%; max-width: 900px; margin-bottom: 20px;}
-.main-image { width: 100%; border-radius: 30px; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-.scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--accent-color); box-shadow: 0 0 20px var(--accent-color); animation: scanMove 4s linear infinite; pointer-events: none; }
-@keyframes scanMove { 0% { top: 2%; } 100% { top: 98%; } }
+.point { position: absolute; width: 22px; height: 22px; background: var(--accent-color); border-radius: 50%; cursor: pointer; z-index: 10; }
+.point.active { background: white; border: 5px solid var(--accent-color); transform: scale(1.4); }
 
-.point { position: absolute; width: 24px; height: 24px; background: var(--accent-color); border-radius: 50%; cursor: pointer; z-index: 10; transition: 0.3s; }
-.point.active { background: white; border: 6px solid var(--accent-color); transform: scale(1.5); }
-.point::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; background: var(--accent-color); animation: pulse 2s infinite; z-index: -1; }
-@keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
-
-/* Tooltip */
+/* Tooltip Styling */
 .point::after {
   content: attr(data-title);
   position: absolute;
-  bottom: 160%;
+  bottom: 150%;
   left: 50%;
   transform: translateX(-50%) translateY(10px);
   background: var(--main-color);
   color: #fff;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-size: 0.9rem;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.85rem;
   font-weight: 600;
   white-space: nowrap;
   opacity: 0;
   transition: 0.3s ease;
   pointer-events: none;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  border-bottom: 3px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
 }
 .point:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ENLARGED FEATURE BOXES */
+/* --- FEATURE BOX (Mobile Default) --- */
 .feature-box {
-  margin-top: 50px;
-  padding: 0;
-  border-radius: 35px;
-  background: #ffffff;
-  display: flex;
-  align-items: stretch;
-  gap: 0;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-  border: 1px solid #edf2f7;
-  overflow: hidden;
-  box-shadow: 0 15px 45px rgba(0,0,0,0.05);
-}
-.feature-box.show { opacity: 1; transform: translateY(0); }
-
-.feature-img-wrapper {
-  width: 50%; /* Image takes half the width */
-  overflow: hidden;
-}
-.feature-box img { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  transition: transform 0.8s ease;
-}
-.feature-box:hover img { transform: scale(1.05); }
-
-.feature-text-wrapper { 
-  width: 50%;
-  padding: 50px;
-  text-align: left; 
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 25px;
+  background: #f8fafc;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  background: #fdfdfd;
-}
-.feature-text-wrapper h3 { font-size: 1.8rem; margin-bottom: 15px; color: var(--main-color); }
-.feature-text-wrapper p { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; }
-
-/* CONTACT */
-.contact-box {
-  background: #ffffff;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(0, 194, 255, 0.1);
-}
-.contact-box::before {
-  content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 8px;
-  background: linear-gradient(90deg, var(--main-color), var(--accent-color));
-}
-.contact-flex {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 60px;
-  max-width: 1000px;
-  margin: 0 auto;
+  gap: 20px;
+  opacity: 0;
+  transition: 0.5s ease;
+  border: 1px solid #edf2f7;
 }
-.contact-video-side {
-  width: 40%;
-  mix-blend-mode: multiply;
-}
-.contact-form-side { flex: 1; text-align: left; }
-.contact-form-side input, .contact-form-side textarea {
-  width: 100%;
-  margin: 12px 0;
-  padding: 20px;
-  border-radius: 15px;
-  border: 1.5px solid #edf2f7;
-  background: #f8fafc;
-  font-family: inherit;
-  font-size: 1rem;
-}
-.contact-form-side button {
-  width: 100%;
-  padding: 20px;
-  background: var(--main-color);
-  color: white;
-  border: none;
-  border-radius: 45px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1.15rem;
-  transition: 0.3s;
-}
-.contact-form-side button:hover { background: var(--accent-color); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,194,255,0.2); }
+.feature-box.show { opacity: 1; }
+.feature-img-wrapper { width: 100%; max-width: 250px; }
+.feature-box img { width: 100%; border-radius: 15px; }
+.feature-text-wrapper { text-align: center; }
 
-/* MOBILE RESPONSIVE STACKING */
-@media (max-width: 900px) {
-  .headline { font-size: 2.8rem; }
-  .feature-box { flex-direction: column; }
-  .feature-img-wrapper, .feature-text-wrapper { width: 100%; }
-  .feature-img-wrapper { height: 250px; }
-  .feature-text-wrapper { padding: 30px; text-align: center; }
-  .contact-flex { flex-direction: column; text-align: center; }
-  .contact-video-side { width: 80%; }
+/* --- CONTACT --- */
+.contact-flex { display: flex; flex-direction: column; align-items: center; gap: 30px; }
+.contact-video-side { width: 70%; mix-blend-mode: multiply; }
+.contact-form-side { width: 100%; text-align: center; }
+
+/* ============================================================
+   DESKTOP STYLES (Enlarged Version)
+   ============================================================ */
+@media (min-width: 992px) {
+  .hero-header { height: 90vh; }
+  .bg-video { transform: translate(-50%, -50%) scale(1.1); }
+  .logo-animate { width: 580px; border-radius: 40px; box-shadow: 0 25px 50px rgba(0,0,0,0.4); }
+  .headline { font-size: 3.8rem; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+  .subtitle { font-size: 1.8rem; }
+
+  .card { padding: 60px 50px; border-radius: 40px; }
+  
+  .feature-box {
+    flex-direction: row;
+    align-items: stretch;
+    padding: 0;
+    overflow: hidden;
+    height: 380px;
+  }
+  .feature-img-wrapper { width: 50%; max-width: none; }
+  .feature-box img { height: 100%; object-fit: cover; border-radius: 0; }
+  .feature-text-wrapper { width: 50%; padding: 50px; text-align: left; background: #fff; }
+  
+  .contact-flex { flex-direction: row; text-align: left; }
+  .contact-video-side { width: 40%; }
 }
+
+.contact-form-side input, .contact-form-side textarea { width: 100%; margin: 10px 0; padding: 18px; border-radius: 15px; border: 1.5px solid #edf2f7; background: #f8fafc; font-family: inherit; }
+.contact-form-side button { width: 100%; padding: 18px; background: var(--main-color); color: white; border: none; border-radius: 45px; cursor: pointer; font-weight: 700; transition: 0.3s; }
+.contact-form-side button:hover { background: var(--accent-color); transform: translateY(-3px); }
 </style>
 </head>
 <body>
@@ -256,22 +172,18 @@ body {
 </div>
 
 <header class="hero-header">
-  <video id="hero-bg-video" autoplay muted playsinline loop class="bg-video">
+  <video id="headerVideo" muted playsinline loop class="bg-video">
     <source src="images/arm AI video.mp4" type="video/mp4">
   </video>
   <div class="overlay">
     <img src="images/KAVA LOGO.png" class="logo-animate" alt="KAVA Logo">
     <h1 id="title" class="headline"></h1>
     <p id="subtitle" class="subtitle"></p>
-    <div class="scroll-indicator" onclick="scrollToVideo()">
-      <div class="scroll-text">DÉCOUVRIR</div>
-      <div class="scroll-line"></div>
-    </div>
   </div>
 </header>
 
 <div class="container">
-  <div class="card video-card">
+  <div class="card">
     <h2 id="video-title"></h2>
     <video controls id="action-video">
       <source id="video-source" src="images/Storyboard.mp4" type="video/mp4">
@@ -282,18 +194,14 @@ body {
     <h2 id="experience-title"></h2>
     <div class="image-wrapper">
       <img src="images/KAVA Home page.png" class="main-image" alt="KAVA Machine">
-      <div class="scan-line"></div>
-      
       <div class="point" data-feature="screen" style="top:27%; left:49%;" onclick="showFeature('screen')"></div>
       <div class="point" data-feature="robot" style="top:50%; left:49%;" onclick="showFeature('robot')"></div>
       <div class="point" data-feature="touch" style="top:69%; left:49%;" onclick="showFeature('touch')"></div>
-      <div class="point" data-feature="foam" style="top:66%; left:30%;" onclick="showFeature('foam')"></div>
+      <div class="point" data-feature="foam" style="top:66%; left:22%;" onclick="showFeature('foam')"></div>
     </div>
     
     <div class="feature-box" id="feature-box">
-        <div class="feature-img-wrapper">
-            <img id="feature-image" src="" alt="">
-        </div>
+        <div class="feature-img-wrapper"><img id="feature-image" src="" alt=""></div>
         <div class="feature-text-wrapper">
           <h3 id="feature-title"></h3>
           <p id="feature-text"></p>
@@ -301,19 +209,17 @@ body {
     </div>
   </div>
 
-  <div class="card contact-box" id="contact">
+  <div class="card" id="contact">
     <div class="contact-flex">
       <video autoplay muted playsinline loop class="contact-video-side">
         <source src="images/contact-video.mp4" type="video/mp4">
       </video>
       <div class="contact-form-side" id="form-container">
         <h2 id="contact-title"></h2>
-        <form>
-          <input type="text" id="input-name" placeholder="">
-          <input type="email" id="input-email" placeholder="">
-          <textarea id="input-message" rows="4" placeholder=""></textarea>
-          <button type="button" id="contact-btn" onclick="handleSend()"></button>
-        </form>
+        <input type="text" id="input-name" placeholder="">
+        <input type="email" id="input-email" placeholder="">
+        <textarea id="input-message" rows="4" placeholder=""></textarea>
+        <button type="button" id="contact-btn" onclick="handleSend()"></button>
       </div>
     </div>
   </div>
@@ -324,30 +230,29 @@ let currentLang = "fr";
 
 const featuresData = {
   screen: {
-    en: { title: "Menu Display", text: "Browse our premium selection of beverages. Our dynamic digital screen brings the art of coffee to life.", image: "images/screen.png", hover: "Menu" },
-    fr: { title: "Écran d'affichage", text: "Découvrez notre sélection de boissons. Notre écran dynamique donne vie à l'art du café.", image: "images/screen.png", hover: "Le Menu" }
+    en: { title: "Menu Display", text: "Browse our premium selection of beverages.", hover: "Menu Display" },
+    fr: { title: "Écran d'affichage", text: "Découvrez notre sélection de boissons.", hover: "Écran d'affichage" }
   },
   robot: {
-    en: { title: "Robotic Precision", text: "A high-precision robotic barista ensures every cup is crafted with perfect consistency.", image: "images/robot.png", hover: "Barista" },
-    fr: { title: "Précision Robotisée", text: "Un barista technologique de haute précision garantit une qualité constante pour chaque tasse.", image: "images/robot.png", hover: "Robotique" }
+    en: { title: "Robotic Precision", text: "Every cup is crafted with perfect consistency.", hover: "Robotic Arm" },
+    fr: { title: "Précision Robotisée", text: "Chaque tasse est préparée avec une régularité parfaite.", hover: "Bras robotisé" }
   },
   touch: {
-    en: { title: "Smart Interface", text: "Customize your drink in seconds. Upload your own photos to personalize your coffee foam.", image: "images/touch.png", hover: "Interface" },
-    fr: { title: "Interface Intelligente", text: "Personnalisez votre boisson en quelques secondes. Imprimez vos propres photos sur la mousse.", image: "images/touch.png", hover: "Commande" }
+    en: { title: "Smart Interface", text: "Customize your drink in seconds.", hover: "Touch Screen" },
+    fr: { title: "Interface Intelligente", text: "Personnalisez votre boisson en quelques secondes.", hover: "Écran tactile" }
   },
   foam: {
-    en: { title: "Foam Art Technology", text: "High-definition edible ink printing directly onto your latte foam for a unique experience.", image: "images/foam.png", hover: "Art" },
-    fr: { title: "Technologie Foam Art", text: "Impression haute définition avec encre comestible directement sur votre mousse de lait.", image: "images/foam.png", hover: "Artiste" }
+    en: { title: "Foam Art", text: "Edible ink printing directly onto your latte foam.", hover: "Foam Art" },
+    fr: { title: "Art sur mousse", text: "Impression sur mousse avec encre comestible.", hover: "Art sur mousse" }
   }
 };
 
 function setLang(lang) {
   currentLang = lang;
   const content = {
-    en: { title: "The Future of Coffee", sub: "AI-Powered Robotic Barista", vTitle: "See It in Action", eTitle: "KAVA Technology", cTitle: "Let's Work Together", btn: "Send Message", name: "Your Name", email: "Your Email", msg: "Your Message", scroll: "SCROLL" },
-    fr: { title: "Le Futur du Café", sub: "Barista Robotisé par l'IA", vTitle: "Voir en Action", eTitle: "Technologie KAVA", cTitle: "Travaillons Ensemble", btn: "Envoyer le Message", name: "Votre Nom", email: "Votre Email", msg: "Votre Message", scroll: "DÉCOUVRIR" }
+    en: { title: "The Future of Coffee", sub: "AI-Powered Robotic Barista", vTitle: "See It in Action", eTitle: "KAVA Technology", cTitle: "Contact Us", btn: "Send Message", name: "Name", email: "Email", msg: "Message" },
+    fr: { title: "Le Futur du Café", sub: "Barista Robotisé par l'IA", vTitle: "Voir en Action", eTitle: "Technologie KAVA", cTitle: "Nous Contacter", btn: "Envoyer", name: "Nom", email: "Email", msg: "Message" }
   };
-
   const d = content[lang];
   document.getElementById("title").innerText = d.title;
   document.getElementById("subtitle").innerText = d.sub;
@@ -358,54 +263,35 @@ function setLang(lang) {
   document.getElementById("input-name").placeholder = d.name;
   document.getElementById("input-email").placeholder = d.email;
   document.getElementById("input-message").placeholder = d.msg;
-  document.querySelector(".scroll-text").innerText = d.scroll;
 
   document.querySelectorAll('.point').forEach(p => {
     const key = p.getAttribute('data-feature');
     p.setAttribute('data-title', featuresData[key][lang].hover);
   });
-  
-  if(document.querySelector(".point.active")) {
-    showFeature(document.querySelector(".point.active").getAttribute('data-feature'));
-  }
 }
 
 function showFeature(featureKey) {
   const data = featuresData[featureKey][currentLang];
-  const box = document.getElementById("feature-box");
-  const img = document.getElementById("feature-image");
-  box.classList.remove("show");
-  setTimeout(() => {
-    img.src = data.image;
-    document.getElementById("feature-title").innerText = data.title;
-    document.getElementById("feature-text").innerText = data.text;
-    box.classList.add("show");
-  }, 200);
-  document.querySelectorAll(".point").forEach(p => {
-    p.classList.toggle("active", p.getAttribute('data-feature') === featureKey);
-  });
+  document.getElementById("feature-image").src = "images/" + featureKey + ".png";
+  document.getElementById("feature-title").innerText = data.title;
+  document.getElementById("feature-text").innerText = data.text;
+  document.getElementById("feature-box").classList.add("show");
+  document.querySelectorAll(".point").forEach(p => p.classList.toggle("active", p.getAttribute('data-feature') === featureKey));
 }
 
 function handleSend() {
-  const container = document.getElementById("form-container");
-  container.style.opacity = "0";
-  setTimeout(() => {
-    container.innerHTML = `
-      <div style="text-align:center; padding: 20px;">
-        <h1 style="font-size: 4rem; color: var(--accent-color); margin-bottom: 15px;">✓</h1>
-        <h2 style="font-size: 2.2rem;">${currentLang === 'fr' ? 'Merci !' : 'Thank You!'}</h2>
-        <p style="font-size: 1.2rem; opacity: 0.8;">${currentLang === 'fr' ? 'Votre message a été envoyé avec succès.' : 'Your message has been sent successfully.'}</p>
-      </div>
-    `;
-    container.style.opacity = "1";
-  }, 500);
+  document.getElementById("form-container").innerHTML = `<h2 style="color:var(--accent-color)">✓</h2><p>${currentLang === 'fr' ? 'Merci !' : 'Thank You!'}</p>`;
 }
 
-function scrollToVideo() { document.querySelector(".video-card").scrollIntoView({ behavior: "smooth" }); }
+window.onload = () => { 
+  setLang("fr"); 
+  showFeature("screen"); 
 
-window.onload = () => {
-  setLang("fr");
-  showFeature("screen");
+  // THE 3 SECOND DELAY LOGIC
+  const vid = document.getElementById('headerVideo');
+  setTimeout(() => {
+    vid.play();
+  }, 3000); 
 };
 </script>
 
