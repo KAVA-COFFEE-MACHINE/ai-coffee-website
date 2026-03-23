@@ -52,6 +52,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  -webkit-object-fit: cover;
   transform: translate(-50%, -50%);
   filter: brightness(0.65);
 }
@@ -113,13 +114,29 @@ body {
 .container {max-width: 1100px;margin:auto;padding:50px 20px;}
 
 /* CARD */
-.card {background:white;padding:30px;margin:30px 0;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,0.08);}
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* vertical centering */
+  align-items: center;      /* horizontal centering */
+  background:white;
+  padding:30px;
+  margin:30px 0;
+  border-radius:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+.card h2 {
+  text-align:center;
+  margin:0 0 20px 0;
+  font-size:2rem;
+  line-height:1.2;
+}
 .card video {width:100%;max-width:600px;display:block;margin:auto;border-radius:20px;}
 .image-wrapper {position:relative;text-align:center;overflow:hidden;}
 .main-image {width:65%;border-radius:20px;display:block;margin:auto;}
 
 /* SCAN LINE */
-.scan-line {position:absolute;top:0;left:10%;width:80%;height:3px;background:var(--accent-color);animation:scanMove 3s linear infinite;}
+.scan-line {position:absolute;top:0;left:10%;width:80%;height:3px;background:var(--accent-color);animation:scanMove 3s linear infinite;pointer-events:none;}
 @keyframes scanMove {0%{top:0;}100%{top:100%;}}
 
 /* POINTS */
@@ -141,7 +158,7 @@ body {
   width: 180px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   box-shadow:0 4px 20px rgba(0,0,0,0.2);
   font-size:0.85rem;
   z-index:5;
@@ -159,10 +176,10 @@ body {
 .point:hover .point-tooltip, .point:active .point-tooltip {opacity:1;transform:translateX(-50%) translateY(-5px);}
 
 /* FEATURE BOX (flex layout) */
-.feature-box {max-width:400px;margin:20px auto 0;padding:25px;border-radius:20px;text-align:center;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);box-shadow:0 8px 30px rgba(0,0,0,0.12);opacity:0;transform:translateY(30px);transition:all 0.5s ease;}
+.feature-box {max-width:400px;margin:20px auto 0;padding:25px;border-radius:20px;text-align:center;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);box-shadow:0 8px 30px rgba(0,0,0,0.12);opacity:0;transform:translateY(30px);transition:all 0.5s ease; z-index:10;}
 .feature-box.show {opacity:1;transform:translateY(0);}
 .feature-box .feature-flex {display:flex; align-items:center; gap:20px; justify-content:center;}
-.feature-box img {width:150px; border-radius:15px; transition:opacity 0.4s;}
+.feature-box img {width:150px; border-radius:15px; transition:opacity 0.4s ease-in-out; opacity:0;}
 .feature-box .feature-text-wrapper {max-width:220px;}
 
 /* CONTACT */
@@ -183,10 +200,10 @@ body {
   .feature-box p{font-size:0.85rem; line-height:1.3rem;}
 
   /* MOBILE POINTS POSITION & SIZE */
-  .point[data-feature="screen"] { top: 26%; left: 50%; width:14px; height:14px; }
-  .point[data-feature="robot"]  { top: 49%; left: 50%; width:14px; height:14px; }
-  .point[data-feature="touch"]  { top: 70%; left: 50%; width:14px; height:14px; }
-  .point[data-feature="foam"]   { top: 54%; left: 34%; width:14px; height:14px; }
+  .point[data-feature="screen"] { top:26%; left:50%; width:14px; height:14px; }
+  .point[data-feature="robot"]  { top:49%; left:50%; width:14px; height:14px; }
+  .point[data-feature="touch"]  { top:70%; left:50%; width:14px; height:14px; }
+  .point[data-feature="foam"]   { top:45%; left:65%; width:14px; height:14px; }
 
   /* Adjust pulse for smaller points */
   @keyframes pulse {
@@ -205,8 +222,6 @@ body {
   }
   @keyframes scanMoveMobile {0%{top:5%;}100%{top:95%;}}
 }
-
-/* SMALLER SCAN-LINE ON MOBILE TO AVOID OVERLAP WITH FEATURE-BOX */
 </style>
 </head>
 <body>
@@ -291,6 +306,7 @@ body {
 
 <script>
 let currentLang="en";
+let autoDemo, autoDemoTimer;
 
 const featuresData={
   screen:{en:{title:"Touch Screen", text:"Intuitive interface.", image:"images/screen.png"}, fr:{title:"Écran tactile", text:"Interface intuitive.", image:"images/screen.png"}},
@@ -299,18 +315,21 @@ const featuresData={
   foam:{en:{title:"Foam Art", text:"Perfect latte art.", image:"images/foam.png"}, fr:{title:"Art mousse", text:"Art latte parfait.", image:"images/foam.png"}}
 };
 
+// Preload images
+Object.values(featuresData).forEach(f=>{
+  new Image().src=f.en.image;
+  new Image().src=f.fr.image;
+});
+
 function updateTooltips(){
-  const map={screen:'screen',robot:'robot',touch:'touch',foam:'foam'};
-  for(const key in map){
-    const f=map[key];
-    const data=featuresData[f][currentLang];
-    document.getElementById(`tooltip-${f}`).innerHTML=`<strong>${data.title}</strong><br>${data.text}`;
+  for(const key in featuresData){
+    const data = featuresData[key][currentLang];
+    document.getElementById(`tooltip-${key}`).innerHTML = `<strong>${data.title}</strong><br>${data.text}`;
   }
 }
 
 function setLang(lang){
   currentLang=lang;
-
   const heroVideo=document.getElementById("hero-bg-video");
   const actionVideo=document.getElementById("action-video");
 
@@ -338,11 +357,10 @@ function setLang(lang){
     document.getElementById("video-source").src="images/Storyboard.mp4";
   }
 
-  heroVideo.pause();heroVideo.currentTime=0;heroVideo.load();heroVideo.play().catch(()=>{});
+  heroVideo.pause(); heroVideo.currentTime=0; heroVideo.load(); heroVideo.play().catch(()=>{});
   actionVideo.load();
 
   updateTooltips();
-
   const active=document.querySelector(".point.active");
   if(active){
     const map={0:'screen',1:'robot',2:'touch',3:'foam'};
@@ -357,9 +375,7 @@ function showFeature(feature){
   const boxEl=document.getElementById("feature-box");
 
   imgEl.style.opacity=0;
-  setTimeout(()=>{
-    imgEl.src=data.image; imgEl.alt=data.title; imgEl.style.opacity=1;
-  },200);
+  setTimeout(()=>{imgEl.src=data.image; imgEl.alt=data.title; imgEl.style.opacity=1;},200);
 
   document.getElementById("feature-title").innerText=data.title;
   document.getElementById("feature-text").innerText=data.text;
@@ -371,15 +387,23 @@ function showFeature(feature){
 }
 
 // AUTO DEMO
-let i = 0;
 const features = ["screen","robot","touch","foam"];
-let autoDemo = setInterval(()=>{showFeature(features[i]); i=(i+1)%features.length;},4000);
+let i=0;
+function startAutoDemo(){
+  autoDemo = setInterval(()=>{ showFeature(features[i]); i=(i+1)%features.length; },4000);
+}
+function resetAutoDemo(){
+  clearInterval(autoDemo);
+  clearTimeout(autoDemoTimer);
+  autoDemoTimer=setTimeout(startAutoDemo,6000); // restart after 6s of inactivity
+}
+startAutoDemo();
 
-// MOBILE/CLICK SUPPORT: pause auto-demo
+// MOBILE/CLICK SUPPORT: pause auto-demo & restart after inactivity
 document.querySelectorAll(".point").forEach((p, idx) => {
   const featureKey = features[idx];
-  p.addEventListener("click", () => { clearInterval(autoDemo); showFeature(featureKey); });
-  p.addEventListener("touchstart", () => { clearInterval(autoDemo); showFeature(featureKey); });
+  p.addEventListener("click", () => { showFeature(featureKey); resetAutoDemo(); });
+  p.addEventListener("touchstart", () => { showFeature(featureKey); resetAutoDemo(); });
 });
 
 function scrollToVideo(){document.querySelector(".video-card").scrollIntoView({behavior:"smooth"});}
