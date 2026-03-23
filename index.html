@@ -117,8 +117,8 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* vertical centering */
-  align-items: center;      /* horizontal centering */
+  justify-content: center;
+  align-items: center;
   background:white;
   padding:30px;
   margin:30px 0;
@@ -175,12 +175,41 @@ body {
 }
 .point:hover .point-tooltip, .point:active .point-tooltip {opacity:1;transform:translateX(-50%) translateY(-5px);}
 
-/* FEATURE BOX (flex layout) */
+/* FEATURE BOX */
 .feature-box {max-width:400px;margin:20px auto 0;padding:25px;border-radius:20px;text-align:center;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);box-shadow:0 8px 30px rgba(0,0,0,0.12);opacity:0;transform:translateY(30px);transition:all 0.5s ease; z-index:10;}
 .feature-box.show {opacity:1;transform:translateY(0);}
 .feature-box .feature-flex {display:flex; align-items:center; gap:20px; justify-content:center;}
 .feature-box img {width:150px; border-radius:15px; transition:opacity 0.4s ease-in-out; opacity:0;}
 .feature-box .feature-text-wrapper {max-width:220px;}
+
+/* FEATURE POPUP FOR DESKTOP */
+.feature-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.feature-popup-overlay img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.feature-popup-overlay .close-popup {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
 
 /* CONTACT */
 .contact-box {background:var(--main-color);color:white;text-align:center;padding:40px;}
@@ -194,25 +223,22 @@ body {
   .main-image{width:90%;}
   .feature-box{max-width:90%; padding:20px 15px; font-size:0.9rem; margin-top:25px;}
   .feature-box .feature-flex{flex-direction:column;}
-  .feature-box img{width:60%; margin-bottom:12px;}
+  .feature-box img{width:80%; margin-bottom:15px;}
   .feature-box .feature-text-wrapper{max-width:90%;}
   .feature-box h3{font-size:1.2rem; margin-bottom:8px;}
   .feature-box p{font-size:0.85rem; line-height:1.3rem;}
 
-  /* MOBILE POINTS POSITION & SIZE */
   .point[data-feature="screen"] { top:26%; left:50%; width:14px; height:14px; }
   .point[data-feature="robot"]  { top:49%; left:50%; width:14px; height:14px; }
   .point[data-feature="touch"]  { top:70%; left:50%; width:14px; height:14px; }
   .point[data-feature="foam"]   { top:45%; left:55%; width:14px; height:14px; }
 
-  /* Adjust pulse for smaller points */
   @keyframes pulse {
     0%   { box-shadow: 0 0 0 0 rgba(0,194,255,0.7); }
     70%  { box-shadow: 0 0 0 10px rgba(0,194,255,0); }
     100% { box-shadow: 0 0 0 0 rgba(0,194,255,0); }
   }
 
-  /* SCAN-LINE ADJUSTMENT FOR MOBILE */
   .scan-line {
     top: 0;
     left: 10%;
@@ -222,6 +248,15 @@ body {
   }
   @keyframes scanMoveMobile {0%{top:5%;}100%{top:95%;}}
 }
+
+/* DESKTOP IMAGE SIZE */
+@media (min-width:769px){
+  .feature-box img {width:250px; margin-right:25px; border-radius:20px;}
+  .feature-box .feature-flex {flex-direction:row; align-items:center; justify-content:flex-start;}
+  .feature-box .feature-text-wrapper {max-width:400px;}
+}
+
+.feature-box img:hover {transform:scale(1.05); transition: transform 0.3s ease;}
 </style>
 </head>
 <body>
@@ -264,7 +299,6 @@ body {
       <img src="images/KAVA Home page.png" class="main-image" alt="KAVA Machine">
       <div class="scan-line"></div>
 
-      <!-- FLOATING POINTS WITH TOOLTIP -->
       <div class="point" data-feature="screen" style="top:27%; left:49%;" onclick="showFeature('screen')">
         <span class="point-tooltip" id="tooltip-screen"></span>
       </div>
@@ -304,6 +338,12 @@ body {
 
 </div>
 
+<!-- POPUP FOR FEATURE IMAGES -->
+<div class="feature-popup-overlay" id="feature-popup">
+  <span class="close-popup" onclick="closePopup()">&times;</span>
+  <img id="popup-image" src="" alt="Feature Image">
+</div>
+
 <script>
 let currentLang="en";
 let autoDemo, autoDemoTimer;
@@ -316,10 +356,7 @@ const featuresData={
 };
 
 // Preload images
-Object.values(featuresData).forEach(f=>{
-  new Image().src=f.en.image;
-  new Image().src=f.fr.image;
-});
+Object.values(featuresData).forEach(f=>{ new Image().src=f.en.image; new Image().src=f.fr.image; });
 
 function updateTooltips(){
   for(const key in featuresData){
@@ -358,57 +395,3 @@ function setLang(lang){
   }
 
   heroVideo.pause(); heroVideo.currentTime=0; heroVideo.load(); heroVideo.play().catch(()=>{});
-  actionVideo.load();
-
-  updateTooltips();
-  const active=document.querySelector(".point.active");
-  if(active){
-    const map={0:'screen',1:'robot',2:'touch',3:'foam'};
-    const idx=Array.from(document.querySelectorAll(".point")).indexOf(active);
-    showFeature(map[idx]);
-  }
-}
-
-function showFeature(feature){
-  const data=featuresData[feature][currentLang];
-  const imgEl=document.getElementById("feature-image");
-  const boxEl=document.getElementById("feature-box");
-
-  imgEl.style.opacity=0;
-  setTimeout(()=>{imgEl.src=data.image; imgEl.alt=data.title; imgEl.style.opacity=1;},200);
-
-  document.getElementById("feature-title").innerText=data.title;
-  document.getElementById("feature-text").innerText=data.text;
-
-  boxEl.classList.add("show");
-  document.querySelectorAll(".point").forEach(p=>p.classList.remove("active"));
-  const map={screen:0,robot:1,touch:2,foam:3};
-  document.querySelectorAll(".point")[map[feature]].classList.add("active");
-}
-
-// AUTO DEMO
-const features = ["screen","robot","touch","foam"];
-let i=0;
-function startAutoDemo(){
-  autoDemo = setInterval(()=>{ showFeature(features[i]); i=(i+1)%features.length; },4000);
-}
-function resetAutoDemo(){
-  clearInterval(autoDemo);
-  clearTimeout(autoDemoTimer);
-  autoDemoTimer=setTimeout(startAutoDemo,6000); // restart after 6s of inactivity
-}
-startAutoDemo();
-
-// MOBILE/CLICK SUPPORT: pause auto-demo & restart after inactivity
-document.querySelectorAll(".point").forEach((p, idx) => {
-  const featureKey = features[idx];
-  p.addEventListener("click", () => { showFeature(featureKey); resetAutoDemo(); });
-  p.addEventListener("touchstart", () => { showFeature(featureKey); resetAutoDemo(); });
-});
-
-function scrollToVideo(){document.querySelector(".video-card").scrollIntoView({behavior:"smooth"});}
-window.onload=()=>setLang("en");
-</script>
-
-</body>
-</html>
