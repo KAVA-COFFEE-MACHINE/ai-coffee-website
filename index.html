@@ -11,9 +11,14 @@
   --accent-color: #00C2FF;
 }
 
+/* REMOVE ALL TOP SPACE */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 /* GLOBAL */
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
   background: #f4f6f9;
   scroll-behavior: smooth;
@@ -35,10 +40,10 @@ body {
   border-radius: 6px;
 }
 
-/* HERO HEADER */
+/* HERO */
 .hero-header {
   position: relative;
-  height: 100vh; /* fits one screen */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,61 +51,83 @@ body {
   overflow: hidden;
 }
 
-/* Background video smaller */
+/* VIDEO */
 .bg-video {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 120%;
-  height: auto;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   transform: translate(-50%, -50%);
-  z-index: 0;
   filter: brightness(0.65);
 }
 
-/* Overlay content */
+/* OVERLAY */
 .overlay {
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 0 20px;
 }
 
-/* Remove default margins */
-.hero-header h1,
-.hero-header p {
-  margin: 0;
-}
-
-/* Logo and spacing */
 .logo-animate {
-  width: 650px;
+  width: 600px;
   max-width: 80%;
-  border-radius: 25px;
-  margin-bottom: 10px;
+  border-radius: 20px;
 }
-.headline {
-  font-size: 3rem;
+
+.headline { font-size: 3rem; margin: 10px 0; }
+.subtitle { font-size: 1.4rem; margin-bottom: 25px; }
+
+/* SCROLL INDICATOR INSANE */
+.scroll-indicator {
+  margin-top: 50px;
+  text-align: center;
+  cursor: pointer;
 }
-.subtitle {
-  font-size: 1.4rem;
-  margin-bottom: 15px;
-}
-.cta-btn {
-  padding: 12px 25px;
-  font-size: 1rem;
-  background: white;
-  color: var(--main-color);
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-}
-.cta-btn:hover {
-  background: var(--accent-color);
+
+.scroll-text {
+  font-size: 0.75rem;
+  letter-spacing: 4px;
   color: white;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.scroll-line {
+  width: 2px;
+  height: 50px;
+  margin: 0 auto;
+  position: relative;
+  background: rgba(255,255,255,0.2);
+}
+
+.scroll-line::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  width: 100%;
+  height: 30px;
+  background: linear-gradient(to bottom, transparent, var(--accent-color), transparent);
+  animation: neonFlow 1.6s linear infinite;
+}
+
+.scroll-line::before {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+  box-shadow: 0 0 20px var(--accent-color);
+}
+
+@keyframes neonFlow {
+  0% { top: -30px; }
+  100% { top: 100%; }
 }
 
 /* CONTAINER */
@@ -124,37 +151,56 @@ body {
   width: 100%;
   max-width: 600px;
   display: block;
-  margin: 0 auto;
+  margin: auto;
   border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-/* Stylish video title above video */
-.video-title {
-  text-align: center;
-  color: #000000;
-  font-size: 3rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-  text-shadow: 0 3px 15px rgba(0,0,0,0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* INTERACTIVE IMAGE */
+/* IMAGE */
 .image-wrapper {
   position: relative;
   text-align: center;
 }
+
 .main-image {
   width: 65%;
-  display: block;
-  margin: 0 auto;
   border-radius: 20px;
 }
 
-/* Points */
+/* SCAN EFFECT */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 3px;
+  background: var(--accent-color);
+  animation: scanMove 3s linear infinite;
+}
+
+@keyframes scanMove {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* CONNECTION LINES */
+.connections {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.connections line {
+  stroke: var(--accent-color);
+  stroke-width: 2;
+  stroke-dasharray: 5;
+  animation: dashMove 2s linear infinite;
+}
+
+@keyframes dashMove {
+  to { stroke-dashoffset: -20; }
+}
+
+/* POINTS */
 .point {
   position: absolute;
   width: 20px;
@@ -162,60 +208,20 @@ body {
   background: var(--accent-color);
   border-radius: 50%;
   cursor: pointer;
-  animation: pulse 2s infinite;
-  z-index: 2;
-}
-.point:hover { transform: scale(1.5); }
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(0,194,255,0.7); }
-  70% { box-shadow: 0 0 0 15px rgba(0,194,255,0); }
-  100% { box-shadow: 0 0 0 0 rgba(0,194,255,0); }
 }
 
-/* FEATURE BOX */
+.point.active {
+  box-shadow: 0 0 20px var(--accent-color);
+}
+
+/* GLASS FEATURE BOX */
 .feature-box {
   margin-top: 30px;
   padding: 25px;
-  background: #f1f5f9;
-  border-radius: 15px;
+  border-radius: 20px;
   text-align: center;
-  min-height: 200px;
-  opacity: 1;
-}
-.component-display-img {
-  width: 60%;
-  max-width: 400px;
-  display: block;
-  margin: 15px auto;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-
-/* Stylish KAVA Technology title above image */
-#experience-title {
-  text-align: center;
-  color: #000000;
-  font-size: 3rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-  text-shadow: 0 3px 15px rgba(0,0,0,0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Fade-in animation */
-.feature-box.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s forwards;
-}
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(20px);
 }
 
 /* CONTACT */
@@ -223,47 +229,17 @@ body {
   background: var(--main-color);
   color: white;
   text-align: center;
-  padding: 40px 20px;
-}
-.contact-box input,
-.contact-box textarea {
-  width: 100%;
-  max-width: 500px;
-  display: block;
-  margin: 10px auto;
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-}
-.contact-box button {
-  padding: 12px 25px;
-  background: var(--accent-color);
-  border: none;
-  color: white;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.contact-box button:hover {
-  background: white;
-  color: var(--main-color);
+  padding: 40px;
 }
 
-/* MOBILE RESPONSIVENESS */
+/* MOBILE */
 @media (max-width: 768px) {
-  .hero-header { height: 80vh; }
-  .logo-animate { width: 60%; }
   .headline { font-size: 2.2rem; }
-  .subtitle { font-size: 1.2rem; margin-bottom: 10px; }
-  .cta-btn { padding: 10px 20px; font-size: 0.9rem; }
-  .video-title, #experience-title { font-size: 2rem; }
   .main-image { width: 90%; }
-  .feature-box { padding: 15px; min-height: auto; }
-  .component-display-img { width: 80%; }
-  .card { padding: 20px; margin: 20px 0; }
 }
 </style>
 </head>
+
 <body>
 
 <!-- LANGUAGE SWITCH -->
@@ -272,16 +248,20 @@ body {
   <button onclick="setLang('fr')">FR</button>
 </div>
 
-<!-- HERO -->
 <header class="hero-header">
-  <video autoplay muted playsinline class="bg-video">
-    <source src="images/arm AI video.mp4" type="video/mp4">
+  <video id="hero-bg-video" autoplay muted playsinline class="bg-video" onended="this.pause();">
+    <source id="hero-video" src="images/arm AI video.mp4" type="video/mp4">
   </video>
+
   <div class="overlay">
     <img src="images/KAVA LOGO.png" class="logo-animate">
-    <h1 id="title" class="headline"></h1>
-    <p id="subtitle" class="subtitle"></p>
-    <a href="#contact" id="cta" class="cta-btn"></a>
+    <h1 id="title"></h1>
+    <p id="subtitle"></p>
+
+    <div class="scroll-indicator" onclick="scrollToVideo()">
+      <div class="scroll-text">SCROLL</div>
+      <div class="scroll-line"></div>
+    </div>
   </div>
 </header>
 
@@ -289,42 +269,37 @@ body {
 
   <!-- VIDEO -->
   <div class="card video-card">
-    <h2 class="video-title" id="video-title"></h2>
+    <h2 id="video-title"></h2>
     <video controls id="action-video">
-      <source src="images/Storyboard.mp4" type="video/mp4">
+      <source id="video-source" src="images/Storyboard.mp4" type="video/mp4">
     </video>
   </div>
 
-  <!-- INTERACTIVE MACHINE -->
-  <div class="card image-card">
+  <!-- MACHINE -->
+  <div class="card">
     <h2 id="experience-title"></h2>
+
     <div class="image-wrapper">
       <img src="images/KAVA Home page.png" class="main-image">
 
-      <!-- POINTS -->
+      <div class="scan-line"></div>
+
+      <svg class="connections">
+        <line x1="50%" y1="30%" x2="50%" y2="52%" />
+        <line x1="50%" y1="52%" x2="50%" y2="70%" />
+        <line x1="50%" y1="52%" x2="30%" y2="55%" />
+      </svg>
+
       <div class="point" style="top:30%; left:50%;" onclick="showFeature('screen')"></div>
       <div class="point" style="top:52%; left:48%;" onclick="showFeature('robot')"></div>
       <div class="point" style="top:70%; left:50%;" onclick="showFeature('touch')"></div>
       <div class="point" style="top:55%; left:30%;" onclick="showFeature('foam')"></div>
     </div>
 
-    <!-- Feature Display -->
     <div class="feature-box">
       <h3 id="feature-title"></h3>
-      <img id="feature-image" src="" class="component-display-img">
       <p id="feature-text"></p>
     </div>
-  </div>
-
-  <!-- CONTACT -->
-  <div class="card contact-box" id="contact">
-    <h2 id="contact-title"></h2>
-    <form>
-      <input type="text" name="name" placeholder="">
-      <input type="email" name="email" placeholder="">
-      <textarea name="message" placeholder=""></textarea>
-      <button id="contact-btn"></button>
-    </form>
   </div>
 
 </div>
@@ -334,74 +309,80 @@ let currentLang = "en";
 
 // FEATURES DATA
 const featuresData = {
-  screen: { titleEN: "Touch Screen", textEN: "Intuitive and responsive interface.",
-            titleFR: "Écran tactile", textFR: "Interface intuitive et réactive." },
-  robot: { titleEN: "Robot Arm", textEN: "Precision robotic barista delivering perfect coffee.",
-           titleFR: "Bras robotisé", textFR: "Barista robotique précis livrant un café parfait." },
-  touch: { titleEN: "Touch Control", textEN: "Customizable coffee options at your fingertips.",
-           titleFR: "Contrôle tactile", textFR: "Options de café personnalisables à portée de main." },
-  foam: { titleEN: "Foam Art", textEN: "Beautiful latte art every time.",
-          titleFR: "Art de mousse", textFR: "Art latte magnifique à chaque fois." }
+  screen: {
+    en: {title:"Touch Screen", text:"Intuitive interface."},
+    fr: {title:"Écran tactile", text:"Interface intuitive."}
+  },
+  robot: {
+    en: {title:"Robot Arm", text:"Precision robotic barista."},
+    fr: {title:"Bras robotisé", text:"Barista précis."}
+  },
+  touch: {
+    en: {title:"Touch Control", text:"Customize your drink."},
+    fr: {title:"Contrôle tactile", text:"Personnalisez votre café."}
+  },
+  foam: {
+    en: {title:"Foam Art", text:"Perfect latte art."},
+    fr: {title:"Art mousse", text:"Art latte parfait."}
+  }
 };
 
-// LANGUAGE SWITCH
-function setLang(lang) {
+// SET LANGUAGE
+function setLang(lang){
   currentLang = lang;
+
+  const heroVideo = document.getElementById("hero-bg-video");
+
   if(lang === "fr"){
     document.getElementById("title").innerText = "Découvrez le futur du café";
     document.getElementById("subtitle").innerText = "Barista robotisé alimenté par l’IA";
-    document.getElementById("cta").innerText = "Demander un partenariat";
     document.getElementById("video-title").innerText = "Voir en action";
     document.getElementById("experience-title").innerText = "Technologie KAVA";
-    document.getElementById("contact-title").innerText = "Travaillons ensemble";
-    document.getElementById("contact-btn").innerText = "Envoyer";
-    document.querySelector('input[name="name"]').placeholder = "Votre nom";
-    document.querySelector('input[name="email"]').placeholder = "Votre email";
-    document.querySelector('textarea[name="message"]').placeholder = "Votre message";
-    document.querySelector("#action-video source").src = "images/StoryboardFR.mp4";
+    document.getElementById("video-source").src = "images/StoryboardFR.mp4";
   } else {
     document.getElementById("title").innerText = "Meet the Future of Coffee";
     document.getElementById("subtitle").innerText = "AI-powered robotic barista";
-    document.getElementById("cta").innerText = "Request Partnership";
     document.getElementById("video-title").innerText = "See It in Action";
     document.getElementById("experience-title").innerText = "KAVA Technology";
-    document.getElementById("contact-title").innerText = "Let’s Work Together";
-    document.getElementById("contact-btn").innerText = "Send";
-    document.querySelector('input[name="name"]').placeholder = "Your Name";
-    document.querySelector('input[name="email"]').placeholder = "Your Email";
-    document.querySelector('textarea[name="message"]').placeholder = "Your Message";
-    document.querySelector("#action-video source").src = "images/Storyboard.mp4";
+    document.getElementById("video-source").src = "images/Storyboard.mp4";
   }
+
+  // Reload header video from start and play
+  heroVideo.pause();
+  heroVideo.currentTime = 0;
+  heroVideo.load();
+  heroVideo.play().catch(() => {});
+
   document.getElementById("action-video").load();
 }
 
-// SHOW FEATURE BELOW IMAGE with fade-in
+// SHOW FEATURE
 function showFeature(feature){
-  const featureTitle = document.getElementById("feature-title");
-  const featureText = document.getElementById("feature-text");
-  const featureImage = document.getElementById("feature-image");
-  const featureBox = document.querySelector(".feature-box");
+  const data = featuresData[feature][currentLang];
+  document.getElementById("feature-title").innerText = data.title;
+  document.getElementById("feature-text").innerText = data.text;
 
-  // Remove previous animation
-  featureBox.classList.remove("fade-in");
-
-  // Set new content
-  if(currentLang === "fr"){
-    featureTitle.innerText = featuresData[feature].titleFR;
-    featureText.innerText = featuresData[feature].textFR;
-  } else {
-    featureTitle.innerText = featuresData[feature].titleEN;
-    featureText.innerText = featuresData[feature].textEN;
-  }
-  featureImage.src = "images/" + feature + ".png";
-
-  // Trigger fade-in
-  void featureBox.offsetWidth; // reflow to restart animation
-  featureBox.classList.add("fade-in");
+  // Highlight active point
+  document.querySelectorAll(".point").forEach(p => p.classList.remove("active"));
+  const map = {screen:0, robot:1, touch:2, foam:3};
+  document.querySelectorAll(".point")[map[feature]].classList.add("active");
 }
 
-// DEFAULT LOAD
-window.onload = ()=>{ setLang('en'); };
+// AUTO DEMO
+const features = ["screen","robot","touch","foam"];
+let i = 0;
+setInterval(()=>{
+  showFeature(features[i]);
+  i = (i+1)%features.length;
+},4000);
+
+// SCROLL
+function scrollToVideo() {
+  document.querySelector(".video-card").scrollIntoView({behavior:"smooth"});
+}
+
+// DEFAULT
+window.onload = ()=> setLang("en");
 </script>
 
 </body>
