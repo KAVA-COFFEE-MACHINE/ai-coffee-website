@@ -38,7 +38,7 @@ body {
 /* HERO HEADER */
 .hero-header {
   position: relative;
-  height: 110vh;
+  height: 165vh; /* 1.5× bigger */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,9 +63,9 @@ body {
   padding: 0 20px;
 }
 .logo-animate {
-  width: 500px;
+  width: 750px;      /* 1.5× bigger */
   max-width: 90%;
-  border-radius: 50%;
+  border-radius: 25px; /* pill-shaped */
   margin-bottom: 20px;
 }
 .headline {
@@ -108,38 +108,41 @@ body {
 
 /* VIDEO */
 .card video {
-  width: 90%;
-  max-width: 600px;
+  width: 135%;        /* 1.5× bigger */
+  max-width: 900px;
   display: block;
   margin: 20px auto;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
+/* Video overlay title */
+.video-card {
+  position: relative;
+  text-align: center;
+}
+.video-overlay-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2.5rem;
+  text-shadow: 0 3px 15px rgba(0,0,0,0.6);
+  z-index: 2;
+  pointer-events: none;
+}
+
 /* INTERACTIVE IMAGE */
 .image-wrapper {
   position: relative;
+  text-align: center;
 }
 .main-image {
-  width: 80%;
-  max-width: 500px;
+  width: 100%;      /* keep full size */
   display: block;
   margin: 0 auto;
   border-radius: 20px;
-}
-
-/* COMPONENT IMAGES */
-.component-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: none;
-  pointer-events: none;
-  border-radius: 20px;
-  z-index: 1;
 }
 
 /* POINTS */
@@ -161,7 +164,7 @@ body {
   100% { box-shadow: 0 0 0 0 rgba(0,194,255,0); }
 }
 
-/* TOOLTIP BOX */
+/* TOOLTIP */
 .feature-tooltip {
   position: absolute;
   background: var(--accent-color);
@@ -195,7 +198,15 @@ body {
   background: #f1f5f9;
   border-radius: 15px;
   text-align: center;
-  min-height: 120px;
+  min-height: 200px;
+}
+.component-display-img {
+  width: 60%;
+  max-width: 400px;
+  display: block;
+  margin: 15px auto;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
 /* CONTACT */
@@ -254,37 +265,33 @@ body {
 <div class="container">
 
   <!-- VIDEO -->
-  <div class="card">
-    <h2 id="video-title"></h2>
+  <div class="card video-card">
     <video controls id="action-video">
       <source src="images/Storyboard.mp4" type="video/mp4">
     </video>
+    <h2 class="video-overlay-title" id="video-title"></h2>
   </div>
 
   <!-- INTERACTIVE MACHINE -->
-  <div class="card">
+  <div class="card image-card">
     <h2 id="experience-title"></h2>
     <div class="image-wrapper">
       <img src="images/KAVA Home page.png" class="main-image">
 
-      <!-- Component images -->
-      <img src="images/screen.png" class="component-img" id="img-screen">
-      <img src="images/robot.png" class="component-img" id="img-robot">
-      <img src="images/touch.png" class="component-img" id="img-touch">
-      <img src="images/foam.png" class="component-img" id="img-foam">
-
       <!-- POINTS -->
-      <div class="point" style="top:30%; left:50%;" onclick="showFeature('screen', this)"></div>
-      <div class="point" style="top:52%; left:48%;" onclick="showFeature('robot', this)"></div>
-      <div class="point" style="top:70%; left:50%;" onclick="showFeature('touch', this)"></div>
-      <div class="point" style="top:55%; left:30%;" onclick="showFeature('foam', this)"></div>
+      <div class="point" style="top:30%; left:50%;" onclick="showFeature('screen')"></div>
+      <div class="point" style="top:52%; left:48%;" onclick="showFeature('robot')"></div>
+      <div class="point" style="top:70%; left:50%;" onclick="showFeature('touch')"></div>
+      <div class="point" style="top:55%; left:30%;" onclick="showFeature('foam')"></div>
 
-      <!-- TOOLTIP -->
+      <!-- Tooltip -->
       <div class="feature-tooltip" id="tooltip"></div>
     </div>
 
+    <!-- Feature Display -->
     <div class="feature-box">
       <h3 id="feature-title"></h3>
+      <img id="feature-image" src="" class="component-display-img">
       <p id="feature-text"></p>
     </div>
   </div>
@@ -348,33 +355,24 @@ function setLang(lang) {
   document.getElementById("action-video").load();
 }
 
-// SHOW FEATURE WITH TOOLTIP AND COMPONENT IMAGE
-function showFeature(feature, el){
-  const tooltip = document.getElementById("tooltip");
-  const rect = el.getBoundingClientRect();
-  const wrapperRect = el.parentElement.getBoundingClientRect();
-
-  tooltip.style.left = (rect.left - wrapperRect.left + rect.width/2) + "px";
-  tooltip.style.top = (rect.top - wrapperRect.top - 45) + "px";
-  tooltip.style.display = "block";
+// SHOW FEATURE BELOW IMAGE
+function showFeature(feature){
+  const featureTitle = document.getElementById("feature-title");
+  const featureText = document.getElementById("feature-text");
+  const featureImage = document.getElementById("feature-image");
 
   if(currentLang === "fr"){
-    document.getElementById("feature-title").innerText = featuresData[feature].titleFR;
-    document.getElementById("feature-text").innerText = featuresData[feature].textFR;
-    tooltip.innerText = featuresData[feature].titleFR;
+    featureTitle.innerText = featuresData[feature].titleFR;
+    featureText.innerText = featuresData[feature].textFR;
   } else {
-    document.getElementById("feature-title").innerText = featuresData[feature].titleEN;
-    document.getElementById("feature-text").innerText = featuresData[feature].textEN;
-    tooltip.innerText = featuresData[feature].titleEN;
+    featureTitle.innerText = featuresData[feature].titleEN;
+    featureText.innerText = featuresData[feature].textEN;
   }
 
-  // Show correct component image
-  document.querySelectorAll(".component-img").forEach(img => img.style.display = "none");
-  const selectedImg = document.getElementById("img-" + feature);
-  if(selectedImg) selectedImg.style.display = "block";
+  featureImage.src = "images/" + feature + ".png";
 }
 
-// HIDE TOOLTIP WHEN CLICKING OUTSIDE
+// TOOLTIP
 document.addEventListener("click", (e)=>{
   if(!e.target.classList.contains("point")){
     document.getElementById("tooltip").style.display = "none";
