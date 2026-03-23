@@ -81,11 +81,48 @@ body {
   box-shadow: 0 15px 40px rgba(0,0,0,0.05);
   text-align: center;
 }
+
+/* FIXED VIDEO SIZE */
+#action-video {
+  width: 100%;
+  max-width: 800px; /* Limits the size on screen */
+  height: auto;
+  border-radius: 20px;
+  display: block;
+  margin: 20px auto;
+}
+
 .image-wrapper { position: relative; display: inline-block; width: 100%; max-width: 900px; }
 .main-image { width: 100%; border-radius: 25px; display: block; }
 
+/* INTERACTIVE POINTS & TOOLTIPS */
 .point { position: absolute; width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; cursor: pointer; z-index: 10; }
 .point.active { background: white; border: 5px solid var(--accent-color); transform: scale(1.3); }
+
+.point::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--main-color);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.point:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
 
 /* --- FEATURE BOX (Mobile Style by Default) --- */
 .feature-box {
@@ -234,6 +271,12 @@ function setLang(lang) {
     en: { title: "The Future of Coffee", sub: "AI-Powered Robotic Barista", vTitle: "See It in Action", eTitle: "KAVA Technology", cTitle: "Contact Us", btn: "Send Message", name: "Name", email: "Email", msg: "Message" },
     fr: { title: "Le Futur du Café", sub: "Barista Robotisé par l'IA", vTitle: "Voir en Action", eTitle: "Technologie KAVA", cTitle: "Nous Contacter", btn: "Envoyer", name: "Nom", email: "Email", msg: "Message" }
   };
+  
+  const tooltips = {
+    en: { screen: "Menu Display", robot: "Robotic Arm", touch: "Touch Interface", foam: "Foam Printing" },
+    fr: { screen: "Écran Menu", robot: "Barista Robot", touch: "Interface Tactile", foam: "Impression Mousse" }
+  };
+
   const d = content[lang];
   document.getElementById("title").innerText = d.title;
   document.getElementById("subtitle").innerText = d.sub;
@@ -244,6 +287,20 @@ function setLang(lang) {
   document.getElementById("input-name").placeholder = d.name;
   document.getElementById("input-email").placeholder = d.email;
   document.getElementById("input-message").placeholder = d.msg;
+
+  // Update hover titles
+  document.querySelectorAll('.point').forEach(p => {
+    const feature = p.getAttribute('data-feature');
+    p.setAttribute('data-title', tooltips[lang][feature]);
+  });
+
+  // Switch Storyboard video based on language
+  const videoPlayer = document.getElementById("action-video");
+  const videoSrc = lang === 'fr' ? 'images/StoryboardFR.mp4' : 'images/Storyboard.mp4';
+  if(videoPlayer.src.indexOf(videoSrc) === -1) {
+    videoPlayer.src = videoSrc;
+    videoPlayer.load();
+  }
 }
 
 function showFeature(featureKey) {
