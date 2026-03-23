@@ -190,7 +190,7 @@ body {
 </div>
 
 <header class="hero-header">
-  <video id="hero-bg-video" autoplay muted playsinline loop class="bg-video">
+  <video id="hero-bg-video" autoplay muted playsinline class="bg-video">
     <source src="images/arm AI video.mp4" type="video/mp4">
   </video>
   <div class="overlay">
@@ -300,6 +300,14 @@ function setLang(lang) {
   if(videoPlayer.src.indexOf(videoSrc) === -1) {
     videoPlayer.src = videoSrc;
     videoPlayer.load();
+  }
+
+  // REPLAY HERO VIDEO ON LANG CHANGE
+  const heroVideo = document.getElementById("hero-bg-video");
+  if (heroVideo) {
+    heroVideo.pause();
+    heroVideo.currentTime = 0;
+    heroVideo.play();
   }
 }
 
