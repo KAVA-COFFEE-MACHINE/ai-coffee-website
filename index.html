@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>KAVA - AI Coffee Experience</title>
+<title>KAVA - Expérience Café IA</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -44,10 +44,10 @@ body {
   color: white;
 }
 
-/* HERO HEADER - BALANCED */
+/* HERO HEADER */
 .hero-header {
   position: relative;
-  height: 85vh; /* Slightly shorter to prevent it from feeling "too big" */
+  height: 85vh; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,7 +63,7 @@ body {
   height: 100%;
   object-fit: cover;
   transform: translate(-50%, -50%);
-  filter: brightness(0.4); /* Darkened slightly to make text pop */
+  filter: brightness(0.4); 
 }
 .overlay { 
   position: relative; 
@@ -72,21 +72,21 @@ body {
   padding: 20px;
 }
 .logo-animate { 
-  width: 550px; /* Increased size */
+  width: 550px; 
   max-width: 85%; 
-  border-radius: 40px; /* Rounded edges as requested */
+  border-radius: 40px; 
   margin-bottom: 20px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
 .headline { 
-  font-size: 3.5rem; /* Bigger text */
+  font-size: 3.5rem; 
   font-weight: 800; 
   margin: 10px 0; 
   text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 .subtitle { 
-  font-size: 1.6rem; /* Bigger text */
+  font-size: 1.6rem; 
   opacity: 0.9;
   margin-bottom: 30px;
 }
@@ -101,7 +101,7 @@ body {
 }
 @keyframes neonFlow { 0% { top: -100%; } 100% { top: 100%; } }
 
-/* CONTAINER & CARDS */
+/* CARDS */
 .container { max-width: 1100px; margin: auto; padding: 60px 20px; }
 .card {
   background: white;
@@ -114,7 +114,7 @@ body {
 .card h2 { font-size: 2.2rem; margin-bottom: 30px; font-weight: 700; }
 video { width: 100%; border-radius: 25px; background: #000; }
 
-/* INTERACTIVE IMAGE SECTION */
+/* INTERACTIVE SECTION & TOOLTIPS */
 .image-wrapper { position: relative; display: inline-block; width: 100%; max-width: 800px; }
 .main-image { width: 100%; border-radius: 25px; display: block; }
 .scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-color); box-shadow: 0 0 15px var(--accent-color); animation: scanMove 4s linear infinite; pointer-events: none; }
@@ -124,6 +124,31 @@ video { width: 100%; border-radius: 25px; background: #000; }
 .point.active { background: white; border: 5px solid var(--accent-color); transform: scale(1.4); }
 .point::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; background: var(--accent-color); animation: pulse 2s infinite; z-index: -1; }
 @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
+
+/* Tooltip Styling */
+.point::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--main-color);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transition: 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border-bottom: 2px solid var(--accent-color);
+}
+.point:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 
 .feature-box {
   margin-top: 40px;
@@ -140,9 +165,8 @@ video { width: 100%; border-radius: 25px; background: #000; }
 }
 .feature-box.show { opacity: 1; transform: translateY(0); }
 .feature-box img { width: 240px; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-.feature-text-wrapper { text-align: left; }
 
-/* CONTACT SECTION */
+/* CONTACT */
 .contact-box {
   background: #ffffff;
   position: relative;
@@ -167,7 +191,6 @@ video { width: 100%; border-radius: 25px; background: #000; }
   mix-blend-mode: multiply;
 }
 .contact-form-side { flex: 1; text-align: left; transition: all 0.5s ease; }
-.contact-form-side h2 { text-align: left; margin-top: 0; }
 
 .contact-form-side input, .contact-form-side textarea {
   width: 100%;
@@ -177,14 +200,6 @@ video { width: 100%; border-radius: 25px; background: #000; }
   border: 1.5px solid #edf2f7;
   background: #f8fafc;
   font-family: inherit;
-  font-size: 1rem;
-  transition: 0.3s;
-}
-.contact-form-side input:focus, .contact-form-side textarea:focus {
-  outline: none;
-  border-color: var(--accent-color);
-  background: white;
-  box-shadow: 0 0 15px rgba(0, 194, 255, 0.1);
 }
 .contact-form-side button {
   width: 100%;
@@ -195,22 +210,17 @@ video { width: 100%; border-radius: 25px; background: #000; }
   border-radius: 40px;
   cursor: pointer;
   font-weight: 700;
-  font-size: 1.1rem;
-  margin-top: 15px;
   transition: 0.3s;
 }
-.contact-form-side button:hover { background: var(--accent-color); transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0, 194, 255, 0.2); }
+.contact-form-side button:hover { background: var(--accent-color); transform: translateY(-3px); }
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .hero-header { height: 70vh; }
   .headline { font-size: 2.4rem; }
-  .subtitle { font-size: 1.2rem; }
+  .logo-animate { width: 85%; }
   .contact-flex { flex-direction: column; text-align: center; }
   .contact-video-side { width: 70%; }
-  .contact-form-side h2 { text-align: center; }
   .feature-box { flex-direction: column; text-align: center; }
-  .feature-box img { width: 100%; max-width: 250px; }
 }
 </style>
 </head>
@@ -230,7 +240,7 @@ video { width: 100%; border-radius: 25px; background: #000; }
     <h1 id="title" class="headline"></h1>
     <p id="subtitle" class="subtitle"></p>
     <div class="scroll-indicator" onclick="scrollToVideo()">
-      <div class="scroll-text">SCROLL</div>
+      <div class="scroll-text">DÉCOUVRIR</div>
       <div class="scroll-line"></div>
     </div>
   </div>
@@ -249,11 +259,13 @@ video { width: 100%; border-radius: 25px; background: #000; }
     <div class="image-wrapper">
       <img src="images/KAVA Home page.png" class="main-image" alt="KAVA Machine">
       <div class="scan-line"></div>
+      
       <div class="point" data-feature="screen" style="top:27%; left:49%;" onclick="showFeature('screen')"></div>
       <div class="point" data-feature="robot" style="top:50%; left:49%;" onclick="showFeature('robot')"></div>
       <div class="point" data-feature="touch" style="top:69%; left:49%;" onclick="showFeature('touch')"></div>
       <div class="point" data-feature="foam" style="top:66%; left:22%;" onclick="showFeature('foam')"></div>
     </div>
+    
     <div class="feature-box" id="feature-box">
         <img id="feature-image" src="" alt="">
         <div class="feature-text-wrapper">
@@ -282,33 +294,32 @@ video { width: 100%; border-radius: 25px; background: #000; }
 </div>
 
 <script>
-let currentLang = "en";
-let autoDemo;
+let currentLang = "fr";
 
 const featuresData = {
   screen: {
-    en: { title: "Menu Display", text: "View our full selection of beverages. This screen showcases our latest digital art creations.", image: "images/screen.png" },
-    fr: { title: "Écran d'affichage", text: "Consultez notre menu complet. Cet écran dynamique affiche nos dernières créations.", image: "images/screen.png" }
+    en: { title: "Menu Display", text: "View our full selection of beverages. This screen showcases our latest digital art creations.", image: "images/screen.png", hover: "Menu" },
+    fr: { title: "Écran d'affichage", text: "Consultez notre sélection complète de boissons. Cet écran dynamique affiche nos dernières créations digitales.", image: "images/screen.png", hover: "Le Menu" }
   },
   robot: {
-    en: { title: "Robotic Arm", text: "A high-precision robotic barista crafts your drink with perfect consistency every time.", image: "images/robot.png" },
-    fr: { title: "Bras robotisé", text: "Admirez la précision de notre barista technologique pour une régularité parfaite.", image: "images/robot.png" }
+    en: { title: "Robotic Arm", text: "A high-precision robotic barista crafts your drink with perfect consistency every time.", image: "images/robot.png", hover: "Barista" },
+    fr: { title: "Bras robotisé", text: "Admirez la précision de notre barista technologique. Il prépare votre café avec une régularité parfaite.", image: "images/robot.png", hover: "Robotique" }
   },
   touch: {
-    en: { title: "Touch Screen", text: "Order and customize your drink in a few taps. Upload photos to print on your coffee foam.", image: "images/touch.png" },
-    fr: { title: "Écran tactile", text: "Commandez et personnalisez votre boisson. Téléchargez votre photo pour l'imprimer sur la mousse.", image: "images/touch.png" }
+    en: { title: "Touch Screen", text: "Order and customize your drink in a few taps. Upload photos to print on your coffee foam.", image: "images/touch.png", hover: "Interface" },
+    fr: { title: "Écran tactile", text: "Commandez et personnalisez votre boisson. Téléchargez votre photo pour l'imprimer directement sur la mousse.", image: "images/touch.png", hover: "Commande" }
   },
   foam: {
-    en: { title: "Foam Art", text: "Our tech prints high-definition edible ink portraits directly onto your latte foam.", image: "images/foam.png" },
-    fr: { title: "Art mousse", text: "Notre technologie imprime des portraits haute définition directement sur votre mousse.", image: "images/foam.png" }
+    en: { title: "Foam Art", text: "Our tech prints high-definition edible ink portraits directly onto your latte foam.", image: "images/foam.png", hover: "Art" },
+    fr: { title: "Art sur mousse", text: "Notre technologie imprime des portraits haute définition directement sur votre mousse.", image: "images/foam.png", hover: "Artiste" }
   }
 };
 
 function setLang(lang) {
   currentLang = lang;
   const content = {
-    en: { title: "Meet the Future of Coffee", sub: "AI-powered robotic barista", vTitle: "See It in Action", eTitle: "KAVA Technology", cTitle: "Let's Work Together", btn: "Send Message", name: "Your Name", email: "Your Email", msg: "Your Message", vid: "images/Storyboard.mp4" },
-    fr: { title: "Le Futur du Café", sub: "Barista robotisé alimenté par l'IA", vTitle: "Voir en action", eTitle: "Technologie KAVA", cTitle: "Travaillons ensemble", btn: "Envoyer le message", name: "Votre Nom", email: "Votre Email", msg: "Votre Message", vid: "images/StoryboardFR.mp4" }
+    en: { title: "Meet the Future of Coffee", sub: "AI-powered robotic barista", vTitle: "See It in Action", eTitle: "KAVA Technology", cTitle: "Let's Work Together", btn: "Send Message", name: "Your Name", email: "Your Email", msg: "Your Message", scroll: "SCROLL" },
+    fr: { title: "Découvrez le futur du café", sub: "Barista robotisé alimenté par l'IA", vTitle: "Voir en action", eTitle: "Technologie KAVA", cTitle: "Travaillons ensemble", btn: "Envoyer le message", name: "Votre Nom", email: "Votre Email", msg: "Votre Message", scroll: "DÉCOUVRIR" }
   };
 
   const d = content[lang];
@@ -321,12 +332,13 @@ function setLang(lang) {
   document.getElementById("input-name").placeholder = d.name;
   document.getElementById("input-email").placeholder = d.email;
   document.getElementById("input-message").placeholder = d.msg;
-  
-  const vSource = document.getElementById("video-source");
-  if(vSource.src.indexOf(d.vid) === -1) {
-    vSource.src = d.vid;
-    document.getElementById("action-video").load();
-  }
+  document.querySelector(".scroll-text").innerText = d.scroll;
+
+  // Update Hover Tooltips
+  document.querySelectorAll('.point').forEach(p => {
+    const key = p.getAttribute('data-feature');
+    p.setAttribute('data-title', featuresData[key][lang].hover);
+  });
 }
 
 function showFeature(featureKey) {
@@ -353,7 +365,7 @@ function handleSend() {
       <div style="text-align:center; padding: 20px;">
         <h1 style="font-size: 3.5rem; color: var(--accent-color); margin-bottom: 15px;">✓</h1>
         <h2 style="font-size: 2rem;">${currentLang === 'fr' ? 'Merci !' : 'Thank You!'}</h2>
-        <p style="font-size: 1.1rem; opacity: 0.8;">${currentLang === 'fr' ? 'Nous vous contacterons très bientôt.' : 'We will get back to you very soon.'}</p>
+        <p style="font-size: 1.1rem; opacity: 0.8;">${currentLang === 'fr' ? 'Votre message a été envoyé.' : 'Your message has been sent.'}</p>
       </div>
     `;
     container.style.opacity = "1";
@@ -363,20 +375,9 @@ function handleSend() {
 function scrollToVideo() { document.querySelector(".video-card").scrollIntoView({ behavior: "smooth" }); }
 
 window.onload = () => {
-  setLang("en");
+  setLang("fr");
   showFeature("screen");
-  autoDemo = setInterval(() => {
-    const keys = Object.keys(featuresData);
-    let active = document.querySelector(".point.active");
-    let currentKey = active ? active.getAttribute('data-feature') : "screen";
-    let idx = (keys.indexOf(currentKey) + 1) % keys.length;
-    showFeature(keys[idx]);
-  }, 5000);
 };
-
-document.querySelectorAll(".point").forEach(p => {
-    p.addEventListener("click", () => clearInterval(autoDemo));
-});
 </script>
 
 </body>
