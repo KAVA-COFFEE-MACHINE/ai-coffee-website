@@ -45,8 +45,6 @@ body {
   color: white;
   overflow: hidden;
 }
-
-/* Background video */
 .bg-video {
   position: absolute;
   top: 50%;
@@ -57,24 +55,18 @@ body {
   transform: translate(-50%, -50%);
   filter: brightness(0.65);
 }
-
-/* Overlay content */
 .overlay {
   position: relative;
   z-index: 1;
   text-align: center;
 }
-
 .logo-animate {
   width: 600px;
   max-width: 80%;
   border-radius: 20px;
 }
-
 .headline { font-size: 3rem; margin: 10px 0; }
 .subtitle { font-size: 1.4rem; margin-bottom: 25px; }
-
-/* Scroll indicator */
 .scroll-indicator {
   margin-top: 50px;
   text-align: center;
@@ -115,129 +107,70 @@ body {
   top: 10px;
   box-shadow: 0 0 20px var(--accent-color);
 }
-@keyframes neonFlow {
-  0% { top: -30px; }
-  100% { top: 100%; }
-}
+@keyframes neonFlow {0%{top:-30px;}100%{top:100%;}}
 
 /* CONTAINER */
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 50px 20px;
-}
+.container {max-width: 1100px;margin:auto;padding:50px 20px;}
 
 /* CARD */
-.card {
-  background: white;
-  padding: 30px;
-  margin: 30px 0;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-}
-
-/* VIDEO */
-.card video {
-  width: 100%;
-  max-width: 600px;
-  display: block;
-  margin: auto;
-  border-radius: 20px;
-}
-
-/* IMAGE */
-.image-wrapper {
-  position: relative;
-  text-align: center;
-  overflow: hidden; /* prevents lines outside the image */
-}
-
-.main-image {
-  width: 65%;
-  border-radius: 20px;
-  display: block;
-  margin: auto;
-}
+.card {background:white;padding:30px;margin:30px 0;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,0.08);}
+.card video {width:100%;max-width:600px;display:block;margin:auto;border-radius:20px;}
+.image-wrapper {position:relative;text-align:center;overflow:hidden;}
+.main-image {width:65%;border-radius:20px;display:block;margin:auto;}
 
 /* SCAN LINE */
-.scan-line {
-  position: absolute;
-  top: 0;
-  left: 10%;
-  width: 80%;
-  height: 3px;
-  background: var(--accent-color);
-  animation: scanMove 3s linear infinite;
-}
-@keyframes scanMove {
-  0% { top: 0; }
-  100% { top: 100%; }
-}
+.scan-line {position:absolute;top:0;left:10%;width:80%;height:3px;background:var(--accent-color);animation:scanMove 3s linear infinite;}
+@keyframes scanMove {0%{top:0;}100%{top:100%;}}
 
 /* POINTS */
-.point {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: var(--accent-color);
-  border-radius: 50%;
-  cursor: pointer;
-  animation: pulse 2s infinite;
-  z-index: 2;
-}
-.point.active, .point:hover { transform: scale(1.5); }
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(0,194,255,0.7); }
-  70% { box-shadow: 0 0 0 15px rgba(0,194,255,0); }
-  100% { box-shadow: 0 0 0 0 rgba(0,194,255,0); }
-}
+.point {position:absolute;width:20px;height:20px;background:var(--accent-color);border-radius:50%;cursor:pointer;animation:pulse 2s infinite;z-index:2;}
+.point.active, .point:hover {transform:scale(1.5);}
+@keyframes pulse {0%{box-shadow:0 0 0 0 rgba(0,194,255,0.7);}70%{box-shadow:0 0 0 15px rgba(0,194,255,0);}100%{box-shadow:0 0 0 0 rgba(0,194,255,0);}}
 
-/* FEATURE BOX */
-.feature-box {
-  margin-top: 30px;
-  padding: 25px;
-  border-radius: 20px;
+/* TOOLTIP */
+.point-tooltip {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  color: var(--main-color);
+  padding: 10px;
+  border-radius: 12px;
   text-align: center;
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(20px);
+  width: 180px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  box-shadow:0 4px 20px rgba(0,0,0,0.2);
+  font-size:0.85rem;
+  z-index:5;
 }
+.point-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(255,255,255,0.95) transparent transparent transparent;
+}
+.point:hover .point-tooltip {opacity:1;transform:translateX(-50%) translateY(-5px);}
+
+/* FEATURE BOX (sliding glassmorphic) */
+.feature-box {max-width:400px;margin:20px auto 0;padding:25px;border-radius:20px;text-align:center;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);box-shadow:0 8px 30px rgba(0,0,0,0.12);opacity:0;transform:translateY(30px);transition:all 0.5s ease;}
+.feature-box.show {opacity:1;transform:translateY(0);}
+.feature-box img {width:200px;border-radius:15px;margin-bottom:15px;transition:opacity 0.4s;}
 
 /* CONTACT */
-.contact-box {
-  background: var(--main-color);
-  color: white;
-  text-align: center;
-  padding: 40px;
-}
-.contact-box input,
-.contact-box textarea {
-  width: 100%;
-  max-width: 500px;
-  display: block;
-  margin: 10px auto;
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-}
-.contact-box button {
-  padding: 12px 25px;
-  background: var(--accent-color);
-  border: none;
-  color: white;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.contact-box button:hover {
-  background: white;
-  color: var(--main-color);
-}
+.contact-box {background:var(--main-color);color:white;text-align:center;padding:40px;}
+.contact-box input,.contact-box textarea {width:100%;max-width:500px;display:block;margin:10px auto;padding:12px;border-radius:8px;border:none;}
+.contact-box button {padding:12px 25px;background:var(--accent-color);border:none;color:white;border-radius:20px;cursor:pointer;transition:0.3s;}
+.contact-box button:hover {background:white;color:var(--main-color);}
 
 /* MOBILE */
-@media (max-width: 768px) {
-  .headline { font-size: 2.2rem; }
-  .main-image { width: 90%; }
-}
+@media (max-width:768px){.headline{font-size:2.2rem;}.main-image{width:90%;}.feature-box{max-width:90%;}}
 </style>
 </head>
 <body>
@@ -252,12 +185,10 @@ body {
   <video id="hero-bg-video" autoplay muted playsinline class="bg-video" onended="this.pause();">
     <source id="hero-video" src="images/arm AI video.mp4" type="video/mp4">
   </video>
-
   <div class="overlay">
-    <img src="images/KAVA LOGO.png" class="logo-animate">
+    <img src="images/KAVA LOGO.png" class="logo-animate" alt="KAVA Logo">
     <h1 id="title"></h1>
     <p id="subtitle"></p>
-
     <div class="scroll-indicator" onclick="scrollToVideo()">
       <div class="scroll-text">SCROLL</div>
       <div class="scroll-line"></div>
@@ -275,24 +206,31 @@ body {
     </video>
   </div>
 
-  <!-- MACHINE -->
+  <!-- MACHINE WITH FLOATING POINTS -->
   <div class="card">
     <h2 id="experience-title"></h2>
-
     <div class="image-wrapper">
-      <img src="images/KAVA Home page.png" class="main-image">
-
-      <!-- SCAN LINE -->
+      <img src="images/KAVA Home page.png" class="main-image" alt="KAVA Machine">
       <div class="scan-line"></div>
 
-      <!-- POINTS ON IMAGE -->
-      <div class="point" style="top:10%; left:55%;" onclick="showFeature('screen')"></div>
-      <div class="point" style="top:50%; left:50%;" onclick="showFeature('robot')"></div>
-      <div class="point" style="top:70%; left:50%;" onclick="showFeature('touch')"></div>
-      <div class="point" style="top:55%; left:30%;" onclick="showFeature('foam')"></div>
+      <!-- FLOATING POINTS WITH TOOLTIP -->
+      <div class="point" style="top:10%; left:55%;" onclick="showFeature('screen')">
+        <span class="point-tooltip" id="tooltip-screen"></span>
+      </div>
+      <div class="point" style="top:50%; left:50%;" onclick="showFeature('robot')">
+        <span class="point-tooltip" id="tooltip-robot"></span>
+      </div>
+      <div class="point" style="top:70%; left:50%;" onclick="showFeature('touch')">
+        <span class="point-tooltip" id="tooltip-touch"></span>
+      </div>
+      <div class="point" style="top:55%; left:30%;" onclick="showFeature('foam')">
+        <span class="point-tooltip" id="tooltip-foam"></span>
+      </div>
     </div>
 
-    <div class="feature-box">
+    <!-- FEATURE BOX -->
+    <div class="feature-box" id="feature-box">
+      <img id="feature-image" src="" alt="">
       <h3 id="feature-title"></h3>
       <p id="feature-text"></p>
     </div>
@@ -312,80 +250,95 @@ body {
 </div>
 
 <script>
-let currentLang = "en";
+let currentLang="en";
 
-// FEATURES DATA
-const featuresData = {
-  screen: {en:{title:"Touch Screen", text:"Intuitive interface."}, fr:{title:"Écran tactile", text:"Interface intuitive."}},
-  robot: {en:{title:"Robot Arm", text:"Precision robotic barista."}, fr:{title:"Bras robotisé", text:"Barista précis."}},
-  touch: {en:{title:"Touch Control", text:"Customize your drink."}, fr:{title:"Contrôle tactile", text:"Personnalisez votre café."}},
-  foam: {en:{title:"Foam Art", text:"Perfect latte art."}, fr:{title:"Art mousse", text:"Art latte parfait."}}
+const featuresData={
+screen:{en:{title:"Touch Screen", text:"Intuitive interface.", image:"images/screen.png"}, fr:{title:"Écran tactile", text:"Interface intuitive.", image:"images/screen.png"}},
+robot:{en:{title:"Robot Arm", text:"Precision robotic barista.", image:"images/robot.png"}, fr:{title:"Bras robotisé", text:"Barista précis.", image:"images/robot.png"}},
+touch:{en:{title:"Touch Control", text:"Customize your drink.", image:"images/touch.png"}, fr:{title:"Contrôle tactile", text:"Personnalisez votre café.", image:"images/touch.png"}},
+foam:{en:{title:"Foam Art", text:"Perfect latte art.", image:"images/foam.png"}, fr:{title:"Art mousse", text:"Art latte parfait.", image:"images/foam.png"}}
 };
 
-function setLang(lang){
-  currentLang = lang;
-
-  const heroVideo = document.getElementById("hero-bg-video");
-  const actionVideo = document.getElementById("action-video");
-
-  if(lang==="fr"){
-    document.getElementById("title").innerText = "Découvrez le futur du café";
-    document.getElementById("subtitle").innerText = "Barista robotisé alimenté par l’IA";
-    document.getElementById("video-title").innerText = "Voir en action";
-    document.getElementById("experience-title").innerText = "Technologie KAVA";
-    document.getElementById("contact-title").innerText = "Travaillons ensemble";
-    document.getElementById("contact-btn").innerText = "Envoyer";
-    document.querySelector('input[name="name"]').placeholder = "Votre nom";
-    document.querySelector('input[name="email"]').placeholder = "Votre email";
-    document.querySelector('textarea[name="message"]').placeholder = "Votre message";
-    document.getElementById("video-source").src = "images/StoryboardFR.mp4";
-  } else {
-    document.getElementById("title").innerText = "Meet the Future of Coffee";
-    document.getElementById("subtitle").innerText = "AI-powered robotic barista";
-    document.getElementById("video-title").innerText = "See It in Action";
-    document.getElementById("experience-title").innerText = "KAVA Technology";
-    document.getElementById("contact-title").innerText = "Let’s Work Together";
-    document.getElementById("contact-btn").innerText = "Send";
-    document.querySelector('input[name="name"]').placeholder = "Your Name";
-    document.querySelector('input[name="email"]').placeholder = "Your Email";
-    document.querySelector('textarea[name="message"]').placeholder = "Your Message";
-    document.getElementById("video-source").src = "images/Storyboard.mp4";
+function updateTooltips(){
+  const map={screen:'screen',robot:'robot',touch:'touch',foam:'foam'};
+  for(const key in map){
+    const f=map[key];
+    const data=featuresData[f][currentLang];
+    document.getElementById(`tooltip-${f}`).innerHTML=`<strong>${data.title}</strong><br>${data.text}`;
   }
-
-  // Restart header video
-  heroVideo.pause();
-  heroVideo.currentTime = 0;
-  heroVideo.load();
-  heroVideo.play().catch(()=>{});
-
-  actionVideo.load();
 }
 
-// SHOW FEATURE
-function showFeature(feature){
-  const data = featuresData[feature][currentLang];
-  document.getElementById("feature-title").innerText = data.title;
-  document.getElementById("feature-text").innerText = data.text;
+function setLang(lang){
+  currentLang=lang;
 
+  const heroVideo=document.getElementById("hero-bg-video");
+  const actionVideo=document.getElementById("action-video");
+
+  if(lang==="fr"){
+    document.getElementById("title").innerText="Découvrez le futur du café";
+    document.getElementById("subtitle").innerText="Barista robotisé alimenté par l’IA";
+    document.getElementById("video-title").innerText="Voir en action";
+    document.getElementById("experience-title").innerText="Technologie KAVA";
+    document.getElementById("contact-title").innerText="Travaillons ensemble";
+    document.getElementById("contact-btn").innerText="Envoyer";
+    document.querySelector('input[name="name"]').placeholder="Votre nom";
+    document.querySelector('input[name="email"]').placeholder="Votre email";
+    document.querySelector('textarea[name="message"]').placeholder="Votre message";
+    document.getElementById("video-source").src="images/StoryboardFR.mp4";
+  } else {
+    document.getElementById("title").innerText="Meet the Future of Coffee";
+    document.getElementById("subtitle").innerText="AI-powered robotic barista";
+    document.getElementById("video-title").innerText="See It in Action";
+    document.getElementById("experience-title").innerText="KAVA Technology";
+    document.getElementById("contact-title").innerText="Let’s Work Together";
+    document.getElementById("contact-btn").innerText="Send";
+    document.querySelector('input[name="name"]').placeholder="Your Name";
+    document.querySelector('input[name="email"]').placeholder="Your Email";
+    document.querySelector('textarea[name="message"]').placeholder="Your Message";
+    document.getElementById("video-source").src="images/Storyboard.mp4";
+  }
+
+  heroVideo.pause();heroVideo.currentTime=0;heroVideo.load();heroVideo.play().catch(()=>{});
+  actionVideo.load();
+
+  // update tooltips
+  updateTooltips();
+
+  // update feature box if active
+  const active=document.querySelector(".point.active");
+  if(active){
+    const map={0:'screen',1:'robot',2:'touch',3:'foam'};
+    const idx=Array.from(document.querySelectorAll(".point")).indexOf(active);
+    showFeature(map[idx]);
+  }
+}
+
+function showFeature(feature){
+  const data=featuresData[feature][currentLang];
+  const imgEl=document.getElementById("feature-image");
+  const boxEl=document.getElementById("feature-box");
+
+  imgEl.style.opacity=0;
+  setTimeout(()=>{
+    imgEl.src=data.image; imgEl.alt=data.title; imgEl.style.opacity=1;
+  },200);
+
+  document.getElementById("feature-title").innerText=data.title;
+  document.getElementById("feature-text").innerText=data.text;
+
+  boxEl.classList.add("show");
   document.querySelectorAll(".point").forEach(p=>p.classList.remove("active"));
-  const map={screen:0, robot:1, touch:2, foam:3};
+  const map={screen:0,robot:1,touch:2,foam:3};
   document.querySelectorAll(".point")[map[feature]].classList.add("active");
 }
 
 // AUTO DEMO
-const features = ["screen","robot","touch","foam"];
+const features=["screen","robot","touch","foam"];
 let i=0;
-setInterval(()=>{
-  showFeature(features[i]);
-  i=(i+1)%features.length;
-},4000);
+setInterval(()=>{showFeature(features[i]);i=(i+1)%features.length;},4000);
 
-function scrollToVideo(){
-  document.querySelector(".video-card").scrollIntoView({behavior:"smooth"});
-}
-
-// DEFAULT
-window.onload = ()=> setLang("en");
+function scrollToVideo(){document.querySelector(".video-card").scrollIntoView({behavior:"smooth"});}
+window.onload=()=>setLang("en");
 </script>
 
 </body>
