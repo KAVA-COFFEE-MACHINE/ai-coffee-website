@@ -156,12 +156,14 @@ body {
   border-style: solid;
   border-color: rgba(255,255,255,0.95) transparent transparent transparent;
 }
-.point:hover .point-tooltip {opacity:1;transform:translateX(-50%) translateY(-5px);}
+.point:hover .point-tooltip, .point:active .point-tooltip {opacity:1;transform:translateX(-50%) translateY(-5px);}
 
-/* FEATURE BOX (sliding glassmorphic) */
+/* FEATURE BOX (flex layout) */
 .feature-box {max-width:400px;margin:20px auto 0;padding:25px;border-radius:20px;text-align:center;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);box-shadow:0 8px 30px rgba(0,0,0,0.12);opacity:0;transform:translateY(30px);transition:all 0.5s ease;}
 .feature-box.show {opacity:1;transform:translateY(0);}
-.feature-box img {width:200px;border-radius:15px;margin-bottom:15px;transition:opacity 0.4s;}
+.feature-box .feature-flex {display:flex; align-items:center; gap:20px; justify-content:center;}
+.feature-box img {width:150px; border-radius:15px; transition:opacity 0.4s;}
+.feature-box .feature-text-wrapper {max-width:220px;}
 
 /* CONTACT */
 .contact-box {background:var(--main-color);color:white;text-align:center;padding:40px;}
@@ -170,7 +172,41 @@ body {
 .contact-box button:hover {background:white;color:var(--main-color);}
 
 /* MOBILE */
-@media (max-width:768px){.headline{font-size:2.2rem;}.main-image{width:90%;}.feature-box{max-width:90%;}}
+@media (max-width:768px){
+  .headline{font-size:2.2rem;}
+  .main-image{width:90%;}
+  .feature-box{max-width:90%; padding:20px 15px; font-size:0.9rem; margin-top:25px;}
+  .feature-box .feature-flex{flex-direction:column;}
+  .feature-box img{width:60%; margin-bottom:12px;}
+  .feature-box .feature-text-wrapper{max-width:90%;}
+  .feature-box h3{font-size:1.2rem; margin-bottom:8px;}
+  .feature-box p{font-size:0.85rem; line-height:1.3rem;}
+
+  /* MOBILE POINTS POSITION & SIZE */
+  .point[data-feature="screen"] { top: 26%; left: 50%; width:14px; height:14px; }
+  .point[data-feature="robot"]  { top: 49%; left: 50%; width:14px; height:14px; }
+  .point[data-feature="touch"]  { top: 70%; left: 50%; width:14px; height:14px; }
+  .point[data-feature="foam"]   { top: 54%; left: 34%; width:14px; height:14px; }
+
+  /* Adjust pulse for smaller points */
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(0,194,255,0.7); }
+    70%  { box-shadow: 0 0 0 10px rgba(0,194,255,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,194,255,0); }
+  }
+
+  /* SCAN-LINE ADJUSTMENT FOR MOBILE */
+  .scan-line {
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    animation: scanMoveMobile 3s linear infinite;
+  }
+  @keyframes scanMoveMobile {0%{top:5%;}100%{top:95%;}}
+}
+
+/* SMALLER SCAN-LINE ON MOBILE TO AVOID OVERLAP WITH FEATURE-BOX */
 </style>
 </head>
 <body>
@@ -214,25 +250,29 @@ body {
       <div class="scan-line"></div>
 
       <!-- FLOATING POINTS WITH TOOLTIP -->
-      <div class="point" style="top:27%; left:49%;" onclick="showFeature('screen')">
+      <div class="point" data-feature="screen" style="top:27%; left:49%;" onclick="showFeature('screen')">
         <span class="point-tooltip" id="tooltip-screen"></span>
       </div>
-      <div class="point" style="top:50%; left:49%;" onclick="showFeature('robot')">
+      <div class="point" data-feature="robot" style="top:50%; left:49%;" onclick="showFeature('robot')">
         <span class="point-tooltip" id="tooltip-robot"></span>
       </div>
-      <div class="point" style="top:69%; left:49%;" onclick="showFeature('touch')">
+      <div class="point" data-feature="touch" style="top:69%; left:49%;" onclick="showFeature('touch')">
         <span class="point-tooltip" id="tooltip-touch"></span>
       </div>
-      <div class="point" style="top:54%; left:33%;" onclick="showFeature('foam')">
+      <div class="point" data-feature="foam" style="top:54%; left:33%;" onclick="showFeature('foam')">
         <span class="point-tooltip" id="tooltip-foam"></span>
       </div>
     </div>
 
     <!-- FEATURE BOX -->
     <div class="feature-box" id="feature-box">
-      <img id="feature-image" src="" alt="">
-      <h3 id="feature-title"></h3>
-      <p id="feature-text"></p>
+      <div class="feature-flex">
+        <img id="feature-image" src="" alt="">
+        <div class="feature-text-wrapper">
+          <h3 id="feature-title"></h3>
+          <p id="feature-text"></p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -253,10 +293,10 @@ body {
 let currentLang="en";
 
 const featuresData={
-screen:{en:{title:"Touch Screen", text:"Intuitive interface.", image:"images/screen.png"}, fr:{title:"Écran tactile", text:"Interface intuitive.", image:"images/screen.png"}},
-robot:{en:{title:"Robot Arm", text:"Precision robotic barista.", image:"images/robot.png"}, fr:{title:"Bras robotisé", text:"Barista précis.", image:"images/robot.png"}},
-touch:{en:{title:"Touch Control", text:"Customize your drink.", image:"images/touch.png"}, fr:{title:"Contrôle tactile", text:"Personnalisez votre café.", image:"images/touch.png"}},
-foam:{en:{title:"Foam Art", text:"Perfect latte art.", image:"images/foam.png"}, fr:{title:"Art mousse", text:"Art latte parfait.", image:"images/foam.png"}}
+  screen:{en:{title:"Touch Screen", text:"Intuitive interface.", image:"images/screen.png"}, fr:{title:"Écran tactile", text:"Interface intuitive.", image:"images/screen.png"}},
+  robot:{en:{title:"Robot Arm", text:"Precision robotic barista.", image:"images/robot.png"}, fr:{title:"Bras robotisé", text:"Barista précis.", image:"images/robot.png"}},
+  touch:{en:{title:"Touch Control", text:"Customize your drink.", image:"images/touch.png"}, fr:{title:"Contrôle tactile", text:"Personnalisez votre café.", image:"images/touch.png"}},
+  foam:{en:{title:"Foam Art", text:"Perfect latte art.", image:"images/foam.png"}, fr:{title:"Art mousse", text:"Art latte parfait.", image:"images/foam.png"}}
 };
 
 function updateTooltips(){
@@ -301,10 +341,8 @@ function setLang(lang){
   heroVideo.pause();heroVideo.currentTime=0;heroVideo.load();heroVideo.play().catch(()=>{});
   actionVideo.load();
 
-  // update tooltips
   updateTooltips();
 
-  // update feature box if active
   const active=document.querySelector(".point.active");
   if(active){
     const map={0:'screen',1:'robot',2:'touch',3:'foam'};
@@ -333,9 +371,16 @@ function showFeature(feature){
 }
 
 // AUTO DEMO
-const features=["screen","robot","touch","foam"];
-let i=0;
-setInterval(()=>{showFeature(features[i]);i=(i+1)%features.length;},4000);
+let i = 0;
+const features = ["screen","robot","touch","foam"];
+let autoDemo = setInterval(()=>{showFeature(features[i]); i=(i+1)%features.length;},4000);
+
+// MOBILE/CLICK SUPPORT: pause auto-demo
+document.querySelectorAll(".point").forEach((p, idx) => {
+  const featureKey = features[idx];
+  p.addEventListener("click", () => { clearInterval(autoDemo); showFeature(featureKey); });
+  p.addEventListener("touchstart", () => { clearInterval(autoDemo); showFeature(featureKey); });
+});
 
 function scrollToVideo(){document.querySelector(".video-card").scrollIntoView({behavior:"smooth"});}
 window.onload=()=>setLang("en");
