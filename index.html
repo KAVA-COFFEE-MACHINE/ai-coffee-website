@@ -232,6 +232,32 @@ body {
   padding: 40px;
 }
 
+.contact-box input,
+.contact-box textarea {
+  width: 100%;
+  max-width: 500px;
+  display: block;
+  margin: 10px auto;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+}
+
+.contact-box button {
+  padding: 12px 25px;
+  background: var(--accent-color);
+  border: none;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-box button:hover {
+  background: white;
+  color: var(--main-color);
+}
+
 /* MOBILE */
 @media (max-width: 768px) {
   .headline { font-size: 2.2rem; }
@@ -302,6 +328,17 @@ body {
     </div>
   </div>
 
+  <!-- CONTACT FORM -->
+  <div class="card contact-box" id="contact">
+    <h2 id="contact-title"></h2>
+    <form>
+      <input type="text" name="name" placeholder="">
+      <input type="email" name="email" placeholder="">
+      <textarea name="message" placeholder=""></textarea>
+      <button id="contact-btn"></button>
+    </form>
+  </div>
+
 </div>
 
 <script>
@@ -309,51 +346,50 @@ let currentLang = "en";
 
 // FEATURES DATA
 const featuresData = {
-  screen: {
-    en: {title:"Touch Screen", text:"Intuitive interface."},
-    fr: {title:"Écran tactile", text:"Interface intuitive."}
-  },
-  robot: {
-    en: {title:"Robot Arm", text:"Precision robotic barista."},
-    fr: {title:"Bras robotisé", text:"Barista précis."}
-  },
-  touch: {
-    en: {title:"Touch Control", text:"Customize your drink."},
-    fr: {title:"Contrôle tactile", text:"Personnalisez votre café."}
-  },
-  foam: {
-    en: {title:"Foam Art", text:"Perfect latte art."},
-    fr: {title:"Art mousse", text:"Art latte parfait."}
-  }
+  screen: {en:{title:"Touch Screen", text:"Intuitive interface."}, fr:{title:"Écran tactile", text:"Interface intuitive."}},
+  robot: {en:{title:"Robot Arm", text:"Precision robotic barista."}, fr:{title:"Bras robotisé", text:"Barista précis."}},
+  touch: {en:{title:"Touch Control", text:"Customize your drink."}, fr:{title:"Contrôle tactile", text:"Personnalisez votre café."}},
+  foam: {en:{title:"Foam Art", text:"Perfect latte art."}, fr:{title:"Art mousse", text:"Art latte parfait."}}
 };
 
-// SET LANGUAGE
 function setLang(lang){
   currentLang = lang;
 
   const heroVideo = document.getElementById("hero-bg-video");
+  const actionVideo = document.getElementById("action-video");
 
-  if(lang === "fr"){
+  if(lang==="fr"){
     document.getElementById("title").innerText = "Découvrez le futur du café";
     document.getElementById("subtitle").innerText = "Barista robotisé alimenté par l’IA";
     document.getElementById("video-title").innerText = "Voir en action";
     document.getElementById("experience-title").innerText = "Technologie KAVA";
+    document.getElementById("contact-title").innerText = "Travaillons ensemble";
+    document.getElementById("contact-btn").innerText = "Envoyer";
+    document.querySelector('input[name="name"]').placeholder = "Votre nom";
+    document.querySelector('input[name="email"]').placeholder = "Votre email";
+    document.querySelector('textarea[name="message"]').placeholder = "Votre message";
     document.getElementById("video-source").src = "images/StoryboardFR.mp4";
   } else {
     document.getElementById("title").innerText = "Meet the Future of Coffee";
     document.getElementById("subtitle").innerText = "AI-powered robotic barista";
     document.getElementById("video-title").innerText = "See It in Action";
     document.getElementById("experience-title").innerText = "KAVA Technology";
+    document.getElementById("contact-title").innerText = "Let’s Work Together";
+    document.getElementById("contact-btn").innerText = "Send";
+    document.querySelector('input[name="name"]').placeholder = "Your Name";
+    document.querySelector('input[name="email"]').placeholder = "Your Email";
+    document.querySelector('textarea[name="message"]').placeholder = "Your Message";
     document.getElementById("video-source").src = "images/Storyboard.mp4";
   }
 
-  // Reload header video from start and play
+  // Restart header video
   heroVideo.pause();
   heroVideo.currentTime = 0;
   heroVideo.load();
-  heroVideo.play().catch(() => {});
+  heroVideo.play().catch(()=>{});
 
-  document.getElementById("action-video").load();
+  // Reload action video
+  actionVideo.load();
 }
 
 // SHOW FEATURE
@@ -362,22 +398,20 @@ function showFeature(feature){
   document.getElementById("feature-title").innerText = data.title;
   document.getElementById("feature-text").innerText = data.text;
 
-  // Highlight active point
-  document.querySelectorAll(".point").forEach(p => p.classList.remove("active"));
-  const map = {screen:0, robot:1, touch:2, foam:3};
+  document.querySelectorAll(".point").forEach(p=>p.classList.remove("active"));
+  const map={screen:0, robot:1, touch:2, foam:3};
   document.querySelectorAll(".point")[map[feature]].classList.add("active");
 }
 
 // AUTO DEMO
 const features = ["screen","robot","touch","foam"];
-let i = 0;
+let i=0;
 setInterval(()=>{
   showFeature(features[i]);
-  i = (i+1)%features.length;
+  i=(i+1)%features.length;
 },4000);
 
-// SCROLL
-function scrollToVideo() {
+function scrollToVideo(){
   document.querySelector(".video-card").scrollIntoView({behavior:"smooth"});
 }
 
