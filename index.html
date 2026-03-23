@@ -43,7 +43,7 @@ body {
 /* --- HEADER SECTION --- */
 .hero-header {
   position: relative;
-  height: 70vh; /* Default Mobile */
+  height: 70vh; /* Default Mobile Height */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,7 +63,7 @@ body {
 }
 .overlay { position: relative; z-index: 1; text-align: center; padding: 20px; }
 .logo-animate { 
-  width: 320px; 
+  width: 320px; /* Default Mobile Logo */
   max-width: 90%; 
   border-radius: 25px; 
   margin-bottom: 20px;
@@ -84,31 +84,10 @@ body {
 .image-wrapper { position: relative; display: inline-block; width: 100%; max-width: 900px; }
 .main-image { width: 100%; border-radius: 25px; display: block; }
 
-.point { position: absolute; width: 22px; height: 22px; background: var(--accent-color); border-radius: 50%; cursor: pointer; z-index: 10; }
-.point.active { background: white; border: 5px solid var(--accent-color); transform: scale(1.4); }
+.point { position: absolute; width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; cursor: pointer; z-index: 10; }
+.point.active { background: white; border: 5px solid var(--accent-color); transform: scale(1.3); }
 
-/* Tooltip Styling */
-.point::after {
-  content: attr(data-title);
-  position: absolute;
-  bottom: 150%;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  background: var(--main-color);
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: 10px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  white-space: nowrap;
-  opacity: 0;
-  transition: 0.3s ease;
-  pointer-events: none;
-  border-bottom: 2px solid var(--accent-color);
-}
-.point:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-/* --- FEATURE BOX (Mobile Default) --- */
+/* --- FEATURE BOX (Mobile Style by Default) --- */
 .feature-box {
   margin-top: 30px;
   padding: 20px;
@@ -133,7 +112,7 @@ body {
 .contact-form-side { width: 100%; text-align: center; }
 
 /* ============================================================
-   DESKTOP STYLES (Enlarged Version)
+   DESKTOP STYLES (Screen wider than 992px)
    ============================================================ */
 @media (min-width: 992px) {
   .hero-header { height: 90vh; }
@@ -149,7 +128,7 @@ body {
     align-items: stretch;
     padding: 0;
     overflow: hidden;
-    height: 380px;
+    height: 350px;
   }
   .feature-img-wrapper { width: 50%; max-width: none; }
   .feature-box img { height: 100%; object-fit: cover; border-radius: 0; }
@@ -157,8 +136,10 @@ body {
   
   .contact-flex { flex-direction: row; text-align: left; }
   .contact-video-side { width: 40%; }
+  .contact-form-side { text-align: left; }
 }
 
+/* Shared UI Components */
 .contact-form-side input, .contact-form-side textarea { width: 100%; margin: 10px 0; padding: 18px; border-radius: 15px; border: 1.5px solid #edf2f7; background: #f8fafc; font-family: inherit; }
 .contact-form-side button { width: 100%; padding: 18px; background: var(--main-color); color: white; border: none; border-radius: 45px; cursor: pointer; font-weight: 700; transition: 0.3s; }
 .contact-form-side button:hover { background: var(--accent-color); transform: translateY(-3px); }
@@ -172,7 +153,7 @@ body {
 </div>
 
 <header class="hero-header">
-  <video id="headerVideo" muted playsinline loop class="bg-video">
+  <video id="hero-bg-video" autoplay muted playsinline loop class="bg-video">
     <source src="images/arm AI video.mp4" type="video/mp4">
   </video>
   <div class="overlay">
@@ -230,20 +211,20 @@ let currentLang = "fr";
 
 const featuresData = {
   screen: {
-    en: { title: "Menu Display", text: "Browse our premium selection of beverages.", hover: "Menu Display" },
-    fr: { title: "Écran d'affichage", text: "Découvrez notre sélection de boissons.", hover: "Écran d'affichage" }
+    en: { title: "Menu Display", text: "View our full selection of hot and cold beverages and current pricing. This screen showcases our latest digital latte art creations.", image: "images/screen.png" },
+    fr: { title: "Écran d'affichage", text: "Consultez notre menu complet et les tarifs en un coup d'œil. Cet écran affiche nos dernières créations de latte art.", image: "images/screen.png" }
   },
   robot: {
-    en: { title: "Robotic Precision", text: "Every cup is crafted with perfect consistency.", hover: "Robotic Arm" },
-    fr: { title: "Précision Robotisée", text: "Chaque tasse est préparée avec une régularité parfaite.", hover: "Bras robotisé" }
+    en: { title: "Robotic Arm", text: "Watch our high-precision robotic barista craft your drink with perfect consistency and zero human contact.", image: "images/robot.png" },
+    fr: { title: "Bras robotisé", text: "Admirez la précision de notre barista technologique. Il prépare votre café avec une régularité parfaite.", image: "images/robot.png" }
   },
   touch: {
-    en: { title: "Smart Interface", text: "Customize your drink in seconds.", hover: "Touch Screen" },
-    fr: { title: "Interface Intelligente", text: "Personnalisez votre boisson en quelques secondes.", hover: "Écran tactile" }
+    en: { title: "Touch Screen", text: "Select your favorite drink and customize it in just a few taps. Upload your photo to be printed on the foam.", image: "images/touch.png" },
+    fr: { title: "Écran tactile", text: "Commandez et personnalisez votre boisson en quelques clics. Téléchargez votre photo pour l'imprimer sur la mousse.", image: "images/touch.png" }
   },
   foam: {
-    en: { title: "Foam Art", text: "Edible ink printing directly onto your latte foam.", hover: "Foam Art" },
-    fr: { title: "Art sur mousse", text: "Impression sur mousse avec encre comestible.", hover: "Art sur mousse" }
+    en: { title: "Foam Art", text: "Our advanced tech prints high-definition edible ink portraits directly onto your latte foam in seconds.", image: "images/foam.png" },
+    fr: { title: "Art mousse", text: "Notre technologie imprime des portraits haute définition avec de l'encre comestible directement sur votre mousse.", image: "images/foam.png" }
   }
 };
 
@@ -263,19 +244,15 @@ function setLang(lang) {
   document.getElementById("input-name").placeholder = d.name;
   document.getElementById("input-email").placeholder = d.email;
   document.getElementById("input-message").placeholder = d.msg;
-
-  document.querySelectorAll('.point').forEach(p => {
-    const key = p.getAttribute('data-feature');
-    p.setAttribute('data-title', featuresData[key][lang].hover);
-  });
 }
 
 function showFeature(featureKey) {
   const data = featuresData[featureKey][currentLang];
-  document.getElementById("feature-image").src = "images/" + featureKey + ".png";
+  const box = document.getElementById("feature-box");
+  document.getElementById("feature-image").src = data.image;
   document.getElementById("feature-title").innerText = data.title;
   document.getElementById("feature-text").innerText = data.text;
-  document.getElementById("feature-box").classList.add("show");
+  box.classList.add("show");
   document.querySelectorAll(".point").forEach(p => p.classList.toggle("active", p.getAttribute('data-feature') === featureKey));
 }
 
@@ -283,16 +260,7 @@ function handleSend() {
   document.getElementById("form-container").innerHTML = `<h2 style="color:var(--accent-color)">✓</h2><p>${currentLang === 'fr' ? 'Merci !' : 'Thank You!'}</p>`;
 }
 
-window.onload = () => { 
-  setLang("fr"); 
-  showFeature("screen"); 
-
-  // THE 3 SECOND DELAY LOGIC
-  const vid = document.getElementById('headerVideo');
-  setTimeout(() => {
-    vid.play();
-  }, 3000); 
-};
+window.onload = () => { setLang("fr"); showFeature("screen"); };
 </script>
 
 </body>
